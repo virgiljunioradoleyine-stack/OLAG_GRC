@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T16:31:42+00:00",
+  "generated_at": "2026-09-07T21:11:45+00:00",
   "split": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
   "ground_truth_records": 0,
   "supervised_metrics_available": false,
@@ -33,46 +33,50 @@
       "baseline": {
         "train": {
           "n": 217,
-          "mae": 0.00558,
-          "rmse": 0.00807,
-          "r2": 0.9729,
-          "residual_std": 0.00518,
-          "naive_mae": 0.0299,
-          "skill_vs_naive": 0.8134
+          "mae": 0.00408,
+          "rmse": 0.00615,
+          "r2": 0.9842,
+          "residual_std": 0.00398,
+          "naive_mae": 0.02988,
+          "skill_vs_naive": 0.8635
         },
         "validation": {
           "n": 35,
-          "mae": 0.01936,
-          "rmse": 0.02854,
-          "r2": 0.6972,
-          "residual_std": 0.00518,
-          "naive_mae": 0.02896,
-          "skill_vs_naive": 0.3315
+          "mae": 0.02082,
+          "rmse": 0.03375,
+          "r2": 0.5777,
+          "residual_std": 0.00398,
+          "naive_mae": 0.02899,
+          "skill_vs_naive": 0.2818
         },
         "test": {
           "n": 45,
-          "mae": 0.01508,
-          "rmse": 0.02163,
-          "r2": 0.731,
-          "residual_std": 0.00518,
-          "naive_mae": 0.02504,
-          "skill_vs_naive": 0.3978
+          "mae": 0.013,
+          "rmse": 0.02023,
+          "r2": 0.7655,
+          "residual_std": 0.00398,
+          "naive_mae": 0.02508,
+          "skill_vs_naive": 0.4817
         },
         "error_by_season": {
-          "dry": 0.02194,
-          "wet_major": 0.01138,
-          "wet_minor": 0.00552
+          "dry": 0.01795,
+          "wet_major": 0.00927,
+          "wet_minor": 0.01222
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01202,
+          "drier_half": 0.01403
         }
       },
       "anomaly": {
-        "threshold": -0.585101,
+        "threshold": -0.58551,
         "threshold_source": "validation quantile (35 rows)",
         "flag_rate": {
-          "train": 0.023,
+          "train": 0.0138,
           "validation": 0.0571,
-          "test": 0.0444
+          "test": 0.0
         },
-        "stability": 0.0127
+        "stability": 0.0571
       }
     },
     {
@@ -101,46 +105,50 @@
       "baseline": {
         "train": {
           "n": 184,
-          "mae": 0.0028,
-          "rmse": 0.00408,
-          "r2": 0.9905,
-          "residual_std": 0.00271,
-          "naive_mae": 0.02126,
-          "skill_vs_naive": 0.8683
+          "mae": 0.00225,
+          "rmse": 0.00334,
+          "r2": 0.9936,
+          "residual_std": 0.00197,
+          "naive_mae": 0.02124,
+          "skill_vs_naive": 0.8941
         },
         "validation": {
           "n": 24,
-          "mae": 0.00868,
-          "rmse": 0.01413,
-          "r2": 0.5719,
-          "residual_std": 0.00271,
+          "mae": 0.00888,
+          "rmse": 0.01402,
+          "r2": 0.5784,
+          "residual_std": 0.00197,
           "naive_mae": 0.01005,
-          "skill_vs_naive": 0.1363
+          "skill_vs_naive": 0.1164
         },
         "test": {
           "n": 46,
-          "mae": 0.01392,
-          "rmse": 0.01913,
-          "r2": 0.6544,
-          "residual_std": 0.00271,
+          "mae": 0.01313,
+          "rmse": 0.01919,
+          "r2": 0.6524,
+          "residual_std": 0.00197,
           "naive_mae": 0.01475,
-          "skill_vs_naive": 0.0563
+          "skill_vs_naive": 0.1098
         },
         "error_by_season": {
-          "dry": 0.01845,
-          "wet_major": 0.01018,
-          "wet_minor": 0.01167
+          "dry": 0.01997,
+          "wet_major": 0.00733,
+          "wet_minor": 0.01001
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01013,
+          "drier_half": 0.01613
         }
       },
       "anomaly": {
-        "threshold": -0.528904,
+        "threshold": -0.532235,
         "threshold_source": "training quantile \u2014 validation had only 24 rows, too few to calibrate on",
         "flag_rate": {
           "train": 0.0543,
           "validation": 0.0417,
-          "test": 0.1087
+          "test": 0.087
         },
-        "stability": 0.067
+        "stability": 0.0453
       }
     },
     {
@@ -162,53 +170,57 @@
         "2026-08-20"
       ],
       "rows": {
-        "train": 220,
+        "train": 212,
         "validation": 30,
         "test": 56
       },
       "baseline": {
         "train": {
-          "n": 220,
-          "mae": 0.00397,
-          "rmse": 0.00562,
-          "r2": 0.9898,
-          "residual_std": 0.00381,
-          "naive_mae": 0.03103,
-          "skill_vs_naive": 0.8721
+          "n": 212,
+          "mae": 0.00282,
+          "rmse": 0.00406,
+          "r2": 0.9943,
+          "residual_std": 0.0028,
+          "naive_mae": 0.02953,
+          "skill_vs_naive": 0.9045
         },
         "validation": {
           "n": 30,
-          "mae": 0.02271,
-          "rmse": 0.03467,
-          "r2": 0.7538,
-          "residual_std": 0.00381,
-          "naive_mae": 0.04414,
-          "skill_vs_naive": 0.4855
+          "mae": 0.02035,
+          "rmse": 0.03319,
+          "r2": 0.7743,
+          "residual_std": 0.0028,
+          "naive_mae": 0.04416,
+          "skill_vs_naive": 0.5392
         },
         "test": {
           "n": 56,
-          "mae": 0.02651,
-          "rmse": 0.03612,
-          "r2": 0.6579,
-          "residual_std": 0.00381,
-          "naive_mae": 0.04013,
-          "skill_vs_naive": 0.3394
+          "mae": 0.02421,
+          "rmse": 0.03537,
+          "r2": 0.6631,
+          "residual_std": 0.0028,
+          "naive_mae": 0.03959,
+          "skill_vs_naive": 0.3885
         },
         "error_by_season": {
-          "dry": 0.03164,
-          "wet_major": 0.02009,
-          "wet_minor": 0.02894
+          "dry": 0.02797,
+          "wet_major": 0.01857,
+          "wet_minor": 0.02866
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.02488,
+          "drier_half": 0.02353
         }
       },
       "anomaly": {
-        "threshold": -0.597765,
+        "threshold": -0.610083,
         "threshold_source": "validation quantile (30 rows)",
         "flag_rate": {
-          "train": 0.0182,
+          "train": 0.0047,
           "validation": 0.0667,
-          "test": 0.0714
+          "test": 0.0536
         },
-        "stability": 0.0047
+        "stability": 0.0131
       }
     },
     {
@@ -230,53 +242,57 @@
         "2026-09-02"
       ],
       "rows": {
-        "train": 233,
+        "train": 225,
         "validation": 28,
         "test": 54
       },
       "baseline": {
         "train": {
-          "n": 233,
-          "mae": 0.00395,
-          "rmse": 0.00584,
-          "r2": 0.9921,
-          "residual_std": 0.00397,
-          "naive_mae": 0.03916,
-          "skill_vs_naive": 0.8991
+          "n": 225,
+          "mae": 0.00318,
+          "rmse": 0.00456,
+          "r2": 0.995,
+          "residual_std": 0.00301,
+          "naive_mae": 0.03888,
+          "skill_vs_naive": 0.9182
         },
         "validation": {
           "n": 28,
-          "mae": 0.01689,
-          "rmse": 0.02034,
-          "r2": 0.8353,
-          "residual_std": 0.00397,
+          "mae": 0.01917,
+          "rmse": 0.02372,
+          "r2": 0.776,
+          "residual_std": 0.00301,
           "naive_mae": 0.03287,
-          "skill_vs_naive": 0.4862
+          "skill_vs_naive": 0.4168
         },
         "test": {
           "n": 54,
-          "mae": 0.01949,
-          "rmse": 0.02847,
-          "r2": 0.6951,
-          "residual_std": 0.00397,
-          "naive_mae": 0.03237,
-          "skill_vs_naive": 0.3979
+          "mae": 0.01913,
+          "rmse": 0.02969,
+          "r2": 0.6686,
+          "residual_std": 0.00301,
+          "naive_mae": 0.03242,
+          "skill_vs_naive": 0.4099
         },
         "error_by_season": {
-          "dry": 0.02558,
-          "wet_major": 0.01749,
-          "wet_minor": 0.00704
+          "dry": 0.02522,
+          "wet_major": 0.01724,
+          "wet_minor": 0.00641
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01564,
+          "drier_half": 0.02262
         }
       },
       "anomaly": {
-        "threshold": -0.538768,
+        "threshold": -0.539448,
         "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
         "flag_rate": {
-          "train": 0.0515,
+          "train": 0.0533,
           "validation": 0.0,
-          "test": 0.0556
+          "test": 0.0185
         },
-        "stability": 0.0556
+        "stability": 0.0185
       }
     },
     {
@@ -298,53 +314,57 @@
         "2026-08-20"
       ],
       "rows": {
-        "train": 207,
+        "train": 200,
         "validation": 32,
         "test": 52
       },
       "baseline": {
         "train": {
-          "n": 207,
-          "mae": 0.0032,
-          "rmse": 0.00468,
-          "r2": 0.9929,
-          "residual_std": 0.00296,
-          "naive_mae": 0.0312,
-          "skill_vs_naive": 0.8974
+          "n": 200,
+          "mae": 0.00217,
+          "rmse": 0.00305,
+          "r2": 0.9968,
+          "residual_std": 0.00218,
+          "naive_mae": 0.03112,
+          "skill_vs_naive": 0.9303
         },
         "validation": {
           "n": 32,
-          "mae": 0.02598,
-          "rmse": 0.03358,
-          "r2": 0.5647,
-          "residual_std": 0.00296,
-          "naive_mae": 0.03604,
-          "skill_vs_naive": 0.2791
+          "mae": 0.02635,
+          "rmse": 0.03303,
+          "r2": 0.575,
+          "residual_std": 0.00218,
+          "naive_mae": 0.03591,
+          "skill_vs_naive": 0.2662
         },
         "test": {
           "n": 52,
-          "mae": 0.02175,
-          "rmse": 0.03036,
-          "r2": 0.7356,
-          "residual_std": 0.00296,
-          "naive_mae": 0.0367,
-          "skill_vs_naive": 0.4074
+          "mae": 0.02332,
+          "rmse": 0.03305,
+          "r2": 0.7165,
+          "residual_std": 0.00218,
+          "naive_mae": 0.03732,
+          "skill_vs_naive": 0.3751
         },
         "error_by_season": {
-          "dry": 0.02319,
-          "wet_major": 0.01787,
-          "wet_minor": 0.02509
+          "dry": 0.02601,
+          "wet_major": 0.01706,
+          "wet_minor": 0.02796
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01968,
+          "drier_half": 0.02697
         }
       },
       "anomaly": {
-        "threshold": -0.512076,
+        "threshold": -0.55225,
         "threshold_source": "validation quantile (32 rows)",
         "flag_rate": {
-          "train": 0.1159,
+          "train": 0.025,
           "validation": 0.0625,
-          "test": 0.1731
+          "test": 0.1154
         },
-        "stability": 0.1106
+        "stability": 0.0529
       }
     },
     {
@@ -366,49 +386,53 @@
         "2026-07-24"
       ],
       "rows": {
-        "train": 218,
+        "train": 205,
         "validation": 29,
         "test": 50
       },
       "baseline": {
         "train": {
-          "n": 218,
-          "mae": 0.00334,
-          "rmse": 0.00476,
-          "r2": 0.9941,
-          "residual_std": 0.00315,
-          "naive_mae": 0.03471,
-          "skill_vs_naive": 0.9038
+          "n": 205,
+          "mae": 0.00228,
+          "rmse": 0.00322,
+          "r2": 0.9972,
+          "residual_std": 0.00228,
+          "naive_mae": 0.03324,
+          "skill_vs_naive": 0.9314
         },
         "validation": {
           "n": 29,
-          "mae": 0.01711,
-          "rmse": 0.02394,
-          "r2": 0.6109,
-          "residual_std": 0.00315,
+          "mae": 0.01684,
+          "rmse": 0.02147,
+          "r2": 0.687,
+          "residual_std": 0.00228,
           "naive_mae": 0.02447,
-          "skill_vs_naive": 0.3008
+          "skill_vs_naive": 0.3118
         },
         "test": {
           "n": 50,
-          "mae": 0.01618,
-          "rmse": 0.02276,
-          "r2": 0.8396,
-          "residual_std": 0.00315,
-          "naive_mae": 0.03684,
-          "skill_vs_naive": 0.5608
+          "mae": 0.01568,
+          "rmse": 0.02092,
+          "r2": 0.8645,
+          "residual_std": 0.00228,
+          "naive_mae": 0.03685,
+          "skill_vs_naive": 0.5745
         },
         "error_by_season": {
-          "dry": 0.01844,
-          "wet_major": 0.01807,
-          "wet_minor": 0.00519
+          "dry": 0.01721,
+          "wet_major": 0.01748,
+          "wet_minor": 0.007
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01243,
+          "drier_half": 0.01893
         }
       },
       "anomaly": {
-        "threshold": -0.545274,
+        "threshold": -0.538845,
         "threshold_source": "training quantile \u2014 validation had only 29 rows, too few to calibrate on",
         "flag_rate": {
-          "train": 0.0505,
+          "train": 0.0537,
           "validation": 0.0,
           "test": 0.1
         },
@@ -434,53 +458,57 @@
         "2026-08-20"
       ],
       "rows": {
-        "train": 205,
+        "train": 193,
         "validation": 23,
         "test": 48
       },
       "baseline": {
         "train": {
-          "n": 205,
-          "mae": 0.0035,
-          "rmse": 0.00494,
-          "r2": 0.9926,
-          "residual_std": 0.00344,
-          "naive_mae": 0.02885,
-          "skill_vs_naive": 0.8787
+          "n": 193,
+          "mae": 0.00238,
+          "rmse": 0.00346,
+          "r2": 0.9958,
+          "residual_std": 0.00234,
+          "naive_mae": 0.02762,
+          "skill_vs_naive": 0.9138
         },
         "validation": {
           "n": 23,
-          "mae": 0.01176,
-          "rmse": 0.0172,
-          "r2": 0.8536,
-          "residual_std": 0.00344,
+          "mae": 0.0138,
+          "rmse": 0.01747,
+          "r2": 0.849,
+          "residual_std": 0.00234,
           "naive_mae": 0.0236,
-          "skill_vs_naive": 0.5017
+          "skill_vs_naive": 0.4153
         },
         "test": {
           "n": 48,
-          "mae": 0.01506,
-          "rmse": 0.02299,
-          "r2": 0.7739,
-          "residual_std": 0.00344,
-          "naive_mae": 0.02689,
-          "skill_vs_naive": 0.4399
+          "mae": 0.01424,
+          "rmse": 0.02224,
+          "r2": 0.7885,
+          "residual_std": 0.00234,
+          "naive_mae": 0.02691,
+          "skill_vs_naive": 0.4708
         },
         "error_by_season": {
-          "dry": 0.0174,
-          "wet_major": 0.0105,
-          "wet_minor": 0.01972
+          "dry": 0.01822,
+          "wet_major": 0.01019,
+          "wet_minor": 0.01344
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01094,
+          "drier_half": 0.01754
         }
       },
       "anomaly": {
-        "threshold": -0.529427,
+        "threshold": -0.533814,
         "threshold_source": "training quantile \u2014 validation had only 23 rows, too few to calibrate on",
         "flag_rate": {
-          "train": 0.0537,
+          "train": 0.0518,
           "validation": 0.0435,
-          "test": 0.0833
+          "test": 0.1042
         },
-        "stability": 0.0398
+        "stability": 0.0607
       }
     },
     {
@@ -502,53 +530,57 @@
         "2026-08-18"
       ],
       "rows": {
-        "train": 207,
+        "train": 203,
         "validation": 28,
-        "test": 48
+        "test": 47
       },
       "baseline": {
         "train": {
-          "n": 207,
-          "mae": 0.0038,
-          "rmse": 0.0053,
-          "r2": 0.9927,
-          "residual_std": 0.00343,
-          "naive_mae": 0.03504,
-          "skill_vs_naive": 0.8916
+          "n": 203,
+          "mae": 0.00236,
+          "rmse": 0.00352,
+          "r2": 0.9967,
+          "residual_std": 0.0023,
+          "naive_mae": 0.03439,
+          "skill_vs_naive": 0.9314
         },
         "validation": {
           "n": 28,
-          "mae": 0.01468,
-          "rmse": 0.02093,
-          "r2": 0.6243,
-          "residual_std": 0.00343,
-          "naive_mae": 0.01653,
-          "skill_vs_naive": 0.1119
+          "mae": 0.01244,
+          "rmse": 0.0183,
+          "r2": 0.7159,
+          "residual_std": 0.0023,
+          "naive_mae": 0.01673,
+          "skill_vs_naive": 0.2564
         },
         "test": {
-          "n": 48,
-          "mae": 0.02786,
-          "rmse": 0.05025,
-          "r2": 0.6497,
-          "residual_std": 0.00343,
-          "naive_mae": 0.04229,
-          "skill_vs_naive": 0.3412
+          "n": 47,
+          "mae": 0.02606,
+          "rmse": 0.05145,
+          "r2": 0.63,
+          "residual_std": 0.0023,
+          "naive_mae": 0.04209,
+          "skill_vs_naive": 0.3809
         },
         "error_by_season": {
-          "dry": 0.04278,
-          "wet_major": 0.01095,
-          "wet_minor": 0.01239
+          "dry": 0.03946,
+          "wet_major": 0.01107,
+          "wet_minor": 0.01061
+        },
+        "error_by_rainfall": {
+          "wetter_half": 0.01791,
+          "drier_half": 0.03457
         }
       },
       "anomaly": {
-        "threshold": -0.529165,
+        "threshold": -0.537719,
         "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
         "flag_rate": {
-          "train": 0.0531,
+          "train": 0.0542,
           "validation": 0.0,
-          "test": 0.125
+          "test": 0.1277
         },
-        "stability": 0.125
+        "stability": 0.1277
       }
     }
   ]

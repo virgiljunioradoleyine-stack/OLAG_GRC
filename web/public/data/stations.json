@@ -22,14 +22,14 @@
     "latest": {
       "date": "2026-07-21",
       "indicator": 0.102559,
-      "expected": 0.09804,
-      "z_score": 0.872,
+      "expected": 0.103167,
+      "z_score": -0.153,
       "quality": "ACCEPTABLE",
       "confidence": "moderate",
       "rain_7d": 6.4,
       "rain_context": "drier than normal"
     },
-    "status": "WATCH",
+    "status": "NORMAL",
     "model": {
       "model_version": "2.0",
       "feature_version": "2.0",
@@ -44,22 +44,22 @@
       "training_rows": 217,
       "validation_rows": 35,
       "test_rows": 45,
-      "created_at": "2026-09-07T16:20:52+00:00",
+      "created_at": "2026-09-07T21:11:29+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 35,
-          "mae": 0.01936,
-          "rmse": 0.02854,
-          "r2": 0.6972,
-          "residual_std": 0.00518,
-          "naive_mae": 0.02896,
-          "skill_vs_naive": 0.3315
+          "mae": 0.02082,
+          "rmse": 0.03375,
+          "r2": 0.5777,
+          "residual_std": 0.00398,
+          "naive_mae": 0.02899,
+          "skill_vs_naive": 0.2818
         },
         "anomaly": {
-          "threshold": -0.585101,
+          "threshold": -0.58551,
           "threshold_source": "validation quantile (35 rows)",
           "validation_flag_rate": 0.0571,
-          "test_flag_rate": 0.0444
+          "test_flag_rate": 0.0
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
@@ -80,12 +80,12 @@
       "test_metrics": {
         "baseline": {
           "n": 45,
-          "mae": 0.01508,
-          "rmse": 0.02163,
-          "r2": 0.731,
-          "residual_std": 0.00518,
-          "naive_mae": 0.02504,
-          "skill_vs_naive": 0.3978
+          "mae": 0.013,
+          "rmse": 0.02023,
+          "r2": 0.7655,
+          "residual_std": 0.00398,
+          "naive_mae": 0.02508,
+          "skill_vs_naive": 0.4817
         }
       },
       "features": [
@@ -135,14 +135,14 @@
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2026-07-21",
-      "severity": "WATCH",
+      "severity": "NORMAL",
       "indicator": 0.102559,
-      "expected": 0.09804,
-      "residual": 0.004519,
-      "z_score": 0.872,
-      "anomaly_score": -0.43225,
+      "expected": 0.103167,
+      "residual": -0.000608,
+      "z_score": -0.153,
+      "anomaly_score": -0.472543,
       "anomaly_flagged": false,
-      "percentile": 65.9,
+      "percentile": 20.7,
       "rain_7d": 6.4,
       "rain_7d_anom": -23.9,
       "rain_context": "drier than normal",
@@ -153,11 +153,11 @@
       "quality_score": 0.92,
       "confidence": "moderate",
       "signals": [
-        "sediment index is +0.005 above expected, which this station exceeds in under 40% of its history"
+        "index is below expected conditions, not above"
       ],
-      "headline": "Possible change river-condition anomaly at Pra Upper Basin",
-      "explanation": "On 2026-07-21 the satellite sediment indicator at Pra Upper Basin (P01) read +0.103. Given the season, recent rainfall and upstream conditions, +0.098 would have been expected \u2014 the reading is 0.9 standard deviations above that. Rainfall over the preceding 7 days totalled 6 mm, which is drier than normal for this time of year. This is the first observation showing the change. Observation quality is ACCEPTABLE; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
-      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
+      "headline": "Normal river conditions at Pra Upper Basin",
+      "explanation": "On 2026-07-21 the satellite sediment indicator at Pra Upper Basin was +0.103, against an expected +0.103 for these conditions. Rainfall over the previous 7 days was drier than normal (6 mm). Nothing here requires attention.",
+      "recommended_action": "No action required."
     }
   },
   {
@@ -184,14 +184,14 @@
     "latest": {
       "date": "2026-09-02",
       "indicator": 0.085444,
-      "expected": 0.079551,
-      "z_score": 2.177,
+      "expected": 0.090098,
+      "z_score": -2.364,
       "quality": "LOW_QUALITY",
       "confidence": "low",
       "rain_7d": 15.8,
       "rain_context": "drier than normal"
     },
-    "status": "WATCH",
+    "status": "NORMAL",
     "model": {
       "model_version": "2.0",
       "feature_version": "2.0",
@@ -206,22 +206,22 @@
       "training_rows": 184,
       "validation_rows": 24,
       "test_rows": 46,
-      "created_at": "2026-09-07T16:20:53+00:00",
+      "created_at": "2026-09-07T21:11:30+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 24,
-          "mae": 0.00868,
-          "rmse": 0.01413,
-          "r2": 0.5719,
-          "residual_std": 0.00271,
+          "mae": 0.00888,
+          "rmse": 0.01402,
+          "r2": 0.5784,
+          "residual_std": 0.00197,
           "naive_mae": 0.01005,
-          "skill_vs_naive": 0.1363
+          "skill_vs_naive": 0.1164
         },
         "anomaly": {
-          "threshold": -0.528904,
+          "threshold": -0.532235,
           "threshold_source": "training quantile \u2014 validation had only 24 rows, too few to calibrate on",
           "validation_flag_rate": 0.0417,
-          "test_flag_rate": 0.1087
+          "test_flag_rate": 0.087
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
@@ -242,12 +242,12 @@
       "test_metrics": {
         "baseline": {
           "n": 46,
-          "mae": 0.01392,
-          "rmse": 0.01913,
-          "r2": 0.6544,
-          "residual_std": 0.00271,
+          "mae": 0.01313,
+          "rmse": 0.01919,
+          "r2": 0.6524,
+          "residual_std": 0.00197,
           "naive_mae": 0.01475,
-          "skill_vs_naive": 0.0563
+          "skill_vs_naive": 0.1098
         }
       },
       "features": [
@@ -297,14 +297,14 @@
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2026-09-02",
-      "severity": "WATCH",
+      "severity": "NORMAL",
       "indicator": 0.085444,
-      "expected": 0.079551,
-      "residual": 0.005893,
-      "z_score": 2.177,
-      "anomaly_score": -0.425273,
+      "expected": 0.090098,
+      "residual": -0.004654,
+      "z_score": -2.364,
+      "anomaly_score": -0.415533,
       "anomaly_flagged": false,
-      "percentile": 70.7,
+      "percentile": 76.6,
       "rain_7d": 15.8,
       "rain_7d_anom": -5.2,
       "rain_context": "drier than normal",
@@ -315,14 +315,11 @@
       "quality_score": 0.64,
       "confidence": "low",
       "signals": [
-        "sediment index is +0.006 above expected, which this station exceeds in under 15% of its history",
-        "rainfall over the past 7 days (16 mm) is BELOW its seasonal norm, so rain does not explain this rise",
-        "held below HIGH: this is a single observation and has not yet persisted across passes",
-        "held at WATCH: observation quality is LOW_QUALITY, which is not reliable enough to raise an alert on"
+        "index is below expected conditions, not above"
       ],
-      "headline": "Possible change river-condition anomaly at Pra Mid-Upper Reach",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Upper Reach (P02) read +0.085. Given the season, recent rainfall and upstream conditions, +0.080 would have been expected \u2014 the reading is 2.2 standard deviations above that. Rainfall over the preceding 7 days totalled 16 mm, which is drier than normal for this time of year. This is the first observation showing the change. Observation quality is LOW_QUALITY; overall confidence is low. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
-      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
+      "headline": "Normal river conditions at Pra Mid-Upper Reach",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Upper Reach was +0.085, against an expected +0.090 for these conditions. Rainfall over the previous 7 days was drier than normal (16 mm). Nothing here requires attention.",
+      "recommended_action": "No action required."
     }
   },
   {
@@ -349,8 +346,8 @@
     "latest": {
       "date": "2026-08-20",
       "indicator": 0.127926,
-      "expected": 0.136375,
-      "z_score": -2.22,
+      "expected": 0.140599,
+      "z_score": -4.521,
       "quality": "LOW_QUALITY",
       "confidence": "low",
       "rain_7d": 31.6,
@@ -368,30 +365,30 @@
       "validation_end": "2024-12-31",
       "test_start": "2025-01-05",
       "test_end": "2026-08-20",
-      "training_rows": 220,
+      "training_rows": 212,
       "validation_rows": 30,
       "test_rows": 56,
-      "created_at": "2026-09-07T16:20:56+00:00",
+      "created_at": "2026-09-07T21:11:31+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 30,
-          "mae": 0.02271,
-          "rmse": 0.03467,
-          "r2": 0.7538,
-          "residual_std": 0.00381,
-          "naive_mae": 0.04414,
-          "skill_vs_naive": 0.4855
+          "mae": 0.02035,
+          "rmse": 0.03319,
+          "r2": 0.7743,
+          "residual_std": 0.0028,
+          "naive_mae": 0.04416,
+          "skill_vs_naive": 0.5392
         },
         "anomaly": {
-          "threshold": -0.597765,
+          "threshold": -0.610083,
           "threshold_source": "validation quantile (30 rows)",
           "validation_flag_rate": 0.0667,
-          "test_flag_rate": 0.0714
+          "test_flag_rate": 0.0536
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
           "train": {
-            "n": 220,
+            "n": 212,
             "range": "2017-01-27 .. 2023-12-27"
           },
           "validation": {
@@ -407,12 +404,12 @@
       "test_metrics": {
         "baseline": {
           "n": 56,
-          "mae": 0.02651,
-          "rmse": 0.03612,
-          "r2": 0.6579,
-          "residual_std": 0.00381,
-          "naive_mae": 0.04013,
-          "skill_vs_naive": 0.3394
+          "mae": 0.02421,
+          "rmse": 0.03537,
+          "r2": 0.6631,
+          "residual_std": 0.0028,
+          "naive_mae": 0.03959,
+          "skill_vs_naive": 0.3885
         }
       },
       "features": [
@@ -464,12 +461,12 @@
       "date": "2026-08-20",
       "severity": "NORMAL",
       "indicator": 0.127926,
-      "expected": 0.136375,
-      "residual": -0.008449,
-      "z_score": -2.22,
-      "anomaly_score": -0.429463,
+      "expected": 0.140599,
+      "residual": -0.012673,
+      "z_score": -4.521,
+      "anomaly_score": -0.434568,
       "anomaly_flagged": false,
-      "percentile": 65.0,
+      "percentile": 54.2,
       "rain_7d": 31.6,
       "rain_7d_anom": 12.4,
       "rain_context": "near normal",
@@ -483,7 +480,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra at Beposo Reach",
-      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra at Beposo Reach was +0.128, against an expected +0.136 for these conditions. Rainfall over the previous 7 days was near normal (32 mm). Nothing here requires attention.",
+      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra at Beposo Reach was +0.128, against an expected +0.141 for these conditions. Rainfall over the previous 7 days was near normal (32 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -511,14 +508,14 @@
     "latest": {
       "date": "2026-09-02",
       "indicator": 0.116709,
-      "expected": 0.111242,
-      "z_score": 1.376,
+      "expected": 0.108304,
+      "z_score": 2.795,
       "quality": "ACCEPTABLE",
       "confidence": "high",
       "rain_7d": 15.8,
       "rain_context": "drier than normal"
     },
-    "status": "WATCH",
+    "status": "HIGH",
     "model": {
       "model_version": "2.0",
       "feature_version": "2.0",
@@ -530,30 +527,30 @@
       "validation_end": "2024-12-31",
       "test_start": "2025-01-05",
       "test_end": "2026-09-02",
-      "training_rows": 233,
+      "training_rows": 225,
       "validation_rows": 28,
       "test_rows": 54,
-      "created_at": "2026-09-07T16:20:58+00:00",
+      "created_at": "2026-09-07T21:11:33+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 28,
-          "mae": 0.01689,
-          "rmse": 0.02034,
-          "r2": 0.8353,
-          "residual_std": 0.00397,
+          "mae": 0.01917,
+          "rmse": 0.02372,
+          "r2": 0.776,
+          "residual_std": 0.00301,
           "naive_mae": 0.03287,
-          "skill_vs_naive": 0.4862
+          "skill_vs_naive": 0.4168
         },
         "anomaly": {
-          "threshold": -0.538768,
+          "threshold": -0.539448,
           "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
           "validation_flag_rate": 0.0,
-          "test_flag_rate": 0.0556
+          "test_flag_rate": 0.0185
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
           "train": {
-            "n": 233,
+            "n": 225,
             "range": "2017-01-07 .. 2023-12-27"
           },
           "validation": {
@@ -569,12 +566,12 @@
       "test_metrics": {
         "baseline": {
           "n": 54,
-          "mae": 0.01949,
-          "rmse": 0.02847,
-          "r2": 0.6951,
-          "residual_std": 0.00397,
-          "naive_mae": 0.03237,
-          "skill_vs_naive": 0.3979
+          "mae": 0.01913,
+          "rmse": 0.02969,
+          "r2": 0.6686,
+          "residual_std": 0.00301,
+          "naive_mae": 0.03242,
+          "skill_vs_naive": 0.4099
         }
       },
       "features": [
@@ -624,14 +621,14 @@
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",
       "date": "2026-09-02",
-      "severity": "WATCH",
+      "severity": "HIGH",
       "indicator": 0.116709,
-      "expected": 0.111242,
-      "residual": 0.005467,
-      "z_score": 1.376,
-      "anomaly_score": -0.422122,
+      "expected": 0.108304,
+      "residual": 0.008405,
+      "z_score": 2.795,
+      "anomaly_score": -0.41517,
       "anomaly_flagged": false,
-      "percentile": 81.1,
+      "percentile": 89.8,
       "rain_7d": 15.8,
       "rain_7d_anom": -5.2,
       "rain_context": "drier than normal",
@@ -642,11 +639,14 @@
       "quality_score": 0.8,
       "confidence": "high",
       "signals": [
-        "sediment index is +0.005 above expected, which this station exceeds in under 40% of its history"
+        "sediment index is +0.008 above expected, which this station exceeds in under 15% of its history",
+        "rainfall over the past 7 days (16 mm) is BELOW its seasonal norm, so rain does not explain this rise",
+        "sustained across 2 consecutive observations",
+        "held below CRITICAL: corroborating evidence is strong, but the departure from expected conditions is not itself extreme"
       ],
-      "headline": "Possible change river-condition anomaly at Pra Mid-Lower Reach",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Lower Reach (P04) read +0.117. Given the season, recent rainfall and upstream conditions, +0.111 would have been expected \u2014 the reading is 1.4 standard deviations above that. Rainfall over the preceding 7 days totalled 16 mm, which is drier than normal for this time of year. The signal has persisted across 2 consecutive observation(s). Observation quality is ACCEPTABLE; overall confidence is high. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
-      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
+      "headline": "Strong river-condition anomaly at Pra Mid-Lower Reach",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Lower Reach (P04) read +0.117. Given the season, recent rainfall and upstream conditions, +0.108 would have been expected \u2014 the reading is 2.8 standard deviations above that. Rainfall over the preceding 7 days totalled 16 mm, which is drier than normal for this time of year. The signal has persisted across 2 consecutive observation(s). Observation quality is ACCEPTABLE; overall confidence is high. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "recommended_action": "Field verification recommended at Pra Mid-Lower Reach. Check raw-water turbidity records at the downstream abstraction and inspect the reach between the upstream station and this one for visible disturbance."
     }
   },
   {
@@ -673,8 +673,8 @@
     "latest": {
       "date": "2026-08-20",
       "indicator": 0.106905,
-      "expected": 0.115105,
-      "z_score": -2.774,
+      "expected": 0.116774,
+      "z_score": -4.526,
       "quality": "GOOD",
       "confidence": "moderate",
       "rain_7d": 18.5,
@@ -692,30 +692,30 @@
       "validation_end": "2024-12-31",
       "test_start": "2025-01-05",
       "test_end": "2026-08-20",
-      "training_rows": 207,
+      "training_rows": 200,
       "validation_rows": 32,
       "test_rows": 52,
-      "created_at": "2026-09-07T16:21:00+00:00",
+      "created_at": "2026-09-07T21:11:34+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 32,
-          "mae": 0.02598,
-          "rmse": 0.03358,
-          "r2": 0.5647,
-          "residual_std": 0.00296,
-          "naive_mae": 0.03604,
-          "skill_vs_naive": 0.2791
+          "mae": 0.02635,
+          "rmse": 0.03303,
+          "r2": 0.575,
+          "residual_std": 0.00218,
+          "naive_mae": 0.03591,
+          "skill_vs_naive": 0.2662
         },
         "anomaly": {
-          "threshold": -0.512076,
+          "threshold": -0.55225,
           "threshold_source": "validation quantile (32 rows)",
           "validation_flag_rate": 0.0625,
-          "test_flag_rate": 0.1731
+          "test_flag_rate": 0.1154
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
           "train": {
-            "n": 207,
+            "n": 200,
             "range": "2017-01-07 .. 2023-12-22"
           },
           "validation": {
@@ -731,12 +731,12 @@
       "test_metrics": {
         "baseline": {
           "n": 52,
-          "mae": 0.02175,
-          "rmse": 0.03036,
-          "r2": 0.7356,
-          "residual_std": 0.00296,
-          "naive_mae": 0.0367,
-          "skill_vs_naive": 0.4074
+          "mae": 0.02332,
+          "rmse": 0.03305,
+          "r2": 0.7165,
+          "residual_std": 0.00218,
+          "naive_mae": 0.03732,
+          "skill_vs_naive": 0.3751
         }
       },
       "features": [
@@ -788,12 +788,12 @@
       "date": "2026-08-20",
       "severity": "NORMAL",
       "indicator": 0.106905,
-      "expected": 0.115105,
-      "residual": -0.0082,
-      "z_score": -2.774,
-      "anomaly_score": -0.417956,
+      "expected": 0.116774,
+      "residual": -0.009869,
+      "z_score": -4.526,
+      "anomaly_score": -0.436258,
       "anomaly_flagged": false,
-      "percentile": 76.8,
+      "percentile": 59.0,
       "rain_7d": 18.5,
       "rain_7d_anom": 2.8,
       "rain_context": "near normal",
@@ -807,7 +807,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Daboase Intake (GWCL)",
-      "explanation": "On 2026-08-20 the satellite sediment indicator at Daboase Intake (GWCL) was +0.107, against an expected +0.115 for these conditions. Rainfall over the previous 7 days was near normal (18 mm). Nothing here requires attention.",
+      "explanation": "On 2026-08-20 the satellite sediment indicator at Daboase Intake (GWCL) was +0.107, against an expected +0.117 for these conditions. Rainfall over the previous 7 days was near normal (18 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -835,14 +835,14 @@
     "latest": {
       "date": "2026-07-24",
       "indicator": -0.019475,
-      "expected": -0.010842,
-      "z_score": -2.738,
+      "expected": -0.021664,
+      "z_score": 0.96,
       "quality": "LOW_QUALITY",
-      "confidence": "low",
+      "confidence": "moderate",
       "rain_7d": 5.8,
       "rain_context": "drier than normal"
     },
-    "status": "NORMAL",
+    "status": "WATCH",
     "model": {
       "model_version": "2.0",
       "feature_version": "2.0",
@@ -854,22 +854,22 @@
       "validation_end": "2024-12-31",
       "test_start": "2025-01-05",
       "test_end": "2026-07-24",
-      "training_rows": 218,
+      "training_rows": 205,
       "validation_rows": 29,
       "test_rows": 50,
-      "created_at": "2026-09-07T16:21:01+00:00",
+      "created_at": "2026-09-07T21:11:35+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 29,
-          "mae": 0.01711,
-          "rmse": 0.02394,
-          "r2": 0.6109,
-          "residual_std": 0.00315,
+          "mae": 0.01684,
+          "rmse": 0.02147,
+          "r2": 0.687,
+          "residual_std": 0.00228,
           "naive_mae": 0.02447,
-          "skill_vs_naive": 0.3008
+          "skill_vs_naive": 0.3118
         },
         "anomaly": {
-          "threshold": -0.545274,
+          "threshold": -0.538845,
           "threshold_source": "training quantile \u2014 validation had only 29 rows, too few to calibrate on",
           "validation_flag_rate": 0.0,
           "test_flag_rate": 0.1
@@ -877,7 +877,7 @@
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
           "train": {
-            "n": 218,
+            "n": 205,
             "range": "2017-01-07 .. 2023-12-22"
           },
           "validation": {
@@ -893,12 +893,12 @@
       "test_metrics": {
         "baseline": {
           "n": 50,
-          "mae": 0.01618,
-          "rmse": 0.02276,
-          "r2": 0.8396,
-          "residual_std": 0.00315,
-          "naive_mae": 0.03684,
-          "skill_vs_naive": 0.5608
+          "mae": 0.01568,
+          "rmse": 0.02092,
+          "r2": 0.8645,
+          "residual_std": 0.00228,
+          "naive_mae": 0.03685,
+          "skill_vs_naive": 0.5745
         }
       },
       "features": [
@@ -948,29 +948,29 @@
       "station_id": "P06",
       "station_name": "Pra Lower Reach",
       "date": "2026-07-24",
-      "severity": "NORMAL",
+      "severity": "WATCH",
       "indicator": -0.019475,
-      "expected": -0.010842,
-      "residual": -0.008633,
-      "z_score": -2.738,
-      "anomaly_score": -0.496543,
+      "expected": -0.021664,
+      "residual": 0.002189,
+      "z_score": 0.96,
+      "anomaly_score": -0.52181,
       "anomaly_flagged": false,
-      "percentile": 15.1,
+      "percentile": 8.8,
       "rain_7d": 5.8,
       "rain_7d_anom": -10.9,
       "rain_context": "drier than normal",
       "upstream_id": "P05",
       "upstream_diff": null,
-      "persistence": 0,
+      "persistence": 3,
       "quality": "LOW_QUALITY",
       "quality_score": 0.49,
-      "confidence": "low",
+      "confidence": "moderate",
       "signals": [
-        "index is below expected conditions, not above"
+        "sediment index is +0.002 above expected, which this station exceeds in under 40% of its history"
       ],
-      "headline": "Normal river conditions at Pra Lower Reach",
-      "explanation": "On 2026-07-24 the satellite sediment indicator at Pra Lower Reach was -0.019, against an expected -0.011 for these conditions. Rainfall over the previous 7 days was drier than normal (6 mm). Nothing here requires attention.",
-      "recommended_action": "No action required."
+      "headline": "Possible change river-condition anomaly at Pra Lower Reach",
+      "explanation": "On 2026-07-24 the satellite sediment indicator at Pra Lower Reach (P06) read -0.019. Given the season, recent rainfall and upstream conditions, -0.022 would have been expected \u2014 the reading is 1.0 standard deviations above that. Rainfall over the preceding 7 days totalled 6 mm, which is drier than normal for this time of year. The signal has persisted across 3 consecutive observation(s). Observation quality is LOW_QUALITY; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
     }
   },
   {
@@ -997,8 +997,8 @@
     "latest": {
       "date": "2026-08-20",
       "indicator": 0.085823,
-      "expected": 0.112365,
-      "z_score": -7.721,
+      "expected": 0.090355,
+      "z_score": -1.938,
       "quality": "ACCEPTABLE",
       "confidence": "moderate",
       "rain_7d": 18.5,
@@ -1016,30 +1016,30 @@
       "validation_end": "2024-12-31",
       "test_start": "2025-01-05",
       "test_end": "2026-08-20",
-      "training_rows": 205,
+      "training_rows": 193,
       "validation_rows": 23,
       "test_rows": 48,
-      "created_at": "2026-09-07T16:21:03+00:00",
+      "created_at": "2026-09-07T21:11:36+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 23,
-          "mae": 0.01176,
-          "rmse": 0.0172,
-          "r2": 0.8536,
-          "residual_std": 0.00344,
+          "mae": 0.0138,
+          "rmse": 0.01747,
+          "r2": 0.849,
+          "residual_std": 0.00234,
           "naive_mae": 0.0236,
-          "skill_vs_naive": 0.5017
+          "skill_vs_naive": 0.4153
         },
         "anomaly": {
-          "threshold": -0.529427,
+          "threshold": -0.533814,
           "threshold_source": "training quantile \u2014 validation had only 23 rows, too few to calibrate on",
           "validation_flag_rate": 0.0435,
-          "test_flag_rate": 0.0833
+          "test_flag_rate": 0.1042
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
           "train": {
-            "n": 205,
+            "n": 193,
             "range": "2017-01-07 .. 2023-12-27"
           },
           "validation": {
@@ -1055,12 +1055,12 @@
       "test_metrics": {
         "baseline": {
           "n": 48,
-          "mae": 0.01506,
-          "rmse": 0.02299,
-          "r2": 0.7739,
-          "residual_std": 0.00344,
-          "naive_mae": 0.02689,
-          "skill_vs_naive": 0.4399
+          "mae": 0.01424,
+          "rmse": 0.02224,
+          "r2": 0.7885,
+          "residual_std": 0.00234,
+          "naive_mae": 0.02691,
+          "skill_vs_naive": 0.4708
         }
       },
       "features": [
@@ -1112,12 +1112,12 @@
       "date": "2026-08-20",
       "severity": "NORMAL",
       "indicator": 0.085823,
-      "expected": 0.112365,
-      "residual": -0.026542,
-      "z_score": -7.721,
-      "anomaly_score": -0.427411,
+      "expected": 0.090355,
+      "residual": -0.004532,
+      "z_score": -1.938,
+      "anomaly_score": -0.450624,
       "anomaly_flagged": false,
-      "percentile": 62.9,
+      "percentile": 41.5,
       "rain_7d": 18.5,
       "rain_7d_anom": 2.8,
       "rain_context": "near normal",
@@ -1131,7 +1131,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra Lower Reach South",
-      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra Lower Reach South was +0.086, against an expected +0.112 for these conditions. Rainfall over the previous 7 days was near normal (18 mm). Nothing here requires attention.",
+      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra Lower Reach South was +0.086, against an expected +0.090 for these conditions. Rainfall over the previous 7 days was near normal (18 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -1158,14 +1158,14 @@
     "latest": {
       "date": "2026-08-18",
       "indicator": 0.053792,
-      "expected": 0.04725,
-      "z_score": 1.906,
+      "expected": 0.065447,
+      "z_score": -5.072,
       "quality": "GOOD",
       "confidence": "moderate",
       "rain_7d": 13.0,
       "rain_context": "near normal"
     },
-    "status": "WATCH",
+    "status": "NORMAL",
     "model": {
       "model_version": "2.0",
       "feature_version": "2.0",
@@ -1177,30 +1177,30 @@
       "validation_end": "2024-12-31",
       "test_start": "2025-01-05",
       "test_end": "2026-08-18",
-      "training_rows": 207,
+      "training_rows": 203,
       "validation_rows": 28,
-      "test_rows": 48,
-      "created_at": "2026-09-07T16:21:05+00:00",
+      "test_rows": 47,
+      "created_at": "2026-09-07T21:11:37+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 28,
-          "mae": 0.01468,
-          "rmse": 0.02093,
-          "r2": 0.6243,
-          "residual_std": 0.00343,
-          "naive_mae": 0.01653,
-          "skill_vs_naive": 0.1119
+          "mae": 0.01244,
+          "rmse": 0.0183,
+          "r2": 0.7159,
+          "residual_std": 0.0023,
+          "naive_mae": 0.01673,
+          "skill_vs_naive": 0.2564
         },
         "anomaly": {
-          "threshold": -0.529165,
+          "threshold": -0.537719,
           "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
           "validation_flag_rate": 0.0,
-          "test_flag_rate": 0.125
+          "test_flag_rate": 0.1277
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
           "train": {
-            "n": 207,
+            "n": 203,
             "range": "2017-01-27 .. 2023-12-22"
           },
           "validation": {
@@ -1208,20 +1208,20 @@
             "range": "2024-01-01 .. 2024-12-31"
           },
           "test": {
-            "n": 48,
+            "n": 47,
             "range": "2025-01-05 .. 2026-08-18"
           }
         }
       },
       "test_metrics": {
         "baseline": {
-          "n": 48,
-          "mae": 0.02786,
-          "rmse": 0.05025,
-          "r2": 0.6497,
-          "residual_std": 0.00343,
-          "naive_mae": 0.04229,
-          "skill_vs_naive": 0.3412
+          "n": 47,
+          "mae": 0.02606,
+          "rmse": 0.05145,
+          "r2": 0.63,
+          "residual_std": 0.0023,
+          "naive_mae": 0.04209,
+          "skill_vs_naive": 0.3809
         }
       },
       "features": [
@@ -1271,14 +1271,14 @@
       "station_id": "P08",
       "station_name": "Pra Estuary Approach",
       "date": "2026-08-18",
-      "severity": "WATCH",
+      "severity": "NORMAL",
       "indicator": 0.053792,
-      "expected": 0.04725,
-      "residual": 0.006542,
-      "z_score": 1.906,
-      "anomaly_score": -0.429893,
+      "expected": 0.065447,
+      "residual": -0.011655,
+      "z_score": -5.072,
+      "anomaly_score": -0.442377,
       "anomaly_flagged": false,
-      "percentile": 63.8,
+      "percentile": 52.2,
       "rain_7d": 13.0,
       "rain_7d_anom": -2.2,
       "rain_context": "near normal",
@@ -1289,11 +1289,11 @@
       "quality_score": 1.0,
       "confidence": "moderate",
       "signals": [
-        "sediment index is +0.007 above expected, which this station exceeds in under 40% of its history"
+        "index is below expected conditions, not above"
       ],
-      "headline": "Possible change river-condition anomaly at Pra Estuary Approach",
-      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Estuary Approach (P08) read +0.054. Given the season, recent rainfall and upstream conditions, +0.047 would have been expected \u2014 the reading is 1.9 standard deviations above that. Rainfall over the preceding 7 days totalled 13 mm, which is near normal for this time of year. This is the first observation showing the change. Observation quality is GOOD; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
-      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
+      "headline": "Normal river conditions at Pra Estuary Approach",
+      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Estuary Approach was +0.054, against an expected +0.065 for these conditions. Rainfall over the previous 7 days was near normal (13 mm). Nothing here requires attention.",
+      "recommended_action": "No action required."
     }
   }
 ]
