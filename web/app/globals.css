@@ -180,6 +180,8 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); 
        cursor: pointer; font-weight: 500; }
 .btn:hover { background: color-mix(in srgb, var(--accent) 7%, var(--panel)); }
 .btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn-primary:hover { background: color-mix(in srgb, #000 12%, var(--accent)); }
 .seg { display: inline-flex; gap: 4px; flex-wrap: wrap; }
 select, input[type="date"] {
   border: 1px solid var(--border-strong); background: var(--panel); color: var(--text);

@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Empty, Indicator, Panel, Severity } from "./Ui";
 import { IndicatorTrend } from "./Charts";
 
+const REPO_URL = "https://github.com/virgiljunioradoleyine-stack/OLAG_GRC";
+const FENCE = "```";
+
 const MapView = dynamic(() => import("./MapView"), {
   ssr: false,
   loading: () => <div style={{ height: 560, borderRadius: 12, background: "var(--bg)" }} />,
@@ -14,7 +17,7 @@ export default function LiveMap({ stations, series, river, network, candidates }
   const [selected, setSelected] = useState(withData[0]?.id || stations[0]?.id);
   const [pickMode, setPickMode] = useState(false);
   const [picked, setPicked] = useState(null);
-  const [copied, setCopied] = useState(false);
+  const [stationName, setStationName] = useState("");
   const s = stations.find((x) => x.id === selected);
   const rows = (series?.[selected] || []).slice(-90);
 
@@ -27,18 +30,36 @@ export default function LiveMap({ stations, series, river, network, candidates }
     return "P" + String((nums.length ? Math.max(...nums) : 0) + 1).padStart(2, "0");
   })();
 
-  const snippet = picked && !picked.error
-    ? `Add a station at ${picked.lat.toFixed(6)}, ${picked.lon.toFixed(6)}`
-      + ` (${picked.water_pixels} water pixels, tile ${picked.tile}) as ${nextId}.`
-    : "";
-
-  function copy() {
-    if (!snippet) return;
-    navigator.clipboard?.writeText(snippet).then(
-      () => { setCopied(true); setTimeout(() => setCopied(false), 2000); },
-      () => {}
-    );
-  }
+  // The Add button opens a prefilled issue. Opening it triggers the
+  // add-station workflow, which validates the point against the published
+  // candidates, collects its history and rebuilds the dashboard. GitHub's own
+  // login authorises the write, so the site needs no token and no sign-in of
+  // its own -- and the page stays a static export.
+  const addUrl = (() => {
+    if (!picked || picked.error) return null;
+    const req = {
+      lat: Number(picked.lat.toFixed(6)),
+      lon: Number(picked.lon.toFixed(6)),
+      name: stationName.trim() || `Pra Reach ${nextId}`,
+      role: "monitor",
+    };
+    const body = [
+      `Adding a monitoring station picked on the Live Map.`,
+      ``,
+      `- **${req.name}** at \`${req.lat}, ${req.lon}\``,
+      `- ${picked.water_pixels} usable water pixels, tile \`${picked.tile}\``,
+      `- snapped ${picked.snapped_m} m from the click`,
+      ``,
+      FENCE + "json",
+      JSON.stringify(req, null, 2),
+      FENCE,
+      ``,
+      `Submitting this issue runs the add-station workflow. It will comment here`,
+      `with the result and close the issue.`,
+    ].join("\n");
+    return `${REPO_URL}/issues/new?title=${encodeURIComponent(`[station] ${req.name}`)}`
+      + `&body=${encodeURIComponent(body)}`;
+  })();
 
   return (
     <>
@@ -98,20 +119,32 @@ export default function LiveMap({ stations, series, river, network, candidates }
                     <dt>Sentinel-2 tile</dt><dd>{picked.tile}</dd>
                     <dt>Snapped</dt><dd>{picked.snapped_m} m from your click</dd>
                   </dl>
-                  <p style={{ fontSize: 12.5, color: "var(--muted)", margin: "12px 0 8px" }}>
-                    Send this line to add it to the monitoring network:
-                  </p>
-                  <code style={{
-                    display: "block", background: "var(--bg)", padding: "9px 11px",
-                    borderRadius: 8, fontSize: 12, lineHeight: 1.5,
-                    border: "1px solid var(--border)", wordBreak: "break-word",
-                  }}>{snippet}</code>
-                  <button className="btn" style={{ marginTop: 10 }} onClick={copy}>
-                    {copied ? "Copied" : "Copy"}
-                  </button>
+                  <label style={{ display: "block", fontSize: 12.5,
+                                  color: "var(--muted)", margin: "14px 0 6px" }}>
+                    Name it (optional)
+                  </label>
+                  <input value={stationName} maxLength={60}
+                         onChange={(e) => setStationName(e.target.value)}
+                         placeholder={`Pra Reach ${nextId}`}
+                         style={{
+                           width: "100%", padding: "8px 10px", borderRadius: 8,
+                           border: "1px solid var(--border)", background: "var(--bg)",
+                           color: "var(--text)", fontSize: 13,
+                         }} />
+
+                  <a className="btn btn-primary" href={addUrl || "#"}
+                     target="_blank" rel="noopener noreferrer"
+                     style={{ display: "block", textAlign: "center",
+                              marginTop: 12, textDecoration: "none" }}>
+                    Add {nextId} to the network
+                  </a>
+
                   <p style={{ fontSize: 12, color: "var(--faint)", marginTop: 10 }}>
-                    Adding a station re-runs collection for it across the full
-                    archive, so its history appears alongside the others.
+                    This opens a prefilled request on GitHub — your GitHub login
+                    is what authorises it, so the site never asks you for one.
+                    Confirming it collects the station&apos;s full Sentinel-2
+                    history, rebuilds the dashboard and trains a model, then
+                    replies with what it found. Nothing else needs doing.
                   </p>
                 </>
               )}

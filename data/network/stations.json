@@ -1,0 +1,4 @@
+{
+  "note": "Stations added from the Live Map. The eight founding stations live in pipeline/config.py with hand-written descriptions; these are appended by the add-station workflow after validating the point against a published, satellite-verified candidate site. Order is not stored: it is recomputed from geography every time the network loads, so inserting a station midstream renumbers the chain correctly.",
+  "stations": []
+}
