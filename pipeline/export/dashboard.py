@@ -120,8 +120,12 @@ def build_station_payloads(obs_all=None):
             base = bundle.estimators.get("baseline")
             anom = bundle.estimators.get("anomaly")
             if base is not None:
-                expected = base.predict(X)
-                z = base.z_scores(X, obs["ndti"].to_numpy(float))
+                # expected_for, not predict: over the training period the raw
+                # model is recalling rows it was fitted on, which would show
+                # nine silent years and then alerts starting the month training
+                # stopped. This asks what was expected of each date at the time.
+                expected = base.expected_for(X, obs["date"])
+                z = (obs["ndti"].to_numpy(float) - expected) / (base.residual_std_ or 1e-6)
                 thresholds = getattr(base, "residual_thresholds_", None)
             if anom is not None:
                 scores = anom.score(X)

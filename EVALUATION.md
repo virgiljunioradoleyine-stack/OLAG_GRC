@@ -1,6 +1,6 @@
 # Evaluation
 
-Generated 2026-09-07T16:31:42+00:00 by `python -m pipeline.models.evaluate`.
+Generated 2026-09-07T21:20:14+00:00 by `python -m pipeline.models.evaluate`.
 Do not edit by hand — this file is regenerated from
 `data/evaluation/evaluation.json`.
 
@@ -26,40 +26,40 @@ adds information; zero or below means it does not.
 
 | Station | Train | Val | Test | Test MAE | Test RMSE | Skill vs naive |
 |---|---|---|---|---|---|---|
-| P01 Pra Upper Basin | 217 | 35 | 45 | 0.01508 | 0.02163 | 0.3978 |
-| P02 Pra Mid-Upper Reach | 184 | 24 | 46 | 0.01392 | 0.01913 | 0.0563 |
-| P03 Pra at Beposo Reach | 220 | 30 | 56 | 0.02651 | 0.03612 | 0.3394 |
-| P04 Pra Mid-Lower Reach | 233 | 28 | 54 | 0.01949 | 0.02847 | 0.3979 |
-| P05 Daboase Intake (GWCL) | 207 | 32 | 52 | 0.02175 | 0.03036 | 0.4074 |
-| P06 Pra Lower Reach | 218 | 29 | 50 | 0.01618 | 0.02276 | 0.5608 |
-| P07 Pra Lower Reach South | 205 | 23 | 48 | 0.01506 | 0.02299 | 0.4399 |
-| P08 Pra Estuary Approach | 207 | 28 | 48 | 0.02786 | 0.05025 | 0.3412 |
+| P01 Pra Upper Basin | 217 | 35 | 45 | 0.013 | 0.02023 | 0.4817 |
+| P02 Pra Mid-Upper Reach | 184 | 24 | 46 | 0.01313 | 0.01919 | 0.1098 |
+| P03 Pra at Beposo Reach | 212 | 30 | 56 | 0.02421 | 0.03537 | 0.3885 |
+| P04 Pra Mid-Lower Reach | 225 | 28 | 54 | 0.01913 | 0.02969 | 0.4099 |
+| P05 Daboase Intake (GWCL) | 200 | 32 | 52 | 0.02332 | 0.03305 | 0.3751 |
+| P06 Pra Lower Reach | 205 | 29 | 50 | 0.01568 | 0.02092 | 0.5745 |
+| P07 Pra Lower Reach South | 193 | 23 | 48 | 0.01424 | 0.02224 | 0.4708 |
+| P08 Pra Estuary Approach | 203 | 28 | 47 | 0.02606 | 0.05145 | 0.3809 |
 
 ### Error by season (test period, mean absolute residual)
 
 | Station | dry | wet major | wet minor |
 |---|---|---|---|
-| P01 | 0.02194 | 0.01138 | 0.00552 |
-| P02 | 0.01845 | 0.01018 | 0.01167 |
-| P03 | 0.03164 | 0.02009 | 0.02894 |
-| P04 | 0.02558 | 0.01749 | 0.00704 |
-| P05 | 0.02319 | 0.01787 | 0.02509 |
-| P06 | 0.01844 | 0.01807 | 0.00519 |
-| P07 | 0.0174 | 0.0105 | 0.01972 |
-| P08 | 0.04278 | 0.01095 | 0.01239 |
+| P01 | 0.01795 | 0.00927 | 0.01222 |
+| P02 | 0.01997 | 0.00733 | 0.01001 |
+| P03 | 0.02797 | 0.01857 | 0.02866 |
+| P04 | 0.02522 | 0.01724 | 0.00641 |
+| P05 | 0.02601 | 0.01706 | 0.02796 |
+| P06 | 0.01721 | 0.01748 | 0.007 |
+| P07 | 0.01822 | 0.01019 | 0.01344 |
+| P08 | 0.03946 | 0.01107 | 0.01061 |
 
 ### Error by rainfall regime (test period)
 
 | Station | Wetter half | Drier half |
 |---|---|---|
-| P01 | — | — |
-| P02 | — | — |
-| P03 | — | — |
-| P04 | — | — |
-| P05 | — | — |
-| P06 | — | — |
-| P07 | — | — |
-| P08 | — | — |
+| P01 | 0.01202 | 0.01403 |
+| P02 | 0.01013 | 0.01613 |
+| P03 | 0.02488 | 0.02353 |
+| P04 | 0.01564 | 0.02262 |
+| P05 | 0.01968 | 0.02697 |
+| P06 | 0.01243 | 0.01893 |
+| P07 | 0.01094 | 0.01754 |
+| P08 | 0.01791 | 0.03457 |
 
 ## Anomaly detector (Model A)
 
@@ -70,14 +70,14 @@ detector behaves the same on data it has never seen.
 
 | Station | Threshold | Source | Train | Val | Test | Stability |
 |---|---|---|---|---|---|---|
-| P01 | -0.585101 | validation quantile | 0.023 | 0.0571 | 0.0444 | 0.0127 |
-| P02 | -0.528904 | training quantile — validation had only 24 rows, too few to calibrate on | 0.0543 | 0.0417 | 0.1087 | 0.067 |
-| P03 | -0.597765 | validation quantile | 0.0182 | 0.0667 | 0.0714 | 0.0047 |
-| P04 | -0.538768 | training quantile — validation had only 28 rows, too few to calibrate on | 0.0515 | 0.0 | 0.0556 | 0.0556 |
-| P05 | -0.512076 | validation quantile | 0.1159 | 0.0625 | 0.1731 | 0.1106 |
-| P06 | -0.545274 | training quantile — validation had only 29 rows, too few to calibrate on | 0.0505 | 0.0 | 0.1 | 0.1 |
-| P07 | -0.529427 | training quantile — validation had only 23 rows, too few to calibrate on | 0.0537 | 0.0435 | 0.0833 | 0.0398 |
-| P08 | -0.529165 | training quantile — validation had only 28 rows, too few to calibrate on | 0.0531 | 0.0 | 0.125 | 0.125 |
+| P01 | -0.58551 | validation quantile | 0.0138 | 0.0571 | 0.0 | 0.0571 |
+| P02 | -0.532235 | training quantile — validation had only 24 rows, too few to calibrate on | 0.0543 | 0.0417 | 0.087 | 0.0453 |
+| P03 | -0.610083 | validation quantile | 0.0047 | 0.0667 | 0.0536 | 0.0131 |
+| P04 | -0.539448 | training quantile — validation had only 28 rows, too few to calibrate on | 0.0533 | 0.0 | 0.0185 | 0.0185 |
+| P05 | -0.55225 | validation quantile | 0.025 | 0.0625 | 0.1154 | 0.0529 |
+| P06 | -0.538845 | training quantile — validation had only 29 rows, too few to calibrate on | 0.0537 | 0.0 | 0.1 | 0.1 |
+| P07 | -0.533814 | training quantile — validation had only 23 rows, too few to calibrate on | 0.0518 | 0.0435 | 0.1042 | 0.0607 |
+| P08 | -0.537719 | training quantile — validation had only 28 rows, too few to calibrate on | 0.0542 | 0.0 | 0.1277 | 0.1277 |
 
 ## Publication gate
 

@@ -72,7 +72,8 @@ def train_station(station, obs_all=None, spec=DEFAULT_SPLIT, verbose=True):
 
     baseline, base_val, base_test = None, {}, {}
     try:
-        baseline = ExpectedConditionModel().fit(X[tr], y[tr], sample_weight=w[tr])
+        baseline = ExpectedConditionModel().fit(X[tr], y[tr], sample_weight=w[tr],
+                                                dates=obs["date"][tr])
         base_val = baseline.evaluate(X[va], y[va]) if va.sum() >= 3 else {"n": int(va.sum())}
         base_test = baseline.evaluate(X[te], y[te]) if te.sum() >= 3 else {"n": int(te.sum())}
     except ValueError as ex:

@@ -56,6 +56,7 @@ class ExpectedConditionModel:
         self.dropped_features_ = []
         self.residual_std_ = None
         self.residual_thresholds_ = None   # empirical watch/elevated/high/critical
+        self.oof_expected_ = {}            # date -> expectation before training on it
 
     # --- helpers ----------------------------------------------------------
     def _matrix(self, X, cols=None):
@@ -73,7 +74,7 @@ class ExpectedConditionModel:
         return m
 
     # --- API --------------------------------------------------------------
-    def fit(self, X, y, sample_weight=None):
+    def fit(self, X, y, sample_weight=None, dates=None):
         y = np.asarray(y, dtype=float)
         m = self._usable(y, sample_weight)
         if m.sum() < 30:
@@ -100,19 +101,36 @@ class ExpectedConditionModel:
         self.model = HistGradientBoostingRegressor(**self.params)
         self.model.fit(M[m], y[m],
                        sample_weight=None if sample_weight is None else np.asarray(sample_weight)[m])
-        resid = y[m] - self.model.predict(M[m])
+        # Spread and severity thresholds come from OUT-OF-FOLD residuals, never
+        # from the residuals of this fitted model against its own training rows.
+        #
+        # A boosted tree fits its training data closely, so in-sample residuals
+        # are far tighter than the errors the model will actually make. Taking
+        # quantiles of them set the whole ladder far too low -- 10.9% of
+        # observations at P05 cleared a bar meant to be exceeded 0.5% of the
+        # time -- and, worse, compressed the top: P05's 96th and 99.5th
+        # percentiles came out at 0.00809 and 0.00862, so the HIGH band was
+        # 0.0005 wide and almost everything that reached HIGH went straight
+        # past it to CRITICAL. That is what kept the severity pyramid inverted.
+        #
+        # Rolling-origin folds give honest forward-looking errors from the same
+        # training window: each fold fits on the past and predicts the next
+        # block, so no threshold is set from a prediction the model had already
+        # seen the answer to. Validation stays free for choosing the anomaly
+        # threshold, and the test period is still never touched.
+        resid, oof = self._out_of_fold_residuals(
+            M[m], y[m],
+            None if sample_weight is None else np.asarray(sample_weight)[m])
+        self._store_oof(dates, m, oof)
+
         # robust spread: MAD scaled to a normal-equivalent sigma
         self.residual_std_ = float(1.4826 * np.median(np.abs(resid - np.median(resid))))
         if not np.isfinite(self.residual_std_) or self.residual_std_ <= 0:
             self.residual_std_ = float(np.std(resid)) or 1e-6
 
-        # Empirical severity thresholds, taken from the TRAINING residuals.
-        #
-        # These residuals are strongly non-normal: measured on the real record,
-        # |z| reaches 5 at the 90th percentile and 19 at the 99th. Treating a
-        # MAD-scaled sigma as if it implied Gaussian rarity therefore overstates
-        # how unusual a reading is, and produced more CRITICAL alerts than HIGH
-        # ones -- an inverted pyramid. Quantiles of the actual distribution are
+        # These residuals are strongly non-normal, so a MAD-scaled sigma cannot
+        # be read as implying Gaussian rarity -- doing so also produced an
+        # inverted pyramid. Quantiles of the actual distribution are
         # distribution-free and give each tier the frequency we intend.
         pos = resid[resid > 0]
         if pos.size >= 20:
@@ -122,10 +140,87 @@ class ExpectedConditionModel:
         self.residual_thresholds_ = [float(v) for v in q]   # watch/elev/high/crit
         return self
 
+    def _out_of_fold_residuals(self, M, y, sample_weight=None, n_splits=4):
+        """Forward-chaining residuals over the training window.
+
+        Falls back to in-sample residuals only when there is too little history
+        to split, which is the one case where they are the best available.
+        """
+        from sklearn.model_selection import TimeSeriesSplit
+
+        n = len(y)
+        if n < 60:
+            return y - self.model.predict(M), {}
+
+        out, preds = [], {}
+        for tr, te in TimeSeriesSplit(n_splits=n_splits).split(M):
+            # An early fold is short, and a feature can be constant within it.
+            # HistGradientBoosting cannot bin a column with a single distinct
+            # value -- it fails outright -- so each fold keeps only the columns
+            # that actually vary in its own training rows. This is the same
+            # hazard as the all-NaN columns dropped at full-fit time, just
+            # reached by a smaller sample.
+            keep = [j for j in range(M.shape[1])
+                    if np.unique(M[tr, j][np.isfinite(M[tr, j])]).size >= 2]
+            if not keep:
+                continue
+            fold = HistGradientBoostingRegressor(**self.params)
+            fold.fit(M[np.ix_(tr, keep)], y[tr],
+                     None if sample_weight is None else sample_weight[tr])
+            p = fold.predict(M[np.ix_(te, keep)])
+            out.append(y[te] - p)
+            for i, v in zip(te, p):
+                preds[int(i)] = float(v)
+        if not out:
+            return y - self.model.predict(M), {}
+        resid = np.concatenate(out)
+        if resid.size < 20:
+            return y - self.model.predict(M), {}
+        return resid, preds
+
+    def _store_oof(self, dates, mask, oof):
+        """Remember what each training row looked like BEFORE it was trained on.
+
+        The final model has seen every training row, so its residuals there are
+        memory, not judgement: on this record the alert rate over the training
+        period came out at 0.2% against 17.6% on unseen data. Plotting that as
+        history would show nine calm years and then a sudden onset of alerts in
+        2024 -- an artifact of when training stopped, presented as if it were
+        something the river did. Keeping the fold predictions lets the dashboard
+        show, for each historical date, what the system would have said at the
+        time.
+        """
+        self.oof_expected_ = {}
+        if dates is None or not oof:
+            return
+        d = pd.to_datetime(pd.Series(list(dates))).dt.strftime("%Y-%m-%d").to_numpy()
+        kept = np.nonzero(np.asarray(mask))[0]      # row index into the full frame
+        for pos, value in oof.items():
+            if pos < len(kept):
+                self.oof_expected_[str(d[kept[pos]])] = value
+
     def predict(self, X):
         if self.model is None:
             raise RuntimeError("ExpectedConditionModel is not fitted")
         return self.model.predict(self._matrix(X))
+
+    def expected_for(self, X, dates=None):
+        """Expectation for display: out-of-fold where the row was trained on.
+
+        `predict` stays the pure model. This is what the dashboard and the alert
+        engine should use over a series that spans the training period, so a
+        historical reading is judged against what was expected of it at the
+        time rather than against a model that already knew the answer.
+        """
+        out = self.predict(X)
+        oof = getattr(self, "oof_expected_", None)
+        if not oof or dates is None:
+            return out
+        keys = pd.to_datetime(pd.Series(list(dates))).dt.strftime("%Y-%m-%d")
+        for i, k in enumerate(keys):
+            if k in oof:
+                out[i] = oof[k]
+        return out
 
     def residuals(self, X, y):
         return np.asarray(y, dtype=float) - self.predict(X)

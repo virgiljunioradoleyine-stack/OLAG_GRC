@@ -1,4 +1,6 @@
 """Model contract tests: splits, fitting, versioning, compatibility."""
+import os
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -114,3 +116,66 @@ def test_bundle_metadata_is_complete():
 
 def test_fingerprint_changes_with_feature_order():
     assert features_fingerprint(["a", "b"]) != features_fingerprint(["b", "a"])
+
+
+@pytest.mark.skipif(not os.path.exists("data/observations/observations.csv"),
+                    reason="no observations collected yet")
+def test_severity_bands_form_a_pyramid():
+    """Each tier must be rarer than the one below it, in every period.
+
+    The thresholds were quantiles of the fitted model's residuals against its
+    own training rows. A boosted tree fits those closely, so the ladder sat far
+    too low -- 10.9% of readings at P05 cleared a bar meant for 0.5% -- and the
+    top compressed until HIGH was 0.0005 wide and almost everything reaching it
+    went straight to CRITICAL. 158 CRITICAL against 81 HIGH.
+    """
+    import collections
+    import numpy as np
+    import pandas as pd
+    from pipeline.config import STATIONS, TRAIN_END, VALIDATION_END
+    from pipeline.export.dashboard import station_frame
+    from pipeline.features.builder import FEATURE_COLUMNS
+    from pipeline.models.versioning import load_bundle
+    from pipeline.satellite.observations import load_observations
+
+    obs_all = load_observations()
+    periods = {"train": (None, TRAIN_END), "validation": (TRAIN_END, VALIDATION_END),
+               "test": (VALIDATION_END, None)}
+    rates = {}
+    for name, (lo, hi) in periods.items():
+        tot, n = collections.Counter(), 0
+        for st in STATIONS:
+            obs, X = station_frame(st, obs_all)
+            try:
+                bl = load_bundle(st.id, features=FEATURE_COLUMNS).estimators["baseline"]
+            except Exception:
+                continue
+            r = obs["ndti"].to_numpy(float) - bl.expected_for(X, obs["date"])
+            m = np.isfinite(r)
+            if lo:
+                m &= (obs["date"] > pd.Timestamp(lo)).to_numpy()
+            if hi:
+                m &= (obs["date"] <= pd.Timestamp(hi)).to_numpy()
+            r, n = r[m], n + int(m.sum())
+            for k, t in zip("WEHC", [float(v) for v in bl.residual_thresholds_]):
+                tot[k] += int((r >= t).sum())
+        if not n:
+            continue
+        b = _bands_from(tot)
+        assert b["WATCH"] >= b["ELEVATED"] >= b["HIGH"] >= b["CRITICAL"], \
+            f"{name} severity is not a pyramid: {b}"
+        rates[name] = sum(b.values()) / n
+
+    # and the rate must not depend on whether the model had seen the period
+    if {"train", "test"} <= set(rates):
+        assert abs(rates["train"] - rates["test"]) < 0.10, (
+            f"alert rate differs by period (train {rates['train']:.1%}, test "
+            f"{rates['test']:.1%}); the model is recalling its training rows "
+            f"rather than judging them")
+
+
+def _bands_from(counter):
+    return {"WATCH": counter["W"] - counter["E"],
+            "ELEVATED": counter["E"] - counter["H"],
+            "HIGH": counter["H"] - counter["C"],
+            "CRITICAL": counter["C"]}

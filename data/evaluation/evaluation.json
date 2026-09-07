@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:11:45+00:00",
+  "generated_at": "2026-09-07T21:20:14+00:00",
   "split": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
   "ground_truth_records": 0,
   "supervised_metrics_available": false,
@@ -36,7 +36,7 @@
           "mae": 0.00408,
           "rmse": 0.00615,
           "r2": 0.9842,
-          "residual_std": 0.00398,
+          "residual_std": 0.0232,
           "naive_mae": 0.02988,
           "skill_vs_naive": 0.8635
         },
@@ -45,7 +45,7 @@
           "mae": 0.02082,
           "rmse": 0.03375,
           "r2": 0.5777,
-          "residual_std": 0.00398,
+          "residual_std": 0.0232,
           "naive_mae": 0.02899,
           "skill_vs_naive": 0.2818
         },
@@ -54,7 +54,7 @@
           "mae": 0.013,
           "rmse": 0.02023,
           "r2": 0.7655,
-          "residual_std": 0.00398,
+          "residual_std": 0.0232,
           "naive_mae": 0.02508,
           "skill_vs_naive": 0.4817
         },
@@ -108,7 +108,7 @@
           "mae": 0.00225,
           "rmse": 0.00334,
           "r2": 0.9936,
-          "residual_std": 0.00197,
+          "residual_std": 0.0157,
           "naive_mae": 0.02124,
           "skill_vs_naive": 0.8941
         },
@@ -117,7 +117,7 @@
           "mae": 0.00888,
           "rmse": 0.01402,
           "r2": 0.5784,
-          "residual_std": 0.00197,
+          "residual_std": 0.0157,
           "naive_mae": 0.01005,
           "skill_vs_naive": 0.1164
         },
@@ -126,7 +126,7 @@
           "mae": 0.01313,
           "rmse": 0.01919,
           "r2": 0.6524,
-          "residual_std": 0.00197,
+          "residual_std": 0.0157,
           "naive_mae": 0.01475,
           "skill_vs_naive": 0.1098
         },
@@ -180,7 +180,7 @@
           "mae": 0.00282,
           "rmse": 0.00406,
           "r2": 0.9943,
-          "residual_std": 0.0028,
+          "residual_std": 0.0242,
           "naive_mae": 0.02953,
           "skill_vs_naive": 0.9045
         },
@@ -189,7 +189,7 @@
           "mae": 0.02035,
           "rmse": 0.03319,
           "r2": 0.7743,
-          "residual_std": 0.0028,
+          "residual_std": 0.0242,
           "naive_mae": 0.04416,
           "skill_vs_naive": 0.5392
         },
@@ -198,7 +198,7 @@
           "mae": 0.02421,
           "rmse": 0.03537,
           "r2": 0.6631,
-          "residual_std": 0.0028,
+          "residual_std": 0.0242,
           "naive_mae": 0.03959,
           "skill_vs_naive": 0.3885
         },
@@ -252,7 +252,7 @@
           "mae": 0.00318,
           "rmse": 0.00456,
           "r2": 0.995,
-          "residual_std": 0.00301,
+          "residual_std": 0.02666,
           "naive_mae": 0.03888,
           "skill_vs_naive": 0.9182
         },
@@ -261,7 +261,7 @@
           "mae": 0.01917,
           "rmse": 0.02372,
           "r2": 0.776,
-          "residual_std": 0.00301,
+          "residual_std": 0.02666,
           "naive_mae": 0.03287,
           "skill_vs_naive": 0.4168
         },
@@ -270,7 +270,7 @@
           "mae": 0.01913,
           "rmse": 0.02969,
           "r2": 0.6686,
-          "residual_std": 0.00301,
+          "residual_std": 0.02666,
           "naive_mae": 0.03242,
           "skill_vs_naive": 0.4099
         },
@@ -324,7 +324,7 @@
           "mae": 0.00217,
           "rmse": 0.00305,
           "r2": 0.9968,
-          "residual_std": 0.00218,
+          "residual_std": 0.02122,
           "naive_mae": 0.03112,
           "skill_vs_naive": 0.9303
         },
@@ -333,7 +333,7 @@
           "mae": 0.02635,
           "rmse": 0.03303,
           "r2": 0.575,
-          "residual_std": 0.00218,
+          "residual_std": 0.02122,
           "naive_mae": 0.03591,
           "skill_vs_naive": 0.2662
         },
@@ -342,7 +342,7 @@
           "mae": 0.02332,
           "rmse": 0.03305,
           "r2": 0.7165,
-          "residual_std": 0.00218,
+          "residual_std": 0.02122,
           "naive_mae": 0.03732,
           "skill_vs_naive": 0.3751
         },
@@ -396,7 +396,7 @@
           "mae": 0.00228,
           "rmse": 0.00322,
           "r2": 0.9972,
-          "residual_std": 0.00228,
+          "residual_std": 0.02384,
           "naive_mae": 0.03324,
           "skill_vs_naive": 0.9314
         },
@@ -405,7 +405,7 @@
           "mae": 0.01684,
           "rmse": 0.02147,
           "r2": 0.687,
-          "residual_std": 0.00228,
+          "residual_std": 0.02384,
           "naive_mae": 0.02447,
           "skill_vs_naive": 0.3118
         },
@@ -414,7 +414,7 @@
           "mae": 0.01568,
           "rmse": 0.02092,
           "r2": 0.8645,
-          "residual_std": 0.00228,
+          "residual_std": 0.02384,
           "naive_mae": 0.03685,
           "skill_vs_naive": 0.5745
         },
@@ -468,7 +468,7 @@
           "mae": 0.00238,
           "rmse": 0.00346,
           "r2": 0.9958,
-          "residual_std": 0.00234,
+          "residual_std": 0.02087,
           "naive_mae": 0.02762,
           "skill_vs_naive": 0.9138
         },
@@ -477,7 +477,7 @@
           "mae": 0.0138,
           "rmse": 0.01747,
           "r2": 0.849,
-          "residual_std": 0.00234,
+          "residual_std": 0.02087,
           "naive_mae": 0.0236,
           "skill_vs_naive": 0.4153
         },
@@ -486,7 +486,7 @@
           "mae": 0.01424,
           "rmse": 0.02224,
           "r2": 0.7885,
-          "residual_std": 0.00234,
+          "residual_std": 0.02087,
           "naive_mae": 0.02691,
           "skill_vs_naive": 0.4708
         },
@@ -540,7 +540,7 @@
           "mae": 0.00236,
           "rmse": 0.00352,
           "r2": 0.9967,
-          "residual_std": 0.0023,
+          "residual_std": 0.02154,
           "naive_mae": 0.03439,
           "skill_vs_naive": 0.9314
         },
@@ -549,7 +549,7 @@
           "mae": 0.01244,
           "rmse": 0.0183,
           "r2": 0.7159,
-          "residual_std": 0.0023,
+          "residual_std": 0.02154,
           "naive_mae": 0.01673,
           "skill_vs_naive": 0.2564
         },
@@ -558,7 +558,7 @@
           "mae": 0.02606,
           "rmse": 0.05145,
           "r2": 0.63,
-          "residual_std": 0.0023,
+          "residual_std": 0.02154,
           "naive_mae": 0.04209,
           "skill_vs_naive": 0.3809
         },
