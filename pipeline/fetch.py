@@ -26,7 +26,12 @@ from .raster import grid_for, read_on_grid
 from .search import search
 from .water import SCL_CLOUDY, persistent_water
 
-READING_RADIUS_M = 50.0
+# Sample a LENGTH of channel, not a 100 m box. A 50 m radius gave 14-22 mask
+# pixels per reading, and TEST_RESULTS.md section 6 showed ~80% of the resulting
+# variation was measurement noise. Noise on a median falls as ~1/sqrt(N), so
+# widening to a 500 m radius -- about 1 km of river -- buys roughly a 3x
+# reduction for the cost of a slightly larger windowed read.
+READING_RADIUS_M = 500.0
 MASK_SCENES = 12
 MIN_PIXELS = 3
 # The Sentinel-2 L2A archive on AWS reaches back to 2017. Eighteen months of it
@@ -38,6 +43,28 @@ HISTORY_START = date(2017, 1, 1)
 
 
 MASK_DIR = "data/masks"
+
+
+def _own_channel(mask, transform, easting, northing):
+    """Keep only the connected water body the monitoring point sits on.
+
+    Sampling 1 km of channel instead of 100 m means the window can now reach
+    other water: the far side of a meander, a tributary joining nearby, or --
+    in a mining area -- a flooded galamsey pit beside the river. Averaging those
+    into the reading would be silently wrong, and worst at the control point,
+    which sits about 1 km above the Pra/Offin junction. So take the connected
+    component containing the point and discard everything else.
+    """
+    from scipy import ndimage
+
+    lbl, n = ndimage.label(mask, structure=np.ones((3, 3)))
+    if n == 0:
+        return mask
+    rows, cols = np.nonzero(mask)
+    xs = transform.c + (cols + 0.5) * transform.a
+    ys = transform.f + (rows + 0.5) * transform.e
+    k = int(np.argmin(np.hypot(xs - easting, ys - northing)))
+    return lbl == lbl[rows[k], cols[k]]
 
 
 def _mask_path(point_id):
@@ -62,6 +89,9 @@ def build_channel_mask(items, easting, northing, point_id=None, rebuild=False):
     pw = persistent_water(items[:MASK_SCENES], easting, northing,
                           half_m=READING_RADIUS_M)
     if pw is None or not pw["mask"].any():
+        return None
+    pw["mask"] = _own_channel(pw["mask"], pw["transform"], easting, northing)
+    if not pw["mask"].any():
         return None
     if point_id:
         os.makedirs(MASK_DIR, exist_ok=True)

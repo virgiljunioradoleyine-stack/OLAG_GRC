@@ -35,7 +35,8 @@ from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
 
 FEATURES = ["ndti", "ndti_delta", "ndti_7d_mean", "ndti_30d_mean",
-            "month", "control_ndti", "control_delta"]
+            "month", "control_ndti", "control_delta",
+            "red", "red_delta", "control_red"]
 
 MODEL_DIR = "models"
 READINGS_DIR = "data/readings"
@@ -64,23 +65,31 @@ def _rolling_mean(dates, values, days):
     return out
 
 
-def _match_control(dates, control_df, max_days=10):
-    """Nearest-date control reading for each row; NaN if none is close enough."""
+def _match_control(dates, control_df, max_days=10, column="ndti"):
+    """Nearest-date control value for each row; NaN if none is close enough.
+
+    The control is matched on a *smoothed* series rather than the single nearest
+    reading. A single reading carries roughly the noise of any other -- see
+    TEST_RESULTS.md section 6 -- so comparing one noisy number against another
+    was asking the model to find a rainfall signal in two independent errors.
+    A 30-day mean averages that down before the comparison happens.
+    """
     if control_df is None or control_df.empty:
         return np.full(len(dates), np.nan), np.full(len(dates), np.nan)
     cd = control_df["date"].values.astype("datetime64[D]").astype(int)
-    cv = control_df["ndti"].to_numpy()
-    cdelta = np.concatenate([[np.nan], np.diff(cv)])
+    raw = control_df[column].to_numpy(dtype=float)
+    smooth = _rolling_mean(control_df["date"], raw, 30)
+    cdelta = np.concatenate([[np.nan], np.diff(smooth)])
     d = dates.values.astype("datetime64[D]").astype(int)
 
-    ndti = np.full(len(d), np.nan)
+    value = np.full(len(d), np.nan)
     delta = np.full(len(d), np.nan)
     for i, day in enumerate(d):
         j = int(np.argmin(np.abs(cd - day)))
         if abs(cd[j] - day) <= max_days:
-            ndti[i] = cv[j]
+            value[i] = smooth[j]
             delta[i] = cdelta[j]
-    return ndti, delta
+    return value, delta
 
 
 def build_features(df, control_df):
@@ -92,9 +101,36 @@ def build_features(df, control_df):
     f["ndti_7d_mean"] = _rolling_mean(df["date"], v, 7)
     f["ndti_30d_mean"] = _rolling_mean(df["date"], v, 30)
     f["month"] = df["date"].dt.month.to_numpy()
-    c_ndti, c_delta = _match_control(df["date"], control_df)
+    c_ndti, c_delta = _match_control(df["date"], control_df, column="ndti")
     f["control_ndti"] = c_ndti
     f["control_delta"] = np.nan_to_num(c_delta, nan=0.0)
+
+    # Absolute red reflectance, alongside the normalised index. NDTI cancels a
+    # uniform brightening, which is exactly what a heavy sediment load produces:
+    # on the one documented pollution event red nearly doubled while NDTI moved
+    # the wrong way (TEST_RESULTS.md section 1a). Neither index is sufficient
+    # alone -- red also rises with atmospheric haze, which is why NDTI was chosen
+    # first -- so the model gets both and the control rejects the common-mode part.
+    if "red" in df.columns:
+        r = pd.to_numeric(df["red"], errors="coerce").to_numpy(dtype=float)
+    else:
+        r = np.full(len(df), np.nan)
+    f["red"] = r
+    f["red_delta"] = np.concatenate([[0.0], np.diff(r)])
+    if control_df is not None and "red" in control_df.columns:
+        c_red, _ = _match_control(df["date"], control_df, column="red")
+    else:
+        c_red = np.full(len(df), np.nan)
+    f["control_red"] = c_red
+    # a reading with no red value falls back to this point's own level, so the
+    # pair looks unremarkable rather than inventing a signal
+    for col, fallback in (("red", np.nanmedian(r) if np.isfinite(r).any() else 0.0),
+                          ("control_red", None)):
+        if col == "control_red":
+            f[col] = np.where(np.isnan(f[col]), f["red"], f[col])
+        else:
+            f[col] = np.where(np.isnan(f[col]), fallback, f[col])
+    f["red_delta"] = np.nan_to_num(f["red_delta"].to_numpy(dtype=float), nan=0.0)
     # a missing control reading falls back to this point's own baseline, which
     # makes the pair look ordinary rather than fabricating a suppression signal
     f["control_ndti"] = np.where(np.isnan(f["control_ndti"]),
