@@ -1,0 +1,99 @@
+{
+  "probed_at": "2026-09-07T13:20:12Z",
+  "probed_from": "GitHub Actions ubuntu-latest (open internet)",
+  "run_url": "https://github.com/virgiljunioradoleyine-stack/OLAG_GRC/actions/runs/34126721647",
+  "reachable_anonymously": [
+    {
+      "group": "rainfall",
+      "name": "NASA POWER daily point",
+      "status": 200,
+      "content_type": "application/json",
+      "note": "PRECTOTCORR daily mm; point query; chosen as PRIMARY rainfall source"
+    },
+    {
+      "group": "rainfall",
+      "name": "Open-Meteo ERA5 archive",
+      "status": 200,
+      "content_type": "application/json",
+      "note": "daily precipitation_sum; chosen as FALLBACK rainfall source"
+    },
+    {
+      "group": "rainfall",
+      "name": "CHIRPS UCSB africa_daily",
+      "status": 200,
+      "content_type": "application/octet-stream",
+      "note": "reachable but one continental GeoTIFF per day; rejected as too heavy for CI"
+    },
+    {
+      "group": "hydrology",
+      "name": "Overpass API (OSM)",
+      "status": 200,
+      "content_type": "application/json",
+      "note": "ODbL; chosen for river geometry and place-name resolution"
+    },
+    {
+      "group": "tiles",
+      "name": "Esri World Imagery",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "group": "tiles",
+      "name": "OSM standard tiles",
+      "status": 200,
+      "content_type": "image/png"
+    },
+    {
+      "group": "tiles",
+      "name": "Esri World Topo",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "group": "satellite",
+      "name": "sentinel-cogs S3",
+      "status": 200,
+      "content_type": "application/xml"
+    },
+    {
+      "group": "satellite",
+      "name": "Earth Search STAC v1",
+      "status": 200,
+      "content_type": "application/json",
+      "note": "reachable from CI; blocked from the dev sandbox, which is why S3 listing is the primary path"
+    }
+  ],
+  "not_reachable": [
+    {
+      "group": "hydrology",
+      "name": "HydroRIVERS Africa",
+      "status": 403,
+      "note": "Cloudflare interstitial ('Just a moment...'). Cannot be fetched programmatically without a browser. OSM/Overpass used instead."
+    },
+    {
+      "group": "hydrology",
+      "name": "Overpass kumi mirror",
+      "status": null,
+      "note": "ReadTimeout after 45s"
+    },
+    {
+      "group": "groundtruth",
+      "name": "data.gov.gh CKAN API",
+      "status": null,
+      "note": "Connection refused (errno 111). Portal appears offline."
+    },
+    {
+      "group": "groundtruth",
+      "name": "GEMStat",
+      "status": 200,
+      "note": "Portal HTML loads but data requires a manual data request; no anonymous programmatic API."
+    },
+    {
+      "group": "groundtruth",
+      "name": "Water Quality Portal (US EPA/USGS)",
+      "status": 200,
+      "note": "Works, but covers the United States only. Retained as a SCHEMA reference for our ground-truth CSV format, not as a data source for Ghana."
+    }
+  ],
+  "conclusion": "No anonymous programmatic source of Ghanaian in-situ water-quality data was found. Ground truth must be ingested manually via the documented CSV schema."
+}
