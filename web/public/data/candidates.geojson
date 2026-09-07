@@ -1,0 +1,386 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "purpose": "Verified candidate sites for click-to-add on the map",
+    "min_water_pixels": 60,
+    "reading_radius_m": 500.0,
+    "note": "Each candidate was snapped onto a persistent-water mask built from the clearest scenes and scored by the water pixels a reading there would actually get. A click on the map snaps to the nearest of these, so what is shown is a measured value, not a browser-side guess."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.539747,
+          5.853077
+        ]
+      },
+      "properties": {
+        "water_pixels": 206,
+        "tile": "T30NXM",
+        "moved_m": 882
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.544665,
+          5.841215
+        ]
+      },
+      "properties": {
+        "water_pixels": 170,
+        "tile": "T30NXM",
+        "moved_m": 899
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.547773,
+          5.830615
+        ]
+      },
+      "properties": {
+        "water_pixels": 279,
+        "tile": "T30NXM",
+        "moved_m": 865
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.573647,
+          5.761178
+        ]
+      },
+      "properties": {
+        "water_pixels": 262,
+        "tile": "T30NXM",
+        "moved_m": 614
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.581272,
+          5.749503
+        ]
+      },
+      "properties": {
+        "water_pixels": 209,
+        "tile": "T30NXM",
+        "moved_m": 891
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.580085,
+          5.726835
+        ]
+      },
+      "properties": {
+        "water_pixels": 184,
+        "tile": "T30NXM",
+        "moved_m": 483
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.594159,
+          5.696939
+        ]
+      },
+      "properties": {
+        "water_pixels": 204,
+        "tile": "T30NXM",
+        "moved_m": 420
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.591734,
+          5.690272
+        ]
+      },
+      "properties": {
+        "water_pixels": 201,
+        "tile": "T30NXM",
+        "moved_m": 694
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.607148,
+          5.53112
+        ]
+      },
+      "properties": {
+        "water_pixels": 221,
+        "tile": "T30NXM",
+        "moved_m": 746
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.615568,
+          5.518147
+        ]
+      },
+      "properties": {
+        "water_pixels": 290,
+        "tile": "T30NXM",
+        "moved_m": 150
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.619394,
+          5.49995
+        ]
+      },
+      "properties": {
+        "water_pixels": 266,
+        "tile": "T30NXM",
+        "moved_m": 870
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.613751,
+          5.479348
+        ]
+      },
+      "properties": {
+        "water_pixels": 192,
+        "tile": "T30NXM",
+        "moved_m": 837
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.627299,
+          5.430455
+        ]
+      },
+      "properties": {
+        "water_pixels": 256,
+        "tile": "T30NXM",
+        "moved_m": 751
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.631352,
+          5.413778
+        ]
+      },
+      "properties": {
+        "water_pixels": 283,
+        "tile": "T30NXL",
+        "moved_m": 791
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.631181,
+          5.373107
+        ]
+      },
+      "properties": {
+        "water_pixels": 305,
+        "tile": "T30NXL",
+        "moved_m": 881
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.625565,
+          5.364336
+        ]
+      },
+      "properties": {
+        "water_pixels": 401,
+        "tile": "T30NXL",
+        "moved_m": 509
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.608113,
+          5.328446
+        ]
+      },
+      "properties": {
+        "water_pixels": 307,
+        "tile": "T30NXL",
+        "moved_m": 892
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.598617,
+          5.310779
+        ]
+      },
+      "properties": {
+        "water_pixels": 331,
+        "tile": "T30NXL",
+        "moved_m": 698
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.596154,
+          5.288746
+        ]
+      },
+      "properties": {
+        "water_pixels": 327,
+        "tile": "T30NXL",
+        "moved_m": 620
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.592802,
+          5.267114
+        ]
+      },
+      "properties": {
+        "water_pixels": 303,
+        "tile": "T30NXL",
+        "moved_m": 726
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.622646,
+          5.169334
+        ]
+      },
+      "properties": {
+        "water_pixels": 208,
+        "tile": "T30NXL",
+        "moved_m": 897
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.630593,
+          5.164952
+        ]
+      },
+      "properties": {
+        "water_pixels": 279,
+        "tile": "T30NXL",
+        "moved_m": 270
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.643228,
+          5.161846
+        ]
+      },
+      "properties": {
+        "water_pixels": 215,
+        "tile": "T30NXL",
+        "moved_m": 614
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.62889,
+          5.128989
+        ]
+      },
+      "properties": {
+        "water_pixels": 241,
+        "tile": "T30NXL",
+        "moved_m": 897
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.617694,
+          5.119871
+        ]
+      },
+      "properties": {
+        "water_pixels": 214,
+        "tile": "T30NXL",
+        "moved_m": 899
+      }
+    }
+  ]
+}

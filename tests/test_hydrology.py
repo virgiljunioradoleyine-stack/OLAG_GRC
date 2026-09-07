@@ -54,3 +54,43 @@ def test_disjoint_geometry_triggers_the_fallback():
     for s in net["segments"]:
         ratio = s["distance_m"] / max(s["straight_line_m"], 1)
         assert ratio <= MAX_SINUOSITY + 0.01
+
+
+def test_candidate_sites_are_verified_if_present():
+    """Every offered candidate must clear the minimum the code advertises."""
+    import json
+    import os
+
+    from pipeline.satellite.candidates import MIN_PIXELS
+
+    p = "web/public/data/candidates.geojson"
+    if not os.path.exists(p):
+        pytest.skip("no candidates generated yet")
+    fc = json.load(open(p))
+    feats = fc.get("features", [])
+    assert feats, "candidates file exists but is empty"
+    for f in feats:
+        px = f["properties"]["water_pixels"]
+        assert px >= MIN_PIXELS, (
+            f"candidate at {f['geometry']['coordinates']} offers only {px} water "
+            f"pixels, below the advertised minimum of {MIN_PIXELS}")
+        lon, lat = f["geometry"]["coordinates"]
+        assert 4.0 < lat < 7.5 and -3.5 < lon < -0.5, "candidate outside the Pra basin"
+
+
+def test_candidates_do_not_duplicate_existing_stations():
+    import json
+    import os
+
+    from pipeline.satellite.candidates import DEDUPE_M
+
+    p = "web/public/data/candidates.geojson"
+    if not os.path.exists(p):
+        pytest.skip("no candidates generated yet")
+    fc = json.load(open(p))
+    for f in fc.get("features", []):
+        lon, lat = f["geometry"]["coordinates"]
+        for s in STATIONS:
+            d = haversine_m(lat, lon, s.lat, s.lon)
+            assert d >= DEDUPE_M * 0.9, (
+                f"candidate is {d:.0f} m from existing station {s.id}")

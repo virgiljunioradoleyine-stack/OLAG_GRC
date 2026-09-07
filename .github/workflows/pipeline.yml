@@ -57,6 +57,11 @@ jobs:
       - name: Validate the dataset before anything downstream uses it
         run: python -m pytest tests/test_data_schema.py -q
 
+      - name: Refresh candidate sites for click-to-add
+        id: cand
+        continue-on-error: true
+        run: python -m pipeline.satellite.candidates
+
       - name: Score and export the dashboard dataset
         run: python -m pipeline.export.dashboard
 
@@ -93,7 +98,7 @@ jobs:
           fi
 
       - name: Report acquisition failures
-        if: steps.rain.outcome == 'failure' || steps.hydro.outcome == 'failure'
+        if: steps.rain.outcome == 'failure' || steps.hydro.outcome == 'failure' || steps.cand.outcome == 'failure'
         run: |
-          echo "::warning::optional acquisition step failed — rainfall=${{ steps.rain.outcome }} hydrology=${{ steps.hydro.outcome }}"
+          echo "::warning::optional step failed — rainfall=${{ steps.rain.outcome }} hydrology=${{ steps.hydro.outcome }} candidates=${{ steps.cand.outcome }}"
           echo "The last known good data was preserved; the run did not publish corrupted output."
