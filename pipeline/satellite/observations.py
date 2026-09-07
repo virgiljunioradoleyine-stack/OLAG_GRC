@@ -281,15 +281,29 @@ def collect_all(start=HISTORY_START, end=None, stations=None, workers=16,
 
 # ------------------------------------------------------------------- I/O ---
 
-def write_observations(rows, path=None):
-    """Write observations atomically, one row per station-date."""
+def write_observations(rows, path=None, merge=True):
+    """Write observations atomically, one row per station-date.
+
+    Merges with whatever is already stored unless `merge=False`. This matters:
+    the scheduled pipeline collects only the last ~90 days, so a replacing write
+    would silently destroy nine years of history on its first run. Existing rows
+    are kept and new ones win only when they carry more usable water pixels.
+    """
     path = path or os.path.join(OBS_DIR, "observations.csv")
     os.makedirs(os.path.dirname(path), exist_ok=True)
 
     best = {}
+    if merge and os.path.exists(path):
+        prev = load_observations(path)
+        for _, r in prev.iterrows():
+            rec = {k: ("" if pd.isna(r.get(k)) else r.get(k)) for k in OBS_FIELDS}
+            rec["date"] = pd.to_datetime(r["date"]).strftime("%Y-%m-%d")
+            best[(rec["station_id"], rec["date"])] = rec
+
     for r in rows:
         k = (r["station_id"], r["date"])
-        if k not in best or r["water_pixel_count"] > best[k]["water_pixel_count"]:
+        if k not in best or float(r["water_pixel_count"] or 0) > float(
+                best[k].get("water_pixel_count") or 0):
             best[k] = r
     ordered = sorted(best.values(), key=lambda r: (r["station_id"], r["date"]))
 
@@ -319,12 +333,18 @@ def load_observations(path=None, station_id=None):
 
 def main():
     import sys
-    start = sys.argv[1] if len(sys.argv) > 1 else HISTORY_START
-    print(f"collecting observations from {start}\n")
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    replace = "--replace" in sys.argv
+    start = args[0] if args else HISTORY_START
+    print(f"collecting observations from {start}"
+          f"{' (REPLACING the stored record)' if replace else ' (merging)'}\n")
     rows = collect_all(start=start)
-    path, n = write_observations(rows)
-    print(f"\nwrote {path}: {n} observations")
-    return 0 if n else 1
+    if not rows:
+        print("no observations collected — leaving the stored record untouched")
+        return 1
+    path, n = write_observations(rows, merge=not replace)
+    print(f"\nwrote {path}: {n} observations total ({len(rows)} collected this run)")
+    return 0
 
 
 if __name__ == "__main__":

@@ -45,6 +45,8 @@ jobs:
       - name: Collect satellite observations
         id: sat
         run: |
+          # Incremental by default; the write merges into the stored record so
+          # a 90-day run cannot truncate the archive.
           if [ "${{ inputs.full_history }}" = "true" ]; then
             python -m pipeline.satellite.observations 2017-01-01
           else

@@ -72,3 +72,34 @@ def test_station_coordinates_are_valid():
 def test_station_order_is_unique_and_dense():
     orders = sorted(s.order for s in STATIONS)
     assert orders == list(range(1, len(STATIONS) + 1))
+
+
+def test_incremental_write_preserves_history(tmp_path):
+    """A 90-day scheduled run must never wipe nine years of record."""
+    import os
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    history = [{**blank, "date": f"2017-01-{i:02d}", "station_id": "P05",
+                "ndti": 0.05, "water_pixel_count": 100} for i in range(1, 21)]
+    write_observations(history, p, merge=False)
+
+    recent = [{**blank, "date": f"2026-09-{i:02d}", "station_id": "P05",
+               "ndti": 0.09, "water_pixel_count": 300} for i in range(1, 4)]
+    write_observations(recent, p)
+
+    df = load_observations(p)
+    assert len(df) == 23, "incremental write destroyed the historical record"
+    assert str(df["date"].min().date()) == "2017-01-01"
+
+
+def test_replace_is_explicit(tmp_path):
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    write_observations([{**blank, "date": "2017-01-01", "station_id": "P05",
+                         "ndti": 0.05, "water_pixel_count": 100}], p, merge=False)
+    write_observations([{**blank, "date": "2026-09-01", "station_id": "P05",
+                         "ndti": 0.09, "water_pixel_count": 300}], p, merge=False)
+    assert len(load_observations(p)) == 1
