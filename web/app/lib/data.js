@@ -20,6 +20,7 @@ export const getSeries = () => read("series.json", {});
 export const getAlerts = () => read("alerts.json", { alerts: [], detailed: [] });
 export const getRiver = () => read("river.geojson", null);
 export const getNetwork = () => read("network.json", {});
+export const getCandidates = () => read("candidates.geojson", null);
 
 export function getAll() {
   return {
@@ -29,6 +30,7 @@ export function getAll() {
     alerts: getAlerts(),
     river: getRiver(),
     network: getNetwork(),
+    candidates: getCandidates(),
   };
 }
 

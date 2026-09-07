@@ -103,3 +103,42 @@ def test_replace_is_explicit(tmp_path):
     write_observations([{**blank, "date": "2026-09-01", "station_id": "P05",
                          "ndti": 0.09, "water_pixel_count": 300}], p, merge=False)
     assert len(load_observations(p)) == 1
+
+
+def test_recollection_supersedes_stored_rows(tmp_path):
+    """Re-collecting a date must recompute it, not preserve the old value.
+
+    A full re-collection once left 25 rows with an out-of-range MNDWI in place,
+    because the stored rows happened to have more water pixels than the fresh
+    ones. Rows computed by since-fixed code could never be healed.
+    """
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    write_observations([{**blank, "date": "2020-05-01", "station_id": "P05",
+                         "ndti": 0.9, "water_pixel_count": 900}], p, merge=False)
+
+    # fresh row for the same date with FEWER pixels must still win
+    write_observations([{**blank, "date": "2020-05-01", "station_id": "P05",
+                         "ndti": 0.1, "water_pixel_count": 100}], p)
+
+    df = load_observations(p)
+    assert len(df) == 1
+    assert float(df["ndti"].iloc[0]) == 0.1, "stale row survived a re-collection"
+
+
+def test_best_scene_wins_within_a_single_run(tmp_path):
+    """Two scenes on one date: the one with more usable water pixels wins."""
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    write_observations([
+        {**blank, "date": "2020-05-01", "station_id": "P05", "ndti": 0.1,
+         "water_pixel_count": 100},
+        {**blank, "date": "2020-05-01", "station_id": "P05", "ndti": 0.2,
+         "water_pixel_count": 500},
+    ], p, merge=False)
+    df = load_observations(p)
+    assert len(df) == 1 and float(df["ndti"].iloc[0]) == 0.2

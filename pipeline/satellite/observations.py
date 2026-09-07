@@ -286,12 +286,33 @@ def write_observations(rows, path=None, merge=True):
 
     Merges with whatever is already stored unless `merge=False`. This matters:
     the scheduled pipeline collects only the last ~90 days, so a replacing write
-    would silently destroy nine years of history on its first run. Existing rows
-    are kept and new ones win only when they carry more usable water pixels.
+    would silently destroy nine years of history on its first run.
+
+    Precedence, in order:
+
+      1. Within a single run, when several scenes cover the same station-date,
+         keep the one with the most usable water pixels.
+      2. Across runs, a freshly collected row SUPERSEDES the stored one for the
+         same station-date, because it was produced by the current code.
+
+    Rule 2 exists because the first version preferred whichever row had more
+    pixels regardless of age, which meant rows computed by since-fixed code
+    could never be healed -- 25 observations with an out-of-range MNDWI survived
+    a full re-collection and kept failing validation. Re-collecting a date is an
+    explicit instruction to recompute it.
     """
     path = path or os.path.join(OBS_DIR, "observations.csv")
     os.makedirs(os.path.dirname(path), exist_ok=True)
 
+    # 1. within this run: best scene per station-date
+    fresh = {}
+    for r in rows:
+        k = (r["station_id"], r["date"])
+        if k not in fresh or float(r["water_pixel_count"] or 0) > float(
+                fresh[k].get("water_pixel_count") or 0):
+            fresh[k] = r
+
+    # 2. across runs: keep stored rows, then let this run supersede its dates
     best = {}
     if merge and os.path.exists(path):
         prev = load_observations(path)
@@ -299,12 +320,8 @@ def write_observations(rows, path=None, merge=True):
             rec = {k: ("" if pd.isna(r.get(k)) else r.get(k)) for k in OBS_FIELDS}
             rec["date"] = pd.to_datetime(r["date"]).strftime("%Y-%m-%d")
             best[(rec["station_id"], rec["date"])] = rec
+    best.update(fresh)
 
-    for r in rows:
-        k = (r["station_id"], r["date"])
-        if k not in best or float(r["water_pixel_count"] or 0) > float(
-                best[k].get("water_pixel_count") or 0):
-            best[k] = r
     ordered = sorted(best.values(), key=lambda r: (r["station_id"], r["date"]))
 
     with atomic_write(path) as fh:

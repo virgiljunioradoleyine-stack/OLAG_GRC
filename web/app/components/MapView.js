@@ -16,12 +16,21 @@ const SEV_COLOR = {
  *  Loaded client-side only: Leaflet touches `window` at import time and would
  *  break the server render.
  */
-export default function MapView({ stations = [], river = null, selected, onSelect, height = 460 }) {
+export default function MapView({
+  stations = [], river = null, selected, onSelect, height = 460,
+  candidates = null, pickMode = false, onPick = null,
+}) {
   const ref = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef({});
   const [ready, setReady] = useState(false);
   const [layer, setLayer] = useState("satellite");
+  const candLayerRef = useRef(null);
+  const pickMarkerRef = useRef(null);
+  const pickModeRef = useRef(pickMode);
+  const onPickRef = useRef(onPick);
+  pickModeRef.current = pickMode;
+  onPickRef.current = onPick;
 
   const points = useMemo(
     () => stations.filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lon)),
@@ -67,6 +76,37 @@ export default function MapView({ stations = [], river = null, selected, onSelec
         markersRef.current[s.id] = m;
       });
 
+      // Click-to-pick. A click cannot verify anything by itself, so it snaps to
+      // the nearest pre-verified candidate site rather than reporting wherever
+      // the pointer happened to land.
+      map.on("click", (e) => {
+        if (!pickModeRef.current || !onPickRef.current) return;
+        const feats = candidates?.features || [];
+        if (!feats.length) {
+          onPickRef.current({ error: "No candidate sites have been generated yet." });
+          return;
+        }
+        let best = null, bestD = Infinity;
+        for (const f of feats) {
+          const [lon, lat] = f.geometry.coordinates;
+          const d = map.distance(e.latlng, L.latLng(lat, lon));
+          if (d < bestD) { best = f; bestD = d; }
+        }
+        const [lon, lat] = best.geometry.coordinates;
+        if (pickMarkerRef.current) map.removeLayer(pickMarkerRef.current);
+        pickMarkerRef.current = L.circleMarker([lat, lon], {
+          radius: 11, color: "#1d6feb", weight: 3,
+          fillColor: "#1d6feb", fillOpacity: 0.35,
+        }).addTo(map);
+        onPickRef.current({
+          lat, lon,
+          water_pixels: best.properties.water_pixels,
+          tile: best.properties.tile,
+          snapped_m: Math.round(bestD),
+          clicked: { lat: e.latlng.lat, lon: e.latlng.lng },
+        });
+      });
+
       if (points.length) {
         map.fitBounds(points.map((s) => [s.lat, s.lon]), { padding: [42, 42] });
       } else {
@@ -78,7 +118,36 @@ export default function MapView({ stations = [], river = null, selected, onSelec
       cancelled = true;
       if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
     };
-  }, [points, river, onSelect]);
+  }, [points, river, onSelect, candidates]);
+
+  // show or hide the candidate sites when pick mode is toggled
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    let cancelled = false;
+    (async () => {
+      const L = (await import("leaflet")).default;
+      if (cancelled || !mapRef.current) return;
+      if (candLayerRef.current) {
+        map.removeLayer(candLayerRef.current);
+        candLayerRef.current = null;
+      }
+      if (!pickMode || !candidates?.features?.length) return;
+      const group = L.layerGroup();
+      candidates.features.forEach((f) => {
+        const [lon, lat] = f.geometry.coordinates;
+        L.circleMarker([lat, lon], {
+          radius: 4, color: "#1d6feb", weight: 1.5,
+          fillColor: "#fff", fillOpacity: 0.9,
+        })
+          .bindTooltip(`${f.properties.water_pixels} water px`, { direction: "top" })
+          .addTo(group);
+      });
+      group.addTo(map);
+      candLayerRef.current = group;
+    })();
+    return () => { cancelled = true; };
+  }, [pickMode, candidates, ready]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -99,9 +168,14 @@ export default function MapView({ stations = [], river = null, selected, onSelec
     <div style={{ position: "relative" }}>
       <div
         ref={ref}
-        style={{ height, width: "100%", borderRadius: "var(--radius)", background: "#0d1420" }}
         role="application"
-        aria-label={`Map of ${points.length} monitoring stations on the Pra River`}
+        aria-label={`Map of ${points.length} monitoring stations on the Pra River`
+          + (pickMode ? ". Pick mode is on: click the river to choose a candidate site."
+                      : "")}
+        style={{
+          height, width: "100%", borderRadius: "var(--radius)",
+          background: "#0d1420", cursor: pickMode ? "crosshair" : "grab",
+        }}
       />
       <div style={{ position: "absolute", top: 10, right: 10, zIndex: 500 }} className="seg">
         {["satellite", "terrain"].map((k) => (
