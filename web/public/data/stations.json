@@ -26,8 +26,8 @@
       "z_score": 0.872,
       "quality": "ACCEPTABLE",
       "confidence": "moderate",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "rain_7d": 6.4,
+      "rain_context": "drier than normal"
     },
     "status": "WATCH",
     "model": {
@@ -143,12 +143,12 @@
       "anomaly_score": -0.43225,
       "anomaly_flagged": false,
       "percentile": 65.9,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "rain_7d": 6.4,
+      "rain_7d_anom": -23.9,
+      "rain_context": "drier than normal",
       "upstream_id": null,
       "upstream_diff": null,
-      "persistence": 2,
+      "persistence": 0,
       "quality": "ACCEPTABLE",
       "quality_score": 0.92,
       "confidence": "moderate",
@@ -156,7 +156,7 @@
         "sediment index is +0.005 above expected, which this station exceeds in under 40% of its history"
       ],
       "headline": "Possible change river-condition anomaly at Pra Upper Basin",
-      "explanation": "On 2026-07-21 the satellite sediment indicator at Pra Upper Basin (P01) read +0.103. Given the season, recent rainfall and upstream conditions, +0.098 would have been expected \u2014 the reading is 0.9 standard deviations above that. Rainfall context is unavailable for this date. The signal has persisted across 2 consecutive observation(s). Observation quality is ACCEPTABLE; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "explanation": "On 2026-07-21 the satellite sediment indicator at Pra Upper Basin (P01) read +0.103. Given the season, recent rainfall and upstream conditions, +0.098 would have been expected \u2014 the reading is 0.9 standard deviations above that. Rainfall over the preceding 7 days totalled 6 mm, which is drier than normal for this time of year. This is the first observation showing the change. Observation quality is ACCEPTABLE; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
       "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
     }
   },
@@ -188,8 +188,8 @@
       "z_score": 2.177,
       "quality": "LOW_QUALITY",
       "confidence": "low",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "rain_7d": 15.8,
+      "rain_context": "drier than normal"
     },
     "status": "WATCH",
     "model": {
@@ -305,9 +305,9 @@
       "anomaly_score": -0.425273,
       "anomaly_flagged": false,
       "percentile": 70.7,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "rain_7d": 15.8,
+      "rain_7d_anom": -5.2,
+      "rain_context": "drier than normal",
       "upstream_id": "P01",
       "upstream_diff": null,
       "persistence": 0,
@@ -316,10 +316,12 @@
       "confidence": "low",
       "signals": [
         "sediment index is +0.006 above expected, which this station exceeds in under 15% of its history",
+        "rainfall over the past 7 days (16 mm) is BELOW its seasonal norm, so rain does not explain this rise",
+        "held below HIGH: this is a single observation and has not yet persisted across passes",
         "held at WATCH: observation quality is LOW_QUALITY, which is not reliable enough to raise an alert on"
       ],
       "headline": "Possible change river-condition anomaly at Pra Mid-Upper Reach",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Upper Reach (P02) read +0.085. Given the season, recent rainfall and upstream conditions, +0.080 would have been expected \u2014 the reading is 2.2 standard deviations above that. Rainfall context is unavailable for this date. This is the first observation showing the change. Observation quality is LOW_QUALITY; overall confidence is low. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Upper Reach (P02) read +0.085. Given the season, recent rainfall and upstream conditions, +0.080 would have been expected \u2014 the reading is 2.2 standard deviations above that. Rainfall over the preceding 7 days totalled 16 mm, which is drier than normal for this time of year. This is the first observation showing the change. Observation quality is LOW_QUALITY; overall confidence is low. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
       "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
     }
   },
@@ -343,16 +345,16 @@
       "P01",
       "P02"
     ],
-    "observations": 306,
+    "observations": 298,
     "latest": {
       "date": "2026-08-20",
       "indicator": 0.127926,
-      "expected": 0.134927,
-      "z_score": -1.839,
+      "expected": 0.136375,
+      "z_score": -2.22,
       "quality": "LOW_QUALITY",
       "confidence": "low",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "rain_7d": 31.6,
+      "rain_context": "near normal"
     },
     "status": "NORMAL",
     "model": {
@@ -462,15 +464,15 @@
       "date": "2026-08-20",
       "severity": "NORMAL",
       "indicator": 0.127926,
-      "expected": 0.134927,
-      "residual": -0.007001,
-      "z_score": -1.839,
-      "anomaly_score": -0.431892,
+      "expected": 0.136375,
+      "residual": -0.008449,
+      "z_score": -2.22,
+      "anomaly_score": -0.429463,
       "anomaly_flagged": false,
-      "percentile": 62.3,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "percentile": 65.0,
+      "rain_7d": 31.6,
+      "rain_7d_anom": 12.4,
+      "rain_context": "near normal",
       "upstream_id": "P02",
       "upstream_diff": null,
       "persistence": 0,
@@ -481,7 +483,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra at Beposo Reach",
-      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra at Beposo Reach was +0.128, against an expected +0.135 for these conditions. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra at Beposo Reach was +0.128, against an expected +0.136 for these conditions. Rainfall over the previous 7 days was near normal (32 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -505,16 +507,16 @@
       "P02",
       "P03"
     ],
-    "observations": 315,
+    "observations": 307,
     "latest": {
       "date": "2026-09-02",
       "indicator": 0.116709,
-      "expected": 0.109639,
-      "z_score": 1.78,
+      "expected": 0.111242,
+      "z_score": 1.376,
       "quality": "ACCEPTABLE",
-      "confidence": "moderate",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "confidence": "high",
+      "rain_7d": 15.8,
+      "rain_context": "drier than normal"
     },
     "status": "WATCH",
     "model": {
@@ -624,26 +626,26 @@
       "date": "2026-09-02",
       "severity": "WATCH",
       "indicator": 0.116709,
-      "expected": 0.109639,
-      "residual": 0.00707,
-      "z_score": 1.78,
-      "anomaly_score": -0.424077,
+      "expected": 0.111242,
+      "residual": 0.005467,
+      "z_score": 1.376,
+      "anomaly_score": -0.422122,
       "anomaly_flagged": false,
-      "percentile": 79.0,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "percentile": 81.1,
+      "rain_7d": 15.8,
+      "rain_7d_anom": -5.2,
+      "rain_context": "drier than normal",
       "upstream_id": "P03",
       "upstream_diff": null,
       "persistence": 2,
       "quality": "ACCEPTABLE",
       "quality_score": 0.8,
-      "confidence": "moderate",
+      "confidence": "high",
       "signals": [
-        "sediment index is +0.007 above expected, which this station exceeds in under 40% of its history"
+        "sediment index is +0.005 above expected, which this station exceeds in under 40% of its history"
       ],
       "headline": "Possible change river-condition anomaly at Pra Mid-Lower Reach",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Lower Reach (P04) read +0.117. Given the season, recent rainfall and upstream conditions, +0.110 would have been expected \u2014 the reading is 1.8 standard deviations above that. Rainfall context is unavailable for this date. The signal has persisted across 2 consecutive observation(s). Observation quality is ACCEPTABLE; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Lower Reach (P04) read +0.117. Given the season, recent rainfall and upstream conditions, +0.111 would have been expected \u2014 the reading is 1.4 standard deviations above that. Rainfall over the preceding 7 days totalled 16 mm, which is drier than normal for this time of year. The signal has persisted across 2 consecutive observation(s). Observation quality is ACCEPTABLE; overall confidence is high. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
       "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
     }
   },
@@ -667,16 +669,16 @@
       "P03",
       "P04"
     ],
-    "observations": 291,
+    "observations": 284,
     "latest": {
       "date": "2026-08-20",
       "indicator": 0.106905,
-      "expected": 0.107705,
-      "z_score": -0.271,
+      "expected": 0.115105,
+      "z_score": -2.774,
       "quality": "GOOD",
       "confidence": "moderate",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "rain_7d": 18.5,
+      "rain_context": "near normal"
     },
     "status": "NORMAL",
     "model": {
@@ -786,15 +788,15 @@
       "date": "2026-08-20",
       "severity": "NORMAL",
       "indicator": 0.106905,
-      "expected": 0.107705,
-      "residual": -0.0008,
-      "z_score": -0.271,
-      "anomaly_score": -0.418615,
+      "expected": 0.115105,
+      "residual": -0.0082,
+      "z_score": -2.774,
+      "anomaly_score": -0.417956,
       "anomaly_flagged": false,
-      "percentile": 75.8,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "percentile": 76.8,
+      "rain_7d": 18.5,
+      "rain_7d_anom": 2.8,
+      "rain_context": "near normal",
       "upstream_id": "P04",
       "upstream_diff": null,
       "persistence": 0,
@@ -805,7 +807,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Daboase Intake (GWCL)",
-      "explanation": "On 2026-08-20 the satellite sediment indicator at Daboase Intake (GWCL) was +0.107, against an expected +0.108 for these conditions. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "explanation": "On 2026-08-20 the satellite sediment indicator at Daboase Intake (GWCL) was +0.107, against an expected +0.115 for these conditions. Rainfall over the previous 7 days was near normal (18 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -829,16 +831,16 @@
       "P04",
       "P05"
     ],
-    "observations": 297,
+    "observations": 284,
     "latest": {
       "date": "2026-07-24",
       "indicator": -0.019475,
-      "expected": -0.014529,
-      "z_score": -1.568,
+      "expected": -0.010842,
+      "z_score": -2.738,
       "quality": "LOW_QUALITY",
       "confidence": "low",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "rain_7d": 5.8,
+      "rain_context": "drier than normal"
     },
     "status": "NORMAL",
     "model": {
@@ -948,15 +950,15 @@
       "date": "2026-07-24",
       "severity": "NORMAL",
       "indicator": -0.019475,
-      "expected": -0.014529,
-      "residual": -0.004946,
-      "z_score": -1.568,
-      "anomaly_score": -0.494309,
+      "expected": -0.010842,
+      "residual": -0.008633,
+      "z_score": -2.738,
+      "anomaly_score": -0.496543,
       "anomaly_flagged": false,
-      "percentile": 16.5,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "percentile": 15.1,
+      "rain_7d": 5.8,
+      "rain_7d_anom": -10.9,
+      "rain_context": "drier than normal",
       "upstream_id": "P05",
       "upstream_diff": null,
       "persistence": 0,
@@ -967,7 +969,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra Lower Reach",
-      "explanation": "On 2026-07-24 the satellite sediment indicator at Pra Lower Reach was -0.019, against an expected -0.015 for these conditions. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "explanation": "On 2026-07-24 the satellite sediment indicator at Pra Lower Reach was -0.019, against an expected -0.011 for these conditions. Rainfall over the previous 7 days was drier than normal (6 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -991,16 +993,16 @@
       "P05",
       "P06"
     ],
-    "observations": 276,
+    "observations": 264,
     "latest": {
       "date": "2026-08-20",
       "indicator": 0.085823,
       "expected": 0.112365,
       "z_score": -7.721,
       "quality": "ACCEPTABLE",
-      "confidence": "low",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "confidence": "moderate",
+      "rain_7d": 18.5,
+      "rain_context": "near normal"
     },
     "status": "NORMAL",
     "model": {
@@ -1113,23 +1115,23 @@
       "expected": 0.112365,
       "residual": -0.026542,
       "z_score": -7.721,
-      "anomaly_score": -0.431398,
+      "anomaly_score": -0.427411,
       "anomaly_flagged": false,
-      "percentile": 59.5,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "percentile": 62.9,
+      "rain_7d": 18.5,
+      "rain_7d_anom": 2.8,
+      "rain_context": "near normal",
       "upstream_id": "P06",
       "upstream_diff": null,
       "persistence": 0,
       "quality": "ACCEPTABLE",
       "quality_score": 0.92,
-      "confidence": "low",
+      "confidence": "moderate",
       "signals": [
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra Lower Reach South",
-      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra Lower Reach South was +0.086, against an expected +0.112 for these conditions. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "explanation": "On 2026-08-20 the satellite sediment indicator at Pra Lower Reach South was +0.086, against an expected +0.112 for these conditions. Rainfall over the previous 7 days was near normal (18 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -1152,7 +1154,7 @@
       "P06",
       "P07"
     ],
-    "observations": 283,
+    "observations": 278,
     "latest": {
       "date": "2026-08-18",
       "indicator": 0.053792,
@@ -1160,8 +1162,8 @@
       "z_score": 1.906,
       "quality": "GOOD",
       "confidence": "moderate",
-      "rain_7d": null,
-      "rain_context": "unknown"
+      "rain_7d": 13.0,
+      "rain_context": "near normal"
     },
     "status": "WATCH",
     "model": {
@@ -1277,9 +1279,9 @@
       "anomaly_score": -0.429893,
       "anomaly_flagged": false,
       "percentile": 63.8,
-      "rain_7d": null,
-      "rain_7d_anom": null,
-      "rain_context": "unknown",
+      "rain_7d": 13.0,
+      "rain_7d_anom": -2.2,
+      "rain_context": "near normal",
       "upstream_id": "P07",
       "upstream_diff": null,
       "persistence": 0,
@@ -1290,7 +1292,7 @@
         "sediment index is +0.007 above expected, which this station exceeds in under 40% of its history"
       ],
       "headline": "Possible change river-condition anomaly at Pra Estuary Approach",
-      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Estuary Approach (P08) read +0.054. Given the season, recent rainfall and upstream conditions, +0.047 would have been expected \u2014 the reading is 1.9 standard deviations above that. Rainfall context is unavailable for this date. This is the first observation showing the change. Observation quality is GOOD; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Estuary Approach (P08) read +0.054. Given the season, recent rainfall and upstream conditions, +0.047 would have been expected \u2014 the reading is 1.9 standard deviations above that. Rainfall over the preceding 7 days totalled 13 mm, which is near normal for this time of year. This is the first observation showing the change. Observation quality is GOOD; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
       "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
     }
   }

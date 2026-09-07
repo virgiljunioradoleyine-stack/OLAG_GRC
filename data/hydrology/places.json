@@ -1,0 +1,47 @@
+{
+  "places": {
+    "P01": {
+      "nearest_place": "Assin Awisem",
+      "place_type": "village",
+      "distance_m": 2990
+    },
+    "P02": {
+      "nearest_place": "Morkwa-Bremeng",
+      "place_type": "village",
+      "distance_m": 1901
+    },
+    "P03": {
+      "nearest_place": "Mfantsefokrom",
+      "place_type": "hamlet",
+      "distance_m": 3908
+    },
+    "P04": {
+      "nearest_place": "Last Stop",
+      "place_type": "hamlet",
+      "distance_m": 9118
+    },
+    "P05": {
+      "nearest_place": "Sekeyre Krobo",
+      "place_type": "village",
+      "distance_m": 4576
+    },
+    "P06": {
+      "nearest_place": "Daboase",
+      "place_type": "town",
+      "distance_m": 1059
+    },
+    "P07": {
+      "nearest_place": "Daboase",
+      "place_type": "town",
+      "distance_m": 1303
+    },
+    "P08": {
+      "nearest_place": "Supomu Dunkwa",
+      "place_type": "village",
+      "distance_m": 1278
+    }
+  },
+  "radius_m": 6000,
+  "source": "OpenStreetMap via Overpass API",
+  "license": "ODbL \u2014 \u00a9 OpenStreetMap contributors"
+}
