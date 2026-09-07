@@ -54,7 +54,11 @@ class AnomalyModel:
 
     def fit(self, X_train):
         self.pipeline = Pipeline([
-            ("impute", SimpleImputer(strategy="median")),
+            # keep_empty_features keeps the column count stable between fit and
+            # transform. Without it SimpleImputer silently DROPS an all-NaN
+            # column, so a model fitted while rainfall was unavailable would
+            # expect a different width once rainfall returned.
+            ("impute", SimpleImputer(strategy="median", keep_empty_features=True)),
             ("scale", StandardScaler()),
             ("forest", IsolationForest(
                 n_estimators=self.n_estimators,

@@ -32,6 +32,11 @@ SEVERITIES = ["NORMAL", "WATCH", "ELEVATED", "HIGH", "CRITICAL"]
 Z_WATCH = 1.5
 Z_ELEVATED = 2.5
 Z_HIGH = 3.5
+# CRITICAL needs its own bar. Without one, every reading past Z_HIGH that picked
+# up any corroboration was promoted to the top tier, and the historical record
+# came out with more CRITICAL than HIGH alerts -- an inverted pyramid that would
+# train an operator to ignore the word.
+Z_CRITICAL = 5.0
 
 # Rainfall context
 RAIN_WET_MM_7D = 40.0        # a genuinely wet week for this basin
@@ -99,8 +104,14 @@ def assess(station, date, indicator, expected=None, z_score=None,
            anomaly_score=None, anomaly_flagged=False, percentile=None,
            rain_7d=None, rain_7d_anom=None, upstream_id=None,
            upstream_diff=None, persistence=0, quality="GOOD",
-           quality_score=None):
-    """Assess one observation. Pure function of its arguments."""
+           quality_score=None, thresholds=None):
+    """Assess one observation. Pure function of its arguments.
+
+    `thresholds` is the station's empirical [watch, elevated, high, critical]
+    residual cut-offs, learned from its training residuals. When absent the
+    sigma constants are used, which is only appropriate before a baseline
+    exists.
+    """
     signals = []
     rain_ctx = _rain_context(rain_7d, rain_7d_anom)
     residual = (indicator - expected) if (expected is not None
@@ -108,10 +119,33 @@ def assess(station, date, indicator, expected=None, z_score=None,
     z = z_score if (z_score is not None and np.isfinite(z_score)) else None
 
     # ---- base severity from deviation against expectation ---------------
-    if z is None:
+    use_empirical = (thresholds is not None and residual is not None
+                     and len(thresholds) == 4 and all(np.isfinite(thresholds)))
+
+    if use_empirical:
+        t_watch, t_elev, t_high, t_crit = thresholds
+        if residual >= t_crit:
+            severity = "CRITICAL"
+        elif residual >= t_high:
+            severity = "HIGH"
+        elif residual >= t_elev:
+            severity = "ELEVATED"
+        elif residual >= t_watch:
+            severity = "WATCH"
+        else:
+            severity = "NORMAL"
+        if severity != "NORMAL":
+            signals.append(
+                f"sediment index is {residual:+.3f} above expected, which this "
+                f"station exceeds in under "
+                f"{['40','15','4','0.5'][SEVERITIES.index(severity)-1]}% of its history")
+    elif z is None:
         severity = "WATCH" if anomaly_flagged else "NORMAL"
         if anomaly_flagged:
             signals.append("flagged by the anomaly detector (no baseline available)")
+    elif z >= Z_CRITICAL:
+        severity = "CRITICAL"
+        signals.append(f"{z:.1f}x the usual deviation above expected conditions")
     elif z >= Z_HIGH:
         severity = "HIGH"
         signals.append(f"{z:.1f}x the usual deviation above expected conditions")
@@ -125,11 +159,12 @@ def assess(station, date, indicator, expected=None, z_score=None,
         severity = "NORMAL"
 
     # A fall in the index is not a pollution concern, whatever the detector says.
-    falling = z is not None and z < 0
+    falling = (residual is not None and residual < 0) if use_empirical else (z is not None and z < 0)
     if falling:
         severity = "NORMAL"
         signals = ["index is below expected conditions, not above"]
 
+    base_severity = severity
     idx = SEVERITIES.index(severity)
 
     # ---- corroboration and suppression ----------------------------------
@@ -171,14 +206,17 @@ def assess(station, date, indicator, expected=None, z_score=None,
             signals.append(f"sustained across {persistence} consecutive observations")
 
         # CRITICAL is reserved for observations that are extreme on their own
-        # terms, not ones that merely accumulated corroboration. Without this
-        # guard a 3-sigma reading in a dry week reaches the top tier by adding
-        # a dry-weather bump to a persistence bump, which reads as alarmism.
-        if idx >= 4 and (z is None or z < Z_HIGH):
+        # terms, not ones that merely accumulated corroboration.
+        # Corroboration can lift a reading to HIGH. Only the size of the
+        # departure itself can reach CRITICAL -- otherwise persistence plus a
+        # dry week plus a detector flag stack up to the top tier and the
+        # historical record ends up with more CRITICAL alerts than HIGH ones.
+        if idx >= 4 and base_severity != "CRITICAL":
             idx = 3
             signals.append(
-                "held below CRITICAL: corroborating evidence is strong but the "
-                "deviation itself is not extreme")
+                "held below CRITICAL: corroborating evidence is strong, but the "
+                "departure from expected conditions is not itself extreme")
+
 
     # quality gate: never escalate on a measurement we do not trust
     if quality not in MIN_QUALITY_FOR_ALERT and idx > 1:
@@ -286,7 +324,7 @@ def _write_narrative(a):
 
 def assess_series(station, obs, features, expected=None, z_scores=None,
                   anomaly_scores=None, anomaly_flags=None, percentiles=None,
-                  upstream_id=None):
+                  upstream_id=None, thresholds=None):
     """Assess a whole series, computing persistence as it goes."""
     out, run = [], 0
     n = len(obs)
@@ -303,7 +341,12 @@ def assess_series(station, obs, features, expected=None, z_scores=None,
     for i in range(n):
         row = obs.iloc[i]
         z = at(z_scores, i)
-        raised = (z is not None and z >= Z_WATCH) or bool(at(anomaly_flags, i))
+        exp_i = at(expected, i)
+        if thresholds is not None and exp_i is not None:
+            raised = (float(row["ndti"]) - exp_i) >= thresholds[0]
+        else:
+            raised = (z is not None and z >= Z_WATCH)
+        raised = raised or bool(at(anomaly_flags, i))
         run = run + 1 if raised else 0
 
         out.append(assess(
@@ -320,5 +363,6 @@ def assess_series(station, obs, features, expected=None, z_scores=None,
             persistence=max(run - 1, 0),
             quality=row.get("quality", "GOOD"),
             quality_score=row.get("quality_score"),
+            thresholds=thresholds,
         ))
     return out

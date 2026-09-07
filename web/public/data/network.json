@@ -1,0 +1,100 @@
+{
+  "method": "straight_line_fallback",
+  "note": "OSM centreline unavailable or did not cover the stations; distances are straight-line and therefore UNDERESTIMATE the true along-river distance.",
+  "velocity_range_ms": [
+    0.3,
+    1.0
+  ],
+  "stations": {
+    "P01": {
+      "river_km": 0.0,
+      "snap_distance_m": null
+    },
+    "P02": {
+      "river_km": 19.61,
+      "snap_distance_m": null
+    },
+    "P03": {
+      "river_km": 51.94,
+      "snap_distance_m": null
+    },
+    "P04": {
+      "river_km": 60.68,
+      "snap_distance_m": null
+    },
+    "P05": {
+      "river_km": 74.72,
+      "snap_distance_m": null
+    },
+    "P06": {
+      "river_km": 87.91,
+      "snap_distance_m": null
+    },
+    "P07": {
+      "river_km": 89.0,
+      "snap_distance_m": null
+    },
+    "P08": {
+      "river_km": 93.85,
+      "snap_distance_m": null
+    }
+  },
+  "segments": [
+    {
+      "from": "P01",
+      "to": "P02",
+      "distance_m": 19615,
+      "straight_line_m": 19615,
+      "travel_hours_min": 5.4,
+      "travel_hours_max": 18.2
+    },
+    {
+      "from": "P02",
+      "to": "P03",
+      "distance_m": 32327,
+      "straight_line_m": 32327,
+      "travel_hours_min": 9.0,
+      "travel_hours_max": 29.9
+    },
+    {
+      "from": "P03",
+      "to": "P04",
+      "distance_m": 8740,
+      "straight_line_m": 8740,
+      "travel_hours_min": 2.4,
+      "travel_hours_max": 8.1
+    },
+    {
+      "from": "P04",
+      "to": "P05",
+      "distance_m": 14039,
+      "straight_line_m": 14039,
+      "travel_hours_min": 3.9,
+      "travel_hours_max": 13.0
+    },
+    {
+      "from": "P05",
+      "to": "P06",
+      "distance_m": 13190,
+      "straight_line_m": 13190,
+      "travel_hours_min": 3.7,
+      "travel_hours_max": 12.2
+    },
+    {
+      "from": "P06",
+      "to": "P07",
+      "distance_m": 1093,
+      "straight_line_m": 1093,
+      "travel_hours_min": 0.3,
+      "travel_hours_max": 1.0
+    },
+    {
+      "from": "P07",
+      "to": "P08",
+      "distance_m": 4844,
+      "straight_line_m": 4844,
+      "travel_hours_min": 1.3,
+      "travel_hours_max": 4.5
+    }
+  ]
+}

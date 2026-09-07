@@ -19,6 +19,7 @@ reviewer than a neural network fitted to a few hundred rows.
 from __future__ import annotations
 
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
@@ -51,14 +52,18 @@ class ExpectedConditionModel:
         self.params.update(kw)
         self.model = None
         self.features = list(BASELINE_FEATURES)
+        self.fitted_features_ = None   # the subset actually usable at fit time
+        self.dropped_features_ = []
         self.residual_std_ = None
+        self.residual_thresholds_ = None   # empirical watch/elevated/high/critical
 
     # --- helpers ----------------------------------------------------------
-    def _matrix(self, X):
-        missing = [c for c in self.features if c not in X.columns]
+    def _matrix(self, X, cols=None):
+        cols = cols or self.fitted_features_ or self.features
+        missing = [c for c in cols if c not in X.columns]
         if missing:
             raise KeyError(f"baseline features missing from frame: {missing}")
-        return X[self.features].to_numpy(dtype=float)
+        return X[cols].to_numpy(dtype=float)
 
     @staticmethod
     def _usable(y, sample_weight=None):
@@ -69,12 +74,29 @@ class ExpectedConditionModel:
 
     # --- API --------------------------------------------------------------
     def fit(self, X, y, sample_weight=None):
-        M = self._matrix(X)
         y = np.asarray(y, dtype=float)
         m = self._usable(y, sample_weight)
         if m.sum() < 30:
             raise ValueError(
                 f"expected-condition model needs >= 30 usable training rows, got {int(m.sum())}")
+
+        # Drop features with no observed value in the training window. An
+        # all-NaN column carries no information, and the gradient booster
+        # cannot bin one -- it fails with an opaque "window shape cannot be
+        # larger than input array shape". This is not hypothetical: if the
+        # rainfall API is unavailable, every rainfall feature arrives empty and
+        # the whole model would refuse to fit. Dropping them lets the model
+        # degrade to what it can actually see, and records what it lost.
+        present = [c for c in self.features
+                   if c in X.columns and np.isfinite(
+                       pd.to_numeric(X[c], errors="coerce").to_numpy(dtype=float)[m]).any()]
+        self.dropped_features_ = [c for c in self.features if c not in present]
+        if len(present) < 3:
+            raise ValueError(
+                f"only {len(present)} usable baseline features; cannot fit")
+        self.fitted_features_ = present
+
+        M = self._matrix(X, present)
         self.model = HistGradientBoostingRegressor(**self.params)
         self.model.fit(M[m], y[m],
                        sample_weight=None if sample_weight is None else np.asarray(sample_weight)[m])
@@ -83,6 +105,21 @@ class ExpectedConditionModel:
         self.residual_std_ = float(1.4826 * np.median(np.abs(resid - np.median(resid))))
         if not np.isfinite(self.residual_std_) or self.residual_std_ <= 0:
             self.residual_std_ = float(np.std(resid)) or 1e-6
+
+        # Empirical severity thresholds, taken from the TRAINING residuals.
+        #
+        # These residuals are strongly non-normal: measured on the real record,
+        # |z| reaches 5 at the 90th percentile and 19 at the 99th. Treating a
+        # MAD-scaled sigma as if it implied Gaussian rarity therefore overstates
+        # how unusual a reading is, and produced more CRITICAL alerts than HIGH
+        # ones -- an inverted pyramid. Quantiles of the actual distribution are
+        # distribution-free and give each tier the frequency we intend.
+        pos = resid[resid > 0]
+        if pos.size >= 20:
+            q = np.quantile(pos, [0.60, 0.85, 0.96, 0.995])
+        else:
+            q = np.array([1, 2, 3, 4], dtype=float) * self.residual_std_
+        self.residual_thresholds_ = [float(v) for v in q]   # watch/elev/high/crit
         return self
 
     def predict(self, X):

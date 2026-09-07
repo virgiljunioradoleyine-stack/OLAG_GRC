@@ -109,7 +109,7 @@ def build_station_payloads(obs_all=None):
         entry["observations"] = int(len(obs))
         up = upstream_neighbour(st)
 
-        expected = z = scores = flags = pct = None
+        expected = z = scores = flags = pct = thresholds = None
         bundle = None
         try:
             bundle = load_bundle(st.id, features=FEATURE_COLUMNS)
@@ -122,6 +122,7 @@ def build_station_payloads(obs_all=None):
             if base is not None:
                 expected = base.predict(X)
                 z = base.z_scores(X, obs["ndti"].to_numpy(float))
+                thresholds = getattr(base, "residual_thresholds_", None)
             if anom is not None:
                 scores = anom.score(X)
                 flags = anom.flag(X) if anom.threshold_ is not None else None
@@ -150,7 +151,7 @@ def build_station_payloads(obs_all=None):
         assessments = assess_series(
             st, obs, X, expected=expected, z_scores=z,
             anomaly_scores=scores, anomaly_flags=flags, percentiles=pct,
-            upstream_id=up.id if up else None)
+            upstream_id=up.id if up else None, thresholds=thresholds)
 
         rain = load_rainfall(st.id)
         series[st.id] = _series_records(obs, X, assessments, rain)

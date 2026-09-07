@@ -51,12 +51,29 @@ def test_falling_index_is_never_an_alert():
 
 
 def test_critical_requires_extreme_deviation():
-    corroborated = _a(z_score=3.0, rain_7d=2, rain_7d_anom=-25, persistence=4,
-                      anomaly_flagged=True, upstream_id="P04", upstream_diff=0.08)
-    assert corroborated.severity != "CRITICAL"
-    extreme = _a(z_score=4.5, rain_7d=2, rain_7d_anom=-25, persistence=4,
-                 anomaly_flagged=True, upstream_id="P04", upstream_diff=0.08)
-    assert extreme.severity == "CRITICAL"
+    """CRITICAL must not be reachable by stacking corroboration alone."""
+    kw = dict(rain_7d=2, rain_7d_anom=-25, persistence=4, anomaly_flagged=True,
+              upstream_id="P04", upstream_diff=0.08)
+    assert _a(z_score=3.0, **kw).severity != "CRITICAL"
+    assert _a(z_score=4.5, **kw).severity != "CRITICAL"
+    assert _a(z_score=5.5, **kw).severity == "CRITICAL"
+
+
+def test_severity_pyramid_is_not_inverted():
+    """Each tier must be rarer than the one below it across a realistic sweep."""
+    import numpy as np
+    from collections import Counter
+    rng = np.random.default_rng(0)
+    counts = Counter()
+    for _ in range(4000):
+        counts[_a(z_score=float(rng.normal(0, 1.2)),
+                  rain_7d=float(abs(rng.normal(25, 20))),
+                  rain_7d_anom=float(rng.normal(0, 12)),
+                  persistence=int(rng.integers(0, 4)),
+                  anomaly_flagged=bool(rng.random() < 0.1)).severity] += 1
+    order = ["WATCH", "ELEVATED", "HIGH", "CRITICAL"]
+    seq = [counts[s] for s in order]
+    assert seq == sorted(seq, reverse=True), f"inverted severity pyramid: {dict(counts)}"
 
 
 @pytest.mark.parametrize("z", [0.1, 2.0, 3.0, 5.0])

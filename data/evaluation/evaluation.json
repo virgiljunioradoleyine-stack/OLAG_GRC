@@ -1,0 +1,555 @@
+{
+  "generated_at": "2026-09-07T16:18:12+00:00",
+  "split": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
+  "ground_truth_records": 0,
+  "supervised_metrics_available": false,
+  "note": "No in-situ water-quality measurements are available, so no turbidity accuracy metrics (MAE/RMSE against NTU) can be computed. What is reported is how well the expected-condition model generalises to unseen time periods, and how stable the anomaly flag rate is outside its calibration window.",
+  "gate_passed": true,
+  "gate_reasons": [],
+  "stations": [
+    {
+      "station_id": "P01",
+      "station_name": "Pra Upper Basin",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-22"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-07-21"
+      ],
+      "rows": {
+        "train": 217,
+        "validation": 35,
+        "test": 45
+      },
+      "baseline": {
+        "train": {
+          "n": 217,
+          "mae": 0.00558,
+          "rmse": 0.00807,
+          "r2": 0.9729,
+          "residual_std": 0.00518,
+          "naive_mae": 0.0299,
+          "skill_vs_naive": 0.8134
+        },
+        "validation": {
+          "n": 35,
+          "mae": 0.01936,
+          "rmse": 0.02854,
+          "r2": 0.6972,
+          "residual_std": 0.00518,
+          "naive_mae": 0.02896,
+          "skill_vs_naive": 0.3315
+        },
+        "test": {
+          "n": 45,
+          "mae": 0.01508,
+          "rmse": 0.02163,
+          "r2": 0.731,
+          "residual_std": 0.00518,
+          "naive_mae": 0.02504,
+          "skill_vs_naive": 0.3978
+        },
+        "error_by_season": {
+          "dry": 0.02194,
+          "wet_major": 0.01138,
+          "wet_minor": 0.00552
+        }
+      },
+      "anomaly": {
+        "threshold": -0.585101,
+        "threshold_source": "validation quantile (35 rows)",
+        "flag_rate": {
+          "train": 0.023,
+          "validation": 0.0571,
+          "test": 0.0444
+        },
+        "stability": 0.0127
+      }
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-22"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-09-02"
+      ],
+      "rows": {
+        "train": 184,
+        "validation": 24,
+        "test": 46
+      },
+      "baseline": {
+        "train": {
+          "n": 184,
+          "mae": 0.0028,
+          "rmse": 0.00408,
+          "r2": 0.9905,
+          "residual_std": 0.00271,
+          "naive_mae": 0.02126,
+          "skill_vs_naive": 0.8683
+        },
+        "validation": {
+          "n": 24,
+          "mae": 0.00868,
+          "rmse": 0.01413,
+          "r2": 0.5719,
+          "residual_std": 0.00271,
+          "naive_mae": 0.01005,
+          "skill_vs_naive": 0.1363
+        },
+        "test": {
+          "n": 46,
+          "mae": 0.01392,
+          "rmse": 0.01913,
+          "r2": 0.6544,
+          "residual_std": 0.00271,
+          "naive_mae": 0.01475,
+          "skill_vs_naive": 0.0563
+        },
+        "error_by_season": {
+          "dry": 0.01845,
+          "wet_major": 0.01018,
+          "wet_minor": 0.01167
+        }
+      },
+      "anomaly": {
+        "threshold": -0.528904,
+        "threshold_source": "training quantile \u2014 validation had only 24 rows, too few to calibrate on",
+        "flag_rate": {
+          "train": 0.0543,
+          "validation": 0.0417,
+          "test": 0.1087
+        },
+        "stability": 0.067
+      }
+    },
+    {
+      "station_id": "P03",
+      "station_name": "Pra at Beposo Reach",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-27",
+        "2023-12-27"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-08-20"
+      ],
+      "rows": {
+        "train": 220,
+        "validation": 30,
+        "test": 56
+      },
+      "baseline": {
+        "train": {
+          "n": 220,
+          "mae": 0.00397,
+          "rmse": 0.00562,
+          "r2": 0.9898,
+          "residual_std": 0.00381,
+          "naive_mae": 0.03103,
+          "skill_vs_naive": 0.8721
+        },
+        "validation": {
+          "n": 30,
+          "mae": 0.02271,
+          "rmse": 0.03467,
+          "r2": 0.7538,
+          "residual_std": 0.00381,
+          "naive_mae": 0.04414,
+          "skill_vs_naive": 0.4855
+        },
+        "test": {
+          "n": 56,
+          "mae": 0.02651,
+          "rmse": 0.03612,
+          "r2": 0.6579,
+          "residual_std": 0.00381,
+          "naive_mae": 0.04013,
+          "skill_vs_naive": 0.3394
+        },
+        "error_by_season": {
+          "dry": 0.03164,
+          "wet_major": 0.02009,
+          "wet_minor": 0.02894
+        }
+      },
+      "anomaly": {
+        "threshold": -0.597765,
+        "threshold_source": "validation quantile (30 rows)",
+        "flag_rate": {
+          "train": 0.0182,
+          "validation": 0.0667,
+          "test": 0.0714
+        },
+        "stability": 0.0047
+      }
+    },
+    {
+      "station_id": "P04",
+      "station_name": "Pra Mid-Lower Reach",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-27"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-09-02"
+      ],
+      "rows": {
+        "train": 233,
+        "validation": 28,
+        "test": 54
+      },
+      "baseline": {
+        "train": {
+          "n": 233,
+          "mae": 0.00395,
+          "rmse": 0.00584,
+          "r2": 0.9921,
+          "residual_std": 0.00397,
+          "naive_mae": 0.03916,
+          "skill_vs_naive": 0.8991
+        },
+        "validation": {
+          "n": 28,
+          "mae": 0.01689,
+          "rmse": 0.02034,
+          "r2": 0.8353,
+          "residual_std": 0.00397,
+          "naive_mae": 0.03287,
+          "skill_vs_naive": 0.4862
+        },
+        "test": {
+          "n": 54,
+          "mae": 0.01949,
+          "rmse": 0.02847,
+          "r2": 0.6951,
+          "residual_std": 0.00397,
+          "naive_mae": 0.03237,
+          "skill_vs_naive": 0.3979
+        },
+        "error_by_season": {
+          "dry": 0.02558,
+          "wet_major": 0.01749,
+          "wet_minor": 0.00704
+        }
+      },
+      "anomaly": {
+        "threshold": -0.538768,
+        "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
+        "flag_rate": {
+          "train": 0.0515,
+          "validation": 0.0,
+          "test": 0.0556
+        },
+        "stability": 0.0556
+      }
+    },
+    {
+      "station_id": "P05",
+      "station_name": "Daboase Intake (GWCL)",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-22"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-08-20"
+      ],
+      "rows": {
+        "train": 207,
+        "validation": 32,
+        "test": 52
+      },
+      "baseline": {
+        "train": {
+          "n": 207,
+          "mae": 0.0032,
+          "rmse": 0.00468,
+          "r2": 0.9929,
+          "residual_std": 0.00296,
+          "naive_mae": 0.0312,
+          "skill_vs_naive": 0.8974
+        },
+        "validation": {
+          "n": 32,
+          "mae": 0.02598,
+          "rmse": 0.03358,
+          "r2": 0.5647,
+          "residual_std": 0.00296,
+          "naive_mae": 0.03604,
+          "skill_vs_naive": 0.2791
+        },
+        "test": {
+          "n": 52,
+          "mae": 0.02175,
+          "rmse": 0.03036,
+          "r2": 0.7356,
+          "residual_std": 0.00296,
+          "naive_mae": 0.0367,
+          "skill_vs_naive": 0.4074
+        },
+        "error_by_season": {
+          "dry": 0.02319,
+          "wet_major": 0.01787,
+          "wet_minor": 0.02509
+        }
+      },
+      "anomaly": {
+        "threshold": -0.512076,
+        "threshold_source": "validation quantile (32 rows)",
+        "flag_rate": {
+          "train": 0.1159,
+          "validation": 0.0625,
+          "test": 0.1731
+        },
+        "stability": 0.1106
+      }
+    },
+    {
+      "station_id": "P06",
+      "station_name": "Pra Lower Reach",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-22"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-07-24"
+      ],
+      "rows": {
+        "train": 218,
+        "validation": 29,
+        "test": 50
+      },
+      "baseline": {
+        "train": {
+          "n": 218,
+          "mae": 0.00334,
+          "rmse": 0.00476,
+          "r2": 0.9941,
+          "residual_std": 0.00315,
+          "naive_mae": 0.03471,
+          "skill_vs_naive": 0.9038
+        },
+        "validation": {
+          "n": 29,
+          "mae": 0.01711,
+          "rmse": 0.02394,
+          "r2": 0.6109,
+          "residual_std": 0.00315,
+          "naive_mae": 0.02447,
+          "skill_vs_naive": 0.3008
+        },
+        "test": {
+          "n": 50,
+          "mae": 0.01618,
+          "rmse": 0.02276,
+          "r2": 0.8396,
+          "residual_std": 0.00315,
+          "naive_mae": 0.03684,
+          "skill_vs_naive": 0.5608
+        },
+        "error_by_season": {
+          "dry": 0.01844,
+          "wet_major": 0.01807,
+          "wet_minor": 0.00519
+        }
+      },
+      "anomaly": {
+        "threshold": -0.545274,
+        "threshold_source": "training quantile \u2014 validation had only 29 rows, too few to calibrate on",
+        "flag_rate": {
+          "train": 0.0505,
+          "validation": 0.0,
+          "test": 0.1
+        },
+        "stability": 0.1
+      }
+    },
+    {
+      "station_id": "P07",
+      "station_name": "Pra Lower Reach South",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-27"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-08-20"
+      ],
+      "rows": {
+        "train": 205,
+        "validation": 23,
+        "test": 48
+      },
+      "baseline": {
+        "train": {
+          "n": 205,
+          "mae": 0.0035,
+          "rmse": 0.00494,
+          "r2": 0.9926,
+          "residual_std": 0.00344,
+          "naive_mae": 0.02885,
+          "skill_vs_naive": 0.8787
+        },
+        "validation": {
+          "n": 23,
+          "mae": 0.01176,
+          "rmse": 0.0172,
+          "r2": 0.8536,
+          "residual_std": 0.00344,
+          "naive_mae": 0.0236,
+          "skill_vs_naive": 0.5017
+        },
+        "test": {
+          "n": 48,
+          "mae": 0.01506,
+          "rmse": 0.02299,
+          "r2": 0.7739,
+          "residual_std": 0.00344,
+          "naive_mae": 0.02689,
+          "skill_vs_naive": 0.4399
+        },
+        "error_by_season": {
+          "dry": 0.0174,
+          "wet_major": 0.0105,
+          "wet_minor": 0.01972
+        }
+      },
+      "anomaly": {
+        "threshold": -0.529427,
+        "threshold_source": "training quantile \u2014 validation had only 23 rows, too few to calibrate on",
+        "flag_rate": {
+          "train": 0.0537,
+          "validation": 0.0435,
+          "test": 0.0833
+        },
+        "stability": 0.0398
+      }
+    },
+    {
+      "station_id": "P08",
+      "station_name": "Pra Estuary Approach",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-27",
+        "2023-12-22"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-08-18"
+      ],
+      "rows": {
+        "train": 207,
+        "validation": 28,
+        "test": 48
+      },
+      "baseline": {
+        "train": {
+          "n": 207,
+          "mae": 0.0038,
+          "rmse": 0.0053,
+          "r2": 0.9927,
+          "residual_std": 0.00343,
+          "naive_mae": 0.03504,
+          "skill_vs_naive": 0.8916
+        },
+        "validation": {
+          "n": 28,
+          "mae": 0.01468,
+          "rmse": 0.02093,
+          "r2": 0.6243,
+          "residual_std": 0.00343,
+          "naive_mae": 0.01653,
+          "skill_vs_naive": 0.1119
+        },
+        "test": {
+          "n": 48,
+          "mae": 0.02786,
+          "rmse": 0.05025,
+          "r2": 0.6497,
+          "residual_std": 0.00343,
+          "naive_mae": 0.04229,
+          "skill_vs_naive": 0.3412
+        },
+        "error_by_season": {
+          "dry": 0.04278,
+          "wet_major": 0.01095,
+          "wet_minor": 0.01239
+        }
+      },
+      "anomaly": {
+        "threshold": -0.529165,
+        "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
+        "flag_rate": {
+          "train": 0.0531,
+          "validation": 0.0,
+          "test": 0.125
+        },
+        "stability": 0.125
+      }
+    }
+  ]
+}
