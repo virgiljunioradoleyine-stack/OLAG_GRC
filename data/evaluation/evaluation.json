@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T16:18:12+00:00",
+  "generated_at": "2026-09-07T16:29:20+00:00",
   "split": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
   "ground_truth_records": 0,
   "supervised_metrics_available": false,

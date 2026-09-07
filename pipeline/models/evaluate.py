@@ -158,8 +158,9 @@ def main():
     }
     os.makedirs(EVAL_DIR, exist_ok=True)
     write_json(EVAL_PATH, report)
+    write_markdown(report)
 
-    print(f"evaluation -> {EVAL_PATH}")
+    print(f"evaluation -> {EVAL_PATH} and {EVAL_MD}")
     for r in results:
         if r.get("status") != "evaluated":
             print(f"  {r['station_id']}: {r.get('status')}")
@@ -173,6 +174,124 @@ def main():
     for x in reasons:
         print(f"  - {x}")
     return 0 if (ok or not args.gate) else 1
+
+
+
+# ------------------------------------------------------------- markdown ---
+
+EVAL_MD = "EVALUATION.md"
+
+
+def write_markdown(report, path=EVAL_MD):
+    """Render the evaluation as a document, regenerated from the JSON.
+
+    Written by the same code that computes the numbers so the prose cannot
+    drift away from the results -- the audit found documentation quoting
+    figures from a model that no longer existed.
+    """
+    from ..io.atomic import atomic_write
+
+    ev = [r for r in report["stations"] if r.get("status") == "evaluated"]
+    lines = [
+        "# Evaluation",
+        "",
+        f"Generated {report['generated_at']} by `python -m pipeline.models.evaluate`.",
+        "Do not edit by hand — this file is regenerated from",
+        "`data/evaluation/evaluation.json`.",
+        "",
+        "## What can and cannot be measured",
+        "",
+        report["note"],
+        "",
+        f"**Ground-truth records available: {report['ground_truth_records']}.** "
+        + ("Supervised turbidity metrics are therefore reported below."
+           if report["supervised_metrics_available"] else
+           "No MAE, RMSE or R² against measured turbidity can be reported, "
+           "because no measured turbidity exists for this basin. Reporting such "
+           "figures would require inventing the measurements."),
+        "",
+        "## Validation design",
+        "",
+        f"`{report['split']}`",
+        "",
+        "Chronological, never shuffled. Preprocessing is fitted on the training",
+        "period alone; thresholds are chosen on validation; the test period is",
+        "untouched until this report.",
+        "",
+        "## Expected-condition model (Model B)",
+        "",
+        "`skill` is the fractional improvement in mean absolute error over a naive",
+        "predictor that assumes the last 30 days repeat. Positive means the model",
+        "adds information; zero or below means it does not.",
+        "",
+        "| Station | Train | Val | Test | Test MAE | Test RMSE | Skill vs naive |",
+        "|---|---|---|---|---|---|---|",
+    ]
+    for r in ev:
+        t = (r.get("baseline") or {}).get("test") or {}
+        rows = r["rows"]
+        lines.append(
+            f"| {r['station_id']} {r['station_name']} | {rows['train']} | "
+            f"{rows['validation']} | {rows['test']} | {t.get('mae', '—')} | "
+            f"{t.get('rmse', '—')} | {t.get('skill_vs_naive', '—')} |")
+
+    lines += ["", "### Error by season (test period, mean absolute residual)", "",
+              "| Station | " + " | ".join(["dry", "wet major", "wet minor"]) + " |",
+              "|---|---|---|---|"]
+    for r in ev:
+        s = (r.get("baseline") or {}).get("error_by_season") or {}
+        lines.append(f"| {r['station_id']} | {s.get('dry','—')} | "
+                     f"{s.get('wet_major','—')} | {s.get('wet_minor','—')} |")
+
+    lines += ["", "### Error by rainfall regime (test period)", "",
+              "| Station | Wetter half | Drier half |", "|---|---|---|"]
+    for r in ev:
+        s = (r.get("baseline") or {}).get("error_by_rainfall") or {}
+        lines.append(f"| {r['station_id']} | {s.get('wetter_half','—')} | "
+                     f"{s.get('drier_half','—')} |")
+
+    lines += ["", "## Anomaly detector (Model A)", "",
+              "The threshold is calibrated on the validation period, not set by a",
+              "`contamination` argument. `stability` is the absolute difference",
+              "between validation and test flag rates — small is good, and means the",
+              "detector behaves the same on data it has never seen.", "",
+              "| Station | Threshold | Source | Train | Val | Test | Stability |",
+              "|---|---|---|---|---|---|---|"]
+    for r in ev:
+        a = r.get("anomaly") or {}
+        fr = a.get("flag_rate") or {}
+        lines.append(
+            f"| {r['station_id']} | {a.get('threshold','—')} | "
+            f"{(a.get('threshold_source') or '—').split('(')[0].strip()} | "
+            f"{fr.get('train','—')} | {fr.get('validation','—')} | "
+            f"{fr.get('test','—')} | {a.get('stability','—')} |")
+
+    lines += ["", "## Publication gate", "",
+              f"**{'PASS' if report['gate_passed'] else 'FAIL'}**", ""]
+    if report["gate_reasons"]:
+        lines += ["Reasons:", ""] + [f"- {x}" for x in report["gate_reasons"]] + [""]
+    else:
+        lines += ["Every model beat the naive baseline and produced a plausible "
+                  "flag rate on the held-out test period.", ""]
+
+    lines += [
+        "## Limitations",
+        "",
+        "- **No calibration to NTU or TSS.** The index is dimensionless. Nothing",
+        "  in this system converts it to a concentration, and it must not be",
+        "  presented as one.",
+        "- **Skill is measured against a naive baseline, not against truth.** A",
+        "  model can predict the index well while the index itself is a poor proxy",
+        "  for water quality. Only ground-truth measurements can settle that.",
+        "- **Irregular sampling.** Cloud decides when observations exist, so test",
+        "  periods contain fewer rows than a regular time series would.",
+        "- **Single basin.** Eight stations on one river. No claim of",
+        "  generalisation to other rivers is supported.",
+        "",
+    ]
+    with atomic_write(path) as fh:
+        fh.write("\n".join(lines))
+    return path
 
 
 if __name__ == "__main__":
