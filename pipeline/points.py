@@ -9,21 +9,21 @@ POINTS = [
     {
         "id": "control", "name": "Pra Upper Basin (Control)",
         "lat": 5.875062, "lon": -1.522239, "role": "control",
-        "pixels": 18,
+        "pixels": 15,
         "note": "Upper basin. Confirm whether this sits above or below the "
                 "Pra/Offin confluence -- below it, the point drains both mined "
                 "systems and cannot act as a control.",
     },
     {
         "id": "monitor", "name": "Pra at Beposo Reach",
-        "lat": 5.423690, "lon": -1.630480, "role": "monitor",
-        "pixels": 21,
+        "lat": 5.423526, "lon": -1.628935, "role": "monitor",
+        "pixels": 14,
         "note": "~21 km upstream of the intake, giving real warning lead time.",
     },
     {
         "id": "intake", "name": "Daboase Intake (GWCL)",
         "lat": 5.230010, "lon": -1.569200, "role": "intake",
-        "pixels": 20,
+        "pixels": 15,
         "note": "1.0 km from Daboase; widest reach tested (811 water px within 1 km).",
     },
 ]

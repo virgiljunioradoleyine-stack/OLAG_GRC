@@ -13,33 +13,23 @@ A single scene is noisy, so water is judged across many clear dates: a pixel is
 from __future__ import annotations
 
 import numpy as np
-import rasterio
-from rasterio.enums import Resampling
-from rasterio.windows import from_bounds
 
-from .ndti import _band_scaling, _vsicurl
+from .raster import grid_for, read_on_grid
 
 SCL_CLOUDY = {0, 1, 3, 8, 9, 10}   # nodata, saturated, shadow, cloud, cirrus
 MIN_DENOM = 0.02                   # guard: BOA offset lets bands go negative
 WATER_THRESHOLD = 0.0              # MNDWI > 0 => water
 
 
-def _read(item, key, bounds, out_shape=None):
-    scale, offset = _band_scaling(item, key)
-    with rasterio.open(_vsicurl(item["assets"][key]["href"])) as ds:
-        win = from_bounds(*bounds, transform=ds.transform).round_offsets().round_lengths()
-        kw = {"out_shape": out_shape, "resampling": Resampling.nearest} if out_shape else {}
-        arr = ds.read(1, window=win, **kw).astype("float32")
-        arr[arr == 0] = np.nan
-        tf = ds.window_transform(win) if out_shape is None else None
-        return arr * scale + offset, tf
+GRID_RES = 20.0   # metres; the native resolution of SWIR and SCL
 
 
 def scene_water_mask(item, bounds):
-    """(water, valid, transform) for one scene on the 20 m SWIR grid."""
-    swir, tf = _read(item, "swir16", bounds)
-    green, _ = _read(item, "green", bounds, out_shape=swir.shape)
-    scl, _ = _read(item, "scl", bounds, out_shape=swir.shape)
+    """(water, valid, transform) for one scene, on the shared 20 m grid."""
+    h, w, tf = grid_for(bounds, GRID_RES)
+    swir = read_on_grid(item, "swir16", bounds, (h, w))
+    green = read_on_grid(item, "green", bounds, (h, w))
+    scl = read_on_grid(item, "scl", bounds, (h, w))
     scl_raw = np.nan_to_num(scl, nan=0).astype("uint8")
 
     denom = green + swir

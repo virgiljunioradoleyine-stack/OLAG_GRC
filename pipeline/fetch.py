@@ -15,39 +15,32 @@ from __future__ import annotations
 
 import csv
 import os
+import sys
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date, timedelta
+from datetime import date
 
 import numpy as np
-import rasterio
-from rasterio.enums import Resampling
-from rasterio.windows import from_bounds
 
-from .ndti import _band_scaling, _vsicurl
 from .points import POINTS, mgrs_tile, to_utm
+from .raster import grid_for, read_on_grid
 from .search import search
 from .water import SCL_CLOUDY, persistent_water
 
 READING_RADIUS_M = 50.0
 MASK_SCENES = 12
 MIN_PIXELS = 3
-HISTORY_DAYS = 548          # ~18 months
-
-
-def _read_window(item, key, bounds, out_shape=None):
-    scale, offset = _band_scaling(item, key)
-    with rasterio.open(_vsicurl(item["assets"][key]["href"])) as ds:
-        win = from_bounds(*bounds, transform=ds.transform).round_offsets().round_lengths()
-        kw = {"out_shape": out_shape, "resampling": Resampling.nearest} if out_shape else {}
-        arr = ds.read(1, window=win, **kw).astype("float32")
-        arr[arr == 0] = np.nan
-        return arr * scale + offset
+# The Sentinel-2 L2A archive on AWS reaches back to 2017. Eighteen months of it
+# yields only ~20 usable readings here, because the Pra basin is under cloud most
+# of the time -- not enough to train an Isolation Forest on. We take the whole
+# archive instead, which also gives the model several full wet/dry cycles so that
+# seasonal turbidity is learned as normal rather than flagged as anomalous.
+HISTORY_START = date(2017, 1, 1)
 
 
 def build_channel_mask(items, easting, northing):
     """Fixed channel mask on the 10 m grid, from the clearest scenes."""
     pw = persistent_water(items[:MASK_SCENES], easting, northing,
-                          half_m=READING_RADIUS_M * 2)
+                          half_m=READING_RADIUS_M)
     if pw is None or not pw["mask"].any():
         return None
     return pw
@@ -57,17 +50,20 @@ def reading_for_scene(item, easting, northing, mask20):
     """One NDTI reading, or None when the scene is unusable here."""
     bounds = (easting - READING_RADIUS_M, northing - READING_RADIUS_M,
               easting + READING_RADIUS_M, northing + READING_RADIUS_M)
+    # read everything, mask included, on one explicit 10 m grid
+    h, w, _ = grid_for(bounds, 10.0)
     try:
-        red = _read_window(item, "red", bounds)
-        green = _read_window(item, "green", bounds, out_shape=red.shape)
-        scl = _read_window(item, "scl", bounds, out_shape=red.shape)
+        red = read_on_grid(item, "red", bounds, (h, w))
+        green = read_on_grid(item, "green", bounds, (h, w))
+        scl = read_on_grid(item, "scl", bounds, (h, w))
     except Exception:
         return None
 
-    # channel mask is on the 20 m grid; nearest-neighbour it onto the 10 m grid
+    # the channel mask is on the 20 m grid covering the same bounds; both grids
+    # are defined from those bounds, so this upsample is a clean 2x
     mh, mw = mask20.shape
-    ry = np.clip((np.arange(red.shape[0]) * mh) // red.shape[0], 0, mh - 1)
-    rx = np.clip((np.arange(red.shape[1]) * mw) // red.shape[1], 0, mw - 1)
+    ry = np.clip((np.arange(h) * mh) // h, 0, mh - 1)
+    rx = np.clip((np.arange(w) * mw) // w, 0, mw - 1)
     channel = mask20[np.ix_(ry, rx)]
 
     scl_raw = np.nan_to_num(scl, nan=0).astype("uint8")
@@ -91,11 +87,11 @@ def reading_for_scene(item, easting, northing, mask20):
     }
 
 
-def collect(point, days=HISTORY_DAYS, workers=8, verbose=True):
+def collect(point, start=HISTORY_START, workers=16, verbose=True):
     z, b, sq = mgrs_tile(point["lat"], point["lon"])
     e, n, _ = to_utm(point["lat"], point["lon"])
     end = date.today()
-    items = search(z, b, sq, end - timedelta(days=days), end, max_cloud=101)
+    items = search(z, b, sq, start, end, max_cloud=101)
     items.sort(key=lambda i: i["properties"]["eo:cloud_cover"])
 
     pw = build_channel_mask(items, e, n)
@@ -142,8 +138,12 @@ def main():
     os.environ.setdefault("GDAL_HTTP_CAINFO", "/root/.ccr/ca-bundle.crt")
     os.environ.setdefault("GDAL_DISABLE_READ_DIR_ON_OPEN", "EMPTY_DIR")
     os.environ.setdefault("CPL_VSIL_CURL_ALLOWED_EXTENSIONS", ".tif")
+    start = HISTORY_START
+    if len(sys.argv) > 1:
+        start = date.fromisoformat(sys.argv[1])
+    print(f"collecting from {start} to today\n")
     for p in POINTS:
-        rows = collect(p)
+        rows = collect(p, start=start)
         if rows:
             print(f"  {p['id']}: wrote {write_csv(p['id'], rows)}  "
                   f"({rows[0]['date']} .. {rows[-1]['date']})\n")
