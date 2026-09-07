@@ -1,15 +1,23 @@
 import "./globals.css";
+import Nav from "./components/Nav";
+import { getSummary } from "./lib/data";
 
 export const metadata = {
-  title: "Pra River Early Warning",
+  title: "Pra River Watch",
   description:
-    "Satellite turbidity monitoring and anomaly detection for the Pra River, Ghana",
+    "Satellite-derived early warning for unusual river and sediment conditions in the Pra basin, Ghana.",
 };
 
 export default function RootLayout({ children }) {
+  const summary = getSummary();
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="shell">
+          <Nav activeAlerts={summary?.active_alerts || 0} />
+          <main className="main">{children}</main>
+        </div>
+      </body>
     </html>
   );
 }
