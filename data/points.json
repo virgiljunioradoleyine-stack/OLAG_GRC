@@ -1,0 +1,32 @@
+[
+  {
+    "id": "control",
+    "name": "Pra Upper Basin (Control)",
+    "lat": 5.875062,
+    "lon": -1.522239,
+    "role": "control",
+    "pixels": 18,
+    "note": "Upper basin. Confirm whether this sits above or below the Pra/Offin confluence -- below it, the point drains both mined systems and cannot act as a control.",
+    "tile": "T30NXM"
+  },
+  {
+    "id": "monitor",
+    "name": "Pra at Beposo Reach",
+    "lat": 5.42369,
+    "lon": -1.63048,
+    "role": "monitor",
+    "pixels": 21,
+    "note": "~21 km upstream of the intake, giving real warning lead time.",
+    "tile": "T30NXL"
+  },
+  {
+    "id": "intake",
+    "name": "Daboase Intake (GWCL)",
+    "lat": 5.23001,
+    "lon": -1.5692,
+    "role": "intake",
+    "pixels": 20,
+    "note": "1.0 km from Daboase; widest reach tested (811 water px within 1 km).",
+    "tile": "T30NXL"
+  }
+]

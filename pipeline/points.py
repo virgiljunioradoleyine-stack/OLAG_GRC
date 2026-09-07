@@ -1,10 +1,31 @@
 """Monitoring points and MGRS tile resolution (no external API required)."""
 from pyproj import Transformer
 
+# Verified against Sentinel-2 persistent-water masks -- see COORDINATES_GUIDE.md.
+# "pixels" is the count of persistent-water pixels inside the 50 m reading
+# window; more pixels means a more reliable reading. The coordinates in the
+# original project brief were all off-channel and were replaced.
 POINTS = [
-    {"id": "control", "name": "Pra Upstream (Control)", "lat": 6.2100, "lon": -1.6500, "role": "control"},
-    {"id": "monitor", "name": "Pra at Dunkwa",          "lat": 5.9700, "lon": -1.7800, "role": "monitor"},
-    {"id": "intake",  "name": "Daboase Intake (GWCL)",  "lat": 5.2300, "lon": -1.5600, "role": "intake"},
+    {
+        "id": "control", "name": "Pra Upper Basin (Control)",
+        "lat": 5.875062, "lon": -1.522239, "role": "control",
+        "pixels": 18,
+        "note": "Upper basin. Confirm whether this sits above or below the "
+                "Pra/Offin confluence -- below it, the point drains both mined "
+                "systems and cannot act as a control.",
+    },
+    {
+        "id": "monitor", "name": "Pra at Beposo Reach",
+        "lat": 5.423690, "lon": -1.630480, "role": "monitor",
+        "pixels": 21,
+        "note": "~21 km upstream of the intake, giving real warning lead time.",
+    },
+    {
+        "id": "intake", "name": "Daboase Intake (GWCL)",
+        "lat": 5.230010, "lon": -1.569200, "role": "intake",
+        "pixels": 20,
+        "note": "1.0 km from Daboase; widest reach tested (811 water px within 1 km).",
+    },
 ]
 
 _COL_SETS = ["ABCDEFGH", "JKLMNPQR", "STUVWXYZ"]
