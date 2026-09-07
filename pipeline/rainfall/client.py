@@ -105,7 +105,11 @@ def rainfall_windows(rain_df, observation_dates, windows=WINDOWS):
     is what keeps rainfall from leaking the future into a prediction.
 
     Also returns, per window, the anomaly against a day-of-year climatology
-    built from OTHER years only -- so a wet year does not normalise itself away.
+    built from PRIOR years only. "Other years" would have been the intuitive
+    choice and is wrong: it lets later years inform an earlier row's anomaly,
+    which is future information the model could not have had. Our own causality
+    test caught this. Prior-years-only costs us an anomaly value for the first
+    couple of seasons, which is the correct price to pay.
     """
     n = len(observation_dates)
     out = {f"rain_{w}d": np.full(n, np.nan) for w in windows}
@@ -132,9 +136,9 @@ def rainfall_windows(rain_df, observation_dates, windows=WINDOWS):
                 continue
             totals[i] = float(rvals[m].sum())
 
-            # climatology for the same day-of-year window, other years only
+            # climatology for the same day-of-year window, PRIOR years only
             doy_lo, doy_hi = odoy[i] - w + 1, odoy[i]
-            same = ((rdoy >= doy_lo) & (rdoy <= doy_hi) & (ryear != oyear[i]))
+            same = ((rdoy >= doy_lo) & (rdoy <= doy_hi) & (ryear < oyear[i]))
             if same.sum() >= w:          # need at least ~1 comparable year
                 per_year = (pd.DataFrame({"y": ryear[same], "v": rvals[same]})
                             .groupby("y")["v"].sum())
