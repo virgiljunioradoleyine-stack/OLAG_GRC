@@ -1,6 +1,10 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+// Centre of the Pra basin, used until the stations can be framed.
+const FALLBACK_CENTER = [5.5, -1.6];
+const FALLBACK_ZOOM = 9;
+
 const SEV_COLOR = {
   CRITICAL: "#dc2626", HIGH: "#ea580c", ELEVATED: "#f59e0b",
   WATCH: "#eab308", NORMAL: "#16a34a", NO_DATA: "#94a3b8",
@@ -44,7 +48,15 @@ export default function MapView({
       await import("leaflet/dist/leaflet.css");
       if (cancelled || !ref.current || mapRef.current) return;
 
-      const map = L.map(ref.current, { scrollWheelZoom: false, zoomControl: true });
+      // The view must be set BEFORE any layer is added. Leaflet cannot project
+      // a coordinate without one -- the SVG renderer reads the map's pixel
+      // origin on add, and with no view that is undefined, so the first vector
+      // layer throws "Cannot read properties of undefined (reading 'min')" and
+      // takes the rest of this setup with it. Tile layers survive it because
+      // they defer until the map reports loaded, which is why the symptom was
+      // a map with imagery and no stations on it rather than a blank panel.
+      const map = L.map(ref.current, { scrollWheelZoom: false, zoomControl: true })
+        .setView(FALLBACK_CENTER, FALLBACK_ZOOM);
       mapRef.current = map;
 
       const bases = {
@@ -107,10 +119,9 @@ export default function MapView({
         });
       });
 
+      // Now that the layers exist, frame them.
       if (points.length) {
         map.fitBounds(points.map((s) => [s.lat, s.lon]), { padding: [42, 42] });
-      } else {
-        map.setView([5.5, -1.6], 9);
       }
       setReady(true);
     })();

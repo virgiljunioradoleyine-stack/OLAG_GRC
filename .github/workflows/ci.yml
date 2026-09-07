@@ -102,3 +102,14 @@ jobs:
             try{JSON.parse(t)}catch(e){console.error(f+': '+e.message);process.exit(1)}
             console.log('  '+f+': valid ('+(t.length/1024).toFixed(0)+' kB)');
           }"
+
+      - name: Pages must actually render in a browser
+        run: |
+          # A green build and a 200 response prove nothing about what the page
+          # draws. The map once served satellite imagery with no stations on it
+          # and passed every other check we had.
+          npx playwright install --with-deps chromium
+          npx next start -p 3000 &
+          npx wait-on -t 60000 http://localhost:3000/ 2>/dev/null \
+            || until curl -sf http://localhost:3000/ >/dev/null; do sleep 1; done
+          node tests/smoke.mjs

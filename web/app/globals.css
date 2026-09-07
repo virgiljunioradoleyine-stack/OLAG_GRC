@@ -80,8 +80,8 @@ a { color: inherit; }
   background: linear-gradient(145deg, #0ea5e9, #0e7490);
   display: grid; place-items: center;
 }
-.brand-name { font-size: 16px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
-.brand-tag { font-size: 11px; color: var(--sidebar-muted); margin-top: 2px; }
+.brand-name { display: block; font-size: 16px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.brand-tag { display: block; font-size: 11px; color: var(--sidebar-muted); margin-top: 2px; }
 
 .nav { padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; flex: 1; }
 .nav a {
