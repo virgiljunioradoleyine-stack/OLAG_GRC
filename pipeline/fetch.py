@@ -156,13 +156,29 @@ FIELDS = ["date", "ndti", "ndti_std", "red", "green",
           "cloud_cover", "scene_id", "water_pixel_count"]
 
 
+def _clean(row):
+    """Blank out missing values rather than writing the string 'nan'.
+
+    Readings collected before `red`/`green` were added have no value for them.
+    An empty cell reads as missing to both pandas and a human; the literal text
+    "nan" reads as data until someone looks closely.
+    """
+    out = {}
+    for k in FIELDS:
+        v = row.get(k, "")
+        if v is None or (isinstance(v, float) and v != v):
+            v = ""
+        out[k] = v
+    return out
+
+
 def write_csv(point_id, rows, outdir="data/readings"):
     os.makedirs(outdir, exist_ok=True)
     path = os.path.join(outdir, f"{point_id}.csv")
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS)
         w.writeheader()
-        w.writerows(rows)
+        w.writerows(_clean(r) for r in rows)
     return path
 
 
