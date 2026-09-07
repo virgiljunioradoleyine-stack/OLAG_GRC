@@ -296,7 +296,7 @@ def collect_all(start=HISTORY_START, end=None, stations=None, workers=16,
 
 # ------------------------------------------------------------------- I/O ---
 
-def write_observations(rows, path=None, merge=True):
+def write_observations(rows, path=None, merge=True, covered_from=None):
     """Write observations atomically, one row per station-date.
 
     Merges with whatever is already stored unless `merge=False`. This matters:
@@ -307,14 +307,24 @@ def write_observations(rows, path=None, merge=True):
 
       1. Within a single run, when several scenes cover the same station-date,
          keep the one with the most usable water pixels.
-      2. Across runs, a freshly collected row SUPERSEDES the stored one for the
-         same station-date, because it was produced by the current code.
+      2. Across runs, a re-collection is AUTHORITATIVE over the window it
+         covered: for any station that produced data in this run, stored rows
+         from `covered_from` onward are replaced wholesale by what this run
+         found. History before that date is untouched.
 
-    Rule 2 exists because the first version preferred whichever row had more
-    pixels regardless of age, which meant rows computed by since-fixed code
-    could never be healed -- 25 observations with an out-of-range MNDWI survived
-    a full re-collection and kept failing validation. Re-collecting a date is an
-    explicit instruction to recompute it.
+    Rule 2 was twice too weak. It first preferred whichever row had more pixels
+    regardless of age, so rows computed by since-fixed code could never be
+    healed. Superseding by station-date fixed that but left a subtler hole: a
+    row can only be superseded if the re-collection produces a row for the same
+    date. When a fix causes a date to stop qualifying at all -- the brightness
+    cut rejected every pixel of 31 cloud-contaminated readings, so those dates
+    yielded nothing -- there was no fresh row to replace the stale one, and the
+    bad row survived a full re-collection untouched. Deletion has to be
+    expressible, and it is only expressible as "this window now looks like this".
+
+    The guard is per station: a station that returned nothing at all keeps its
+    stored rows, so a transient read failure cannot erase history. Only a
+    station that demonstrably collected can rewrite its own window.
     """
     path = path or os.path.join(OBS_DIR, "observations.csv")
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -327,13 +337,18 @@ def write_observations(rows, path=None, merge=True):
                 fresh[k].get("water_pixel_count") or 0):
             fresh[k] = r
 
-    # 2. across runs: keep stored rows, then let this run supersede its dates
+    collected = {sid for sid, _ in fresh}
+
     best = {}
     if merge and os.path.exists(path):
         prev = load_observations(path)
         for _, r in prev.iterrows():
             rec = {k: ("" if pd.isna(r.get(k)) else r.get(k)) for k in OBS_FIELDS}
             rec["date"] = pd.to_datetime(r["date"]).strftime("%Y-%m-%d")
+            # 2. drop stored rows this run is authoritative over
+            if (covered_from and rec["station_id"] in collected
+                    and rec["date"] >= covered_from):
+                continue
             best[(rec["station_id"], rec["date"])] = rec
     best.update(fresh)
 
@@ -374,7 +389,7 @@ def main():
     if not rows:
         print("no observations collected — leaving the stored record untouched")
         return 1
-    path, n = write_observations(rows, merge=not replace)
+    path, n = write_observations(rows, merge=not replace, covered_from=start)
     print(f"\nwrote {path}: {n} observations total ({len(rows)} collected this run)")
     return 0
 

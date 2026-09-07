@@ -191,3 +191,80 @@ def test_best_scene_wins_within_a_single_run(tmp_path):
     ], p, merge=False)
     df = load_observations(p)
     assert len(df) == 1 and float(df["ndti"].iloc[0]) == 0.2
+
+
+def test_recollection_can_remove_a_date_that_no_longer_qualifies(tmp_path):
+    """A re-collection is authoritative: a row it no longer produces is gone.
+
+    Superseding by station-date is not enough. When a fix makes a date stop
+    qualifying entirely -- the brightness cut rejected every pixel of 31
+    cloud-contaminated readings, so those dates yielded no fresh row -- there is
+    nothing to supersede the stale row with, and it survives a full
+    re-collection. Deletion is only expressible as "this window now looks like
+    this".
+    """
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    write_observations([
+        {**blank, "date": "2020-05-01", "station_id": "P05", "ndti": 0.1,
+         "water_pixel_count": 100},
+        {**blank, "date": "2020-05-06", "station_id": "P05", "ndti": 0.9,
+         "water_pixel_count": 100},          # the contaminated one
+    ], p, merge=False)
+
+    # re-collect the window; the bad date now yields nothing
+    write_observations([
+        {**blank, "date": "2020-05-01", "station_id": "P05", "ndti": 0.1,
+         "water_pixel_count": 100},
+    ], p, covered_from="2020-05-01")
+
+    df = load_observations(p)
+    assert len(df) == 1, "a row the re-collection rejected survived"
+    assert str(df["date"].iloc[0].date()) == "2020-05-01"
+
+
+def test_authoritative_window_does_not_reach_into_history(tmp_path):
+    """A 90-day run rewrites 90 days, not nine years."""
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    write_observations([{**blank, "date": f"2017-01-{i:02d}", "station_id": "P05",
+                         "ndti": 0.05, "water_pixel_count": 100}
+                        for i in range(1, 21)], p, merge=False)
+
+    write_observations([{**blank, "date": "2026-09-01", "station_id": "P05",
+                         "ndti": 0.09, "water_pixel_count": 300}],
+                       p, covered_from="2026-06-09")
+
+    df = load_observations(p)
+    assert len(df) == 21, "the covered window reached back into history"
+
+
+def test_a_station_that_collected_nothing_keeps_its_rows(tmp_path):
+    """A transient read failure must not erase a station's record.
+
+    Only a station that demonstrably collected something may rewrite its own
+    window; one that returned nothing at all is treated as unread, not as empty.
+    """
+    from pipeline.satellite.observations import OBS_FIELDS, write_observations
+
+    p = str(tmp_path / "obs.csv")
+    blank = {k: "" for k in OBS_FIELDS}
+    write_observations([
+        {**blank, "date": "2026-09-01", "station_id": "P05", "ndti": 0.1,
+         "water_pixel_count": 100},
+        {**blank, "date": "2026-09-01", "station_id": "P06", "ndti": 0.2,
+         "water_pixel_count": 100},
+    ], p, merge=False)
+
+    # only P05 came back this run; P06's scenes failed to read
+    write_observations([{**blank, "date": "2026-09-03", "station_id": "P05",
+                         "ndti": 0.3, "water_pixel_count": 200}],
+                       p, covered_from="2026-08-01")
+
+    df = load_observations(p)
+    assert set(df["station_id"]) == {"P05", "P06"}, "an unread station was erased"
+    assert len(df[df["station_id"] == "P05"]) == 1, "P05's window was not rewritten"
