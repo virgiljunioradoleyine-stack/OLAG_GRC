@@ -77,10 +77,17 @@ def reading_for_scene(item, easting, northing, mask20):
 
     vals = ((red - green) / denom)[usable]
     p = item["properties"]
+    # The raw band medians are recorded alongside NDTI because NDTI normalises
+    # away exactly the signal a heavy sediment load produces: at high turbidity
+    # both bands brighten together and the ratio stops responding. See
+    # TEST_RESULTS.md section 1 -- absolute red reflectance separated the one
+    # documented pollution event that NDTI scored as entirely ordinary.
     return {
         "date": p["datetime"][:10],
         "ndti": round(float(np.median(vals)), 6),
         "ndti_std": round(float(np.std(vals)), 6),
+        "red": round(float(np.median(red[usable])), 6),
+        "green": round(float(np.median(green[usable])), 6),
         "cloud_cover": round(float(p.get("eo:cloud_cover", float("nan"))), 3),
         "scene_id": item["id"],
         "water_pixel_count": n,
@@ -121,7 +128,8 @@ def collect(point, start=HISTORY_START, workers=16, verbose=True):
     return out
 
 
-FIELDS = ["date", "ndti", "ndti_std", "cloud_cover", "scene_id", "water_pixel_count"]
+FIELDS = ["date", "ndti", "ndti_std", "red", "green",
+          "cloud_cover", "scene_id", "water_pixel_count"]
 
 
 def write_csv(point_id, rows, outdir="data/readings"):

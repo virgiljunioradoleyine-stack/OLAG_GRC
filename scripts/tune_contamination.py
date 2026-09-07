@@ -41,6 +41,7 @@ def evaluate(point_id, contamination):
             "delta": X["ndti_delta"].iloc[i],
             "control_delta": cd,
             "clean": bool(cd < CONTROL_RISE_THRESHOLD),
+            "rising": bool(X["ndti_delta"].iloc[i] > 0),
             "score": scores[i],
         })
     return model, df, rows
@@ -58,11 +59,15 @@ def main():
         for c in CANDIDATES:
             model, df, rows = evaluate(pid, c)
             clean = [r for r in rows if r["clean"]]
+            alerts = [r for r in clean if r["rising"]]
+            years = 9.7
             print(f"\ncontamination = {c:.2f}  ->  {len(rows)} flagged "
-                  f"({100*len(rows)/max(n,1):.0f}% of readings), "
-                  f"{len(clean)} clean (control did not rise)")
+                  f"({100*len(rows)/max(n,1):.0f}%), {len(clean)} with a flat "
+                  f"control, {len(alerts)} of those RISING = real ALERTs "
+                  f"({len(alerts)/years:.1f}/year)")
             for r in sorted(rows, key=lambda r: r["date"]):
-                tag = "CLEAN " if r["clean"] else "rain? "
+                tag = ("ALERT " if (r["clean"] and r["rising"])
+                       else "fell  " if r["clean"] else "rain? ")
                 print(f"    {tag} {r['date']}  ndti={r['ndti']:+.4f} "
                       f"delta={r['delta']:+.4f} control_delta={r['control_delta']:+.4f}"
                       f"  score={r['score']:.4f}")
