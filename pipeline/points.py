@@ -1,0 +1,49 @@
+"""Monitoring points and MGRS tile resolution (no external API required)."""
+from pyproj import Transformer
+
+POINTS = [
+    {"id": "control", "name": "Pra Upstream (Control)", "lat": 6.2100, "lon": -1.6500, "role": "control"},
+    {"id": "monitor", "name": "Pra at Dunkwa",          "lat": 5.9700, "lon": -1.7800, "role": "monitor"},
+    {"id": "intake",  "name": "Daboase Intake (GWCL)",  "lat": 5.2300, "lon": -1.5600, "role": "intake"},
+]
+
+_COL_SETS = ["ABCDEFGH", "JKLMNPQR", "STUVWXYZ"]
+_ROW_SETS = ["ABCDEFGHJKLMNPQRSTUV", "FGHJKLMNPQRSTUVABCDE"]
+_LAT_BANDS = "CDEFGHJKLMNPQRSTUVWX"
+
+
+def utm_zone(lon):
+    return int((lon + 180) // 6) + 1
+
+
+def lat_band(lat):
+    return _LAT_BANDS[int((lat + 80) // 8)]
+
+
+def epsg_for(lat, lon):
+    z = utm_zone(lon)
+    return 32600 + z if lat >= 0 else 32700 + z
+
+
+def to_utm(lat, lon):
+    epsg = epsg_for(lat, lon)
+    tr = Transformer.from_crs("EPSG:4326", f"EPSG:{epsg}", always_xy=True)
+    x, y = tr.transform(lon, lat)
+    return x, y, epsg
+
+
+def mgrs_tile(lat, lon):
+    """Return (zone:int, band:str, square:str) — the Sentinel-2 tile prefix parts."""
+    z = utm_zone(lon)
+    x, y, _ = to_utm(lat, lon)
+    col = _COL_SETS[(z - 1) % 3][int(x // 100000) - 1]
+    row = _ROW_SETS[(z - 1) % 2][int(y // 100000) % 20]
+    return z, lat_band(lat), col + row
+
+
+if __name__ == "__main__":
+    for p in POINTS:
+        z, b, sq = mgrs_tile(p["lat"], p["lon"])
+        x, y, epsg = to_utm(p["lat"], p["lon"])
+        print(f"{p['id']:8s} lat={p['lat']:.4f} lon={p['lon']:.4f} -> T{z}{b}{sq}  "
+              f"EPSG:{epsg} easting={x:.0f} northing={y:.0f}")

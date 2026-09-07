@@ -1,0 +1,38 @@
+# STEP 0 / check 4 — proves Actions runs and can read the repo before the real
+# monitoring pipeline is wired in.
+name: step0-selfcheck
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  selfcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Resolve monitoring points to Sentinel-2 tiles
+        run: python pipeline/points.py
+
+      - name: Reach the Sentinel-2 COG bucket
+        run: |
+          python - <<'PY'
+          from datetime import date
+          from pipeline.search import list_scene_prefixes
+          p = list_scene_prefixes(30, "N", "XM", 2026, 7)
+          print(f"{len(p)} scenes listed for T30NXM 2026-07")
+          assert p, "no scenes returned from sentinel-cogs"
+          print("OK:", p[0])
+          PY
