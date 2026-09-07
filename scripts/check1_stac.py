@@ -1,4 +1,14 @@
-"""STEP 0 / Check 1 — Earth Search STAC connectivity."""
+"""
+STEP 0 / Check 1 — Earth Search STAC connectivity.
+
+KEPT AS A RECORD OF A FAILED APPROACH. This script does not work from our build
+environment: the egress policy denies earth-search.aws.element84.com and the
+request dies with `Tunnel connection failed: 403 Forbidden`. It is retained
+because the engineering notebook needs the attempt, not just the fix.
+
+The working replacement is `pipeline/search.py`, which reaches the same data
+through the `sentinel-cogs` S3 bucket. See HICCUPS.md.
+"""
 import json, sys, datetime as dt
 import requests
 
