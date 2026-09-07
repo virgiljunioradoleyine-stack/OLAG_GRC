@@ -8,7 +8,7 @@ data, not estimated. Reproduce with `python scripts/step0_verify.py`.
 | 1 | Earth Search STAC connectivity | **FAIL as specified → PASS via replacement** |
 | 2 | Asset retrieval (windowed COG read) | **PASS** |
 | 3 | NDTI on real pixels | **FAIL — points are not on the river** |
-| 4 | GitHub repo + Actions | **PASS** |
+| 4 | GitHub repo + Actions | **PASS** (run #1 succeeded) |
 | 5 | Vercel deploy | **BLOCKED — needs a linked project** |
 
 ---
@@ -108,8 +108,21 @@ job it does well — rejecting cloud and shadow pixels.
 Repo is `virgiljunioradoleyine-stack/OLAG_GRC`, authenticated as
 `virgiljunioradoleyine-stack`. `.github/workflows/hello.yml` runs on push and
 `workflow_dispatch`; it installs dependencies, resolves the monitoring points to
-Sentinel-2 tiles, and confirms the runner can reach the COG bucket. Run status
-is recorded below once the first push completes.
+Sentinel-2 tiles, and confirms the runner can reach the COG bucket.
+
+First run: **success**.
+
+```
+step0-selfcheck  run #1  event=push  branch=claude/new-session-udfegz
+conclusion: success   (2026-09-07T11:15:11Z -> 11:15:42Z, 31s)
+https://github.com/virgiljunioradoleyine-stack/OLAG_GRC/actions/runs/34115666893
+```
+
+This confirms three things at once: Actions is enabled and permissions are
+sound, the runner can install the geospatial dependencies, and — importantly —
+GitHub's network can reach `sentinel-cogs`. The egress restriction that blocks
+Earth Search is specific to this development environment; it does not apply to
+the CI runner that will execute the real monitoring job.
 
 ## 5. Vercel — blocked
 
