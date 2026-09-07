@@ -13,10 +13,11 @@ import os
 import sys
 from datetime import date, timedelta
 
-os.environ.setdefault("GDAL_HTTP_CAINFO", "/root/.ccr/ca-bundle.crt")
-os.environ.setdefault("GDAL_DISABLE_READ_DIR_ON_OPEN", "EMPTY_DIR")
-os.environ.setdefault("CPL_VSIL_CURL_ALLOWED_EXTENSIONS", ".tif")
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from pipeline.io.env import configure_gdal  # noqa: E402
+
+configure_gdal()
 
 import numpy as np  # noqa: E402
 
