@@ -60,3 +60,9 @@ Feeds Engineering Notebook §4 (Engineering process) and §7 (Challenges & failu
 **What we tried first:** We had scaffolded with Next.js 15.5.4, which was simply what we reached for.
 **What we learned:** Vercel blocks builds on known-vulnerable framework versions outright rather than warning — a good default, but it means a stale version number fails the deploy rather than degrading it.
 **What we changed:** Bumped to Next.js 15.5.25, the current patched 15.x release. Worth knowing before demo week: a deploy can fail for reasons that have nothing to do with our code, so the dashboard should not be first deployed the night before judging.
+
+### 2026-09-07 — Deployed dashboard was not publicly reachable
+**What happened:** After the Next.js CVE fix the deploy went green, but fetching the production URL returned `302 Found` redirecting to `vercel.com/sso-api`.
+**What we tried first:** Assumed the build had not finished propagating and re-fetched.
+**What we learned:** It was not a propagation delay. The Vercel team applies **Deployment Protection (Vercel Authentication)** to new projects by default, so every visitor must log in to the Vercel account first. A "successful deploy" is therefore not the same as a reachable page — and a judge following our link during evaluation would have hit a login wall, with us none the wiser because it works fine for whoever is signed in.
+**What we changed:** Flagged for the team to disable under Project Settings → Deployment Protection, and added "open the dashboard URL in a private browser window" to the demo checklist. Testing a public link while logged in proves nothing.

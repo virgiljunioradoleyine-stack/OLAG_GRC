@@ -143,6 +143,13 @@ The **first deploy failed**: Vercel rejected the build with
 that a deploy can fail for reasons unrelated to our code, so the dashboard must
 not be deployed for the first time the night before judging.
 
+**One thing to decide:** the deployment is currently behind **Vercel
+Authentication** (the team's default deployment protection). Fetching the URL
+returns a 302 to Vercel SSO, which means *a judge clicking the link would hit a
+login wall*. For a public competition dashboard this needs turning off in
+Project Settings → Deployment Protection. Left as-is for now — making a page
+publicly readable is your call, not mine. Say the word and I'll disable it.
+
 Note: `vercel.com` is also denied by this dev environment's egress policy, so
 deploys are driven through the Vercel GitHub integration rather than the CLI.
 
