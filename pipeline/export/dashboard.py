@@ -37,6 +37,12 @@ from ..satellite.observations import load_observations
 
 WEB_DATA_DIR = os.path.join("web", "public", "data")
 
+# How recent an alert must be to still describe the river now. Sentinel-2
+# revisits every ~5 days and the Pra is heavily clouded, so a station can go
+# three or four weeks between usable readings; a window much shorter than this
+# would report "no alerts" simply because nothing has been seen lately.
+ACTIVE_WINDOW_DAYS = 30
+
 INDICATOR_NAME = "Sediment Anomaly Index"
 INDICATOR_SHORT = "SAI"
 INDICATOR_NOTE = (
@@ -198,8 +204,20 @@ def export_all(out_dir=WEB_DATA_DIR):
     detailed = [s["assessment"] for s in stations
                 if s.get("assessment") and s["assessment"]["severity"] != "NORMAL"]
 
-    active = [a for a in alerts if a["severity"] in ("ELEVATED", "HIGH", "CRITICAL")]
+    # "Active" must mean now, not ever. This counted every ELEVATED-or-worse
+    # alert in the nine-year record, so the sidebar read "96 active alerts"
+    # while all eight stations sat at NORMAL -- a historical total wearing the
+    # word active. An alert is active if it is recent enough to still describe
+    # the river's current condition.
     latest_dates = [s["latest"]["date"] for s in stations if s.get("latest")]
+    cutoff = ""
+    if latest_dates:
+        cutoff = str((pd.Timestamp(max(latest_dates))
+                      - pd.Timedelta(days=ACTIVE_WINDOW_DAYS)).date())
+    raised = ("ELEVATED", "HIGH", "CRITICAL")
+    active = [a for a in alerts
+              if a["severity"] in raised and a["date"] >= cutoff]
+    ever = [a for a in alerts if a["severity"] in raised]
 
     # ---- catchment rainfall: mean of the last 7 days across stations ------
     rain_vals = [s["latest"]["rain_7d"] for s in stations
@@ -215,10 +233,15 @@ def export_all(out_dir=WEB_DATA_DIR):
         "stations_total": len(stations),
         "stations_with_data": sum(1 for s in stations if s["observations"]),
         "observations_total": int(len(obs_all)),
+        "first_observation": str(pd.to_datetime(obs_all["date"]).min().date())
+                             if len(obs_all) else None,
         "latest_observation": max(latest_dates) if latest_dates else None,
         "mean_indicator": round(float(np.mean(ind_vals)), 4) if ind_vals else None,
         "mean_rain_7d_mm": round(float(np.mean(rain_vals)), 1) if rain_vals else None,
         "active_alerts": len(active),
+        "active_window_days": ACTIVE_WINDOW_DAYS,
+        "raised_alerts_total": len(ever),
+        "alerts_total": len(alerts),
         "alerts_by_severity": {
             s: sum(1 for a in alerts if a["severity"] == s)
             for s in ("WATCH", "ELEVATED", "HIGH", "CRITICAL")},
@@ -241,7 +264,9 @@ def export_all(out_dir=WEB_DATA_DIR):
     print(f"exported to {out_dir}:")
     print(f"  stations   {len(stations)} ({summary['stations_with_data']} with data)")
     print(f"  observations {summary['observations_total']}")
-    print(f"  alerts     {len(alerts)} ({summary['active_alerts']} active)")
+    print(f"  alerts     {len(alerts)} over the whole record; "
+          f"{summary['active_alerts']} active in the last "
+          f"{ACTIVE_WINDOW_DAYS} days")
     print(f"  river      {'yes' if river else 'MISSING (run hydrology fetch)'}")
     return summary
 

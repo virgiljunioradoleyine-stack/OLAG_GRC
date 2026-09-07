@@ -81,8 +81,12 @@ export default function Overview({ summary, stations, series, alerts, river }) {
              sub={summary.indicator.name} icon={<IconDrop />} tint="var(--accent)" />
         <Kpi label="Rainfall (7-day mean)" value={summary.mean_rain_7d_mm} unit="mm"
              sub="Across all stations" icon={<IconRain />} tint="#0891b2" />
-        <Kpi label="Active alerts" value={summary.active_alerts}
-             sub={`${summary.alerts_by_severity?.CRITICAL || 0} critical · ${summary.alerts_by_severity?.HIGH || 0} high`}
+        {/* The sub-line carries the all-time total so a quiet river reads as
+            quiet rather than as a system with nothing in it. */}
+        <Kpi label={`Active alerts (${summary.active_window_days ?? 30}d)`}
+             value={summary.active_alerts}
+             sub={`${summary.raised_alerts_total ?? 0} raised since `
+                  + `${(summary.first_observation || "2017").slice(0, 4)}`}
              icon={<IconWarn />} tint="var(--critical)" />
         <Kpi label="Monitored locations" value={summary.stations_with_data}
              sub={`of ${summary.stations_total} on the Pra`} icon={<IconPin />} tint="var(--normal)" />

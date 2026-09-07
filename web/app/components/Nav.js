@@ -33,7 +33,7 @@ export default function Nav({ activeAlerts = 0 }) {
               <Icon />
               <span>{label}</span>
               {badge && activeAlerts > 0 && (
-                <span className="count" aria-label={`${activeAlerts} active alerts`}>
+                <span className="count" aria-label={`${activeAlerts} alerts active now`}>
                   {activeAlerts}
                 </span>
               )}
