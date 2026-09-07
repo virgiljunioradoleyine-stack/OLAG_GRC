@@ -56,11 +56,16 @@ def _snap_index(pts, lat, lon):
     return best, best_d
 
 
-def build_network(stations, fc=None):
+def build_network(stations, fc=None, path=NETWORK_PATH):
     """Along-river distances and travel-time ranges between adjacent stations.
 
     Falls back to straight-line distance when the OSM geometry is unavailable,
     and says so in the output rather than silently substituting.
+
+    `path=None` computes without persisting. Tests must pass it: this function
+    used to write the production network file unconditionally, so running the
+    suite -- including a test that feeds it deliberately disjoint fake geometry
+    -- overwrote the real published distances with test output.
     """
     fc = fc if fc is not None else load_river()
     pts = _all_vertices(fc)
@@ -141,13 +146,33 @@ def build_network(stations, fc=None):
             f"typical sinuosity of {TYPICAL_SINUOSITY}, and are marked "
             f"method='straight_line_estimate'. Treat them as approximate."),
         "velocity_range_ms": [VELOCITY_MS_LOW, VELOCITY_MS_HIGH],
-        "stations": {k: {"river_km": round(v["river_m"] / 1000, 2),
-                         "snap_distance_m": v["snap_distance_m"]}
-                     for k, v in nodes.items()},
+        "stations": _chainage(ordered, segments, nodes),
         "segments": segments,
     }
-    write_json(NETWORK_PATH, net)
+    if path:
+        write_json(path, net)
     return net
+
+
+def _chainage(ordered, segments, nodes):
+    """Distance downstream from the first station, accumulated from segments.
+
+    Not read off the centreline walk. That walk is the thing the sinuosity
+    check exists to distrust -- it jumps between disjoint Overpass ways -- and
+    taking chainage straight from it published a river that ran 277 km at P01,
+    10 km at P02 and 334 km at P03, which is not an ordering any river has.
+    The segment distances are already validated, so accumulating those gives a
+    chainage that is monotonic downstream and consistent with the distances
+    published beside it.
+    """
+    by_pair = {(s["from"], s["to"]): s["distance_m"] for s in segments}
+    out, run = {}, 0.0
+    for i, s in enumerate(ordered):
+        if i:
+            run += by_pair[(ordered[i - 1].id, s.id)]
+        out[s.id] = {"river_km": round(run / 1000, 2),
+                     "snap_distance_m": nodes[s.id]["snap_distance_m"]}
+    return out
 
 
 def load_network():

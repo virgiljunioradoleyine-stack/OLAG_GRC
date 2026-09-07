@@ -17,7 +17,7 @@ def test_haversine_is_sane():
 
 
 def test_network_covers_every_adjacent_pair():
-    net = build_network(STATIONS, fc=None)
+    net = build_network(STATIONS, fc=None, path=None)
     assert len(net["segments"]) == len(STATIONS) - 1
     for s in net["segments"]:
         assert s["distance_m"] > 0
@@ -26,7 +26,7 @@ def test_network_covers_every_adjacent_pair():
 
 def test_implausible_river_distance_is_rejected():
     """A disjoint-way artifact must never be published as a real distance."""
-    net = build_network(STATIONS, fc=None)
+    net = build_network(STATIONS, fc=None, path=None)
     for s in net["segments"]:
         ratio = s["distance_m"] / max(s["straight_line_m"], 1)
         assert ratio <= MAX_SINUOSITY + 0.01, (
@@ -35,7 +35,7 @@ def test_implausible_river_distance_is_rejected():
 
 
 def test_fallback_segments_are_labelled():
-    net = build_network(STATIONS, fc=None)
+    net = build_network(STATIONS, fc=None, path=None)
     for s in net["segments"]:
         assert s["method"] in ("osm_centreline", "straight_line_estimate")
     assert net["segments_from_centreline"] + net["segments_estimated"] == len(net["segments"])
@@ -50,7 +50,7 @@ def test_disjoint_geometry_triggers_the_fallback():
         {"geometry": {"type": "LineString",
                       "coordinates": [[-3.00, 7.50], [-3.01, 7.49]]}},
     ]}
-    net = build_network(STATIONS, fc=fc)
+    net = build_network(STATIONS, fc=fc, path=None)
     for s in net["segments"]:
         ratio = s["distance_m"] / max(s["straight_line_m"], 1)
         assert ratio <= MAX_SINUOSITY + 0.01
@@ -94,3 +94,48 @@ def test_candidates_do_not_duplicate_existing_stations():
             d = haversine_m(lat, lon, s.lat, s.lon)
             assert d >= DEDUPE_M * 0.9, (
                 f"candidate is {d:.0f} m from existing station {s.id}")
+
+
+def test_building_a_network_does_not_touch_the_published_file(tmp_path):
+    """A test run must never rewrite production data.
+
+    build_network used to write the real network file unconditionally, so the
+    suite -- which includes a test feeding it deliberately disjoint fake
+    geometry -- silently replaced the published river distances with whichever
+    test happened to run last.
+    """
+    import json
+    import os
+    from pipeline.hydrology.network import NETWORK_PATH
+
+    before = open(NETWORK_PATH).read() if os.path.exists(NETWORK_PATH) else None
+    build_network(STATIONS, fc=None, path=None)
+    after = open(NETWORK_PATH).read() if os.path.exists(NETWORK_PATH) else None
+    assert before == after, "building a network overwrote the published file"
+
+    # and it still writes when asked to
+    p = str(tmp_path / "net.json")
+    build_network(STATIONS, fc=None, path=p)
+    assert json.load(open(p))["segments"]
+
+
+def test_chainage_increases_downstream():
+    """Distance from the top of the network cannot go backwards.
+
+    Chainage was read off the raw centreline walk, which is exactly what the
+    sinuosity check exists to distrust: it published P01 at 277 km, P02 at
+    10 km and P03 at 334 km. It is now accumulated from the validated segment
+    distances instead.
+    """
+    net = build_network(STATIONS, fc=None, path=None)
+    ordered = sorted(STATIONS, key=lambda s: s.order)
+    km = [net["stations"][s.id]["river_km"] for s in ordered]
+    assert km[0] == 0.0
+    assert all(b > a for a, b in zip(km, km[1:])), f"chainage not monotonic: {km}"
+
+    # and it agrees with the segment distances published beside it,
+    # to within the 10 m resolution of a chainage rounded to 2 decimal km
+    for seg in net["segments"]:
+        gap = net["stations"][seg["to"]]["river_km"] - \
+              net["stations"][seg["from"]]["river_km"]
+        assert abs(gap * 1000 - seg["distance_m"]) <= 20.0
