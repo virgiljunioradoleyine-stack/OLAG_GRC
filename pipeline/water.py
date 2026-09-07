@@ -89,3 +89,46 @@ def persistent_water(items, easting, northing, half_m=1000.0, min_fraction=0.6):
         "transform": transform,
         "scenes_used": used,
     }
+
+
+def snap_to_channel(pw, easting, northing, radius_m=50.0, max_move_m=400.0):
+    """Find the best nearby reading location on the water mask.
+
+    Snapping to the single *nearest* water pixel lands on whatever bend or
+    sliver happens to be closest, which often yields a 1-pixel window. Instead
+    score every candidate centre by how many persistent-water pixels fall inside
+    its reading window, then among the good ones take the closest to the
+    original. That favours a wide, straight reach over a nearby thread of water.
+
+    Returns (easting, northing, pixel_count) or None.
+    """
+    mask, tf = pw["mask"], pw["transform"]
+    if not mask.any():
+        return None
+
+    px = abs(tf.a)                      # metres per mask pixel
+    rad = int(np.ceil(radius_m / px))
+    offs = [(dy, dx) for dy in range(-rad, rad + 1) for dx in range(-rad, rad + 1)
+            if np.hypot(dy * px, dx * px) <= radius_m]
+
+    h, w = mask.shape
+    ys, xs = np.nonzero(mask)
+    best = None
+    for r, c in zip(ys, xs):
+        cnt = 0
+        for dy, dx in offs:
+            rr, cc = r + dy, c + dx
+            if 0 <= rr < h and 0 <= cc < w and mask[rr, cc]:
+                cnt += 1
+        ex = tf.c + (c + 0.5) * tf.a
+        ny = tf.f + (r + 0.5) * tf.e
+        dist = float(np.hypot(ex - easting, ny - northing))
+        if dist > max_move_m:
+            continue
+        # maximise pixels, then minimise how far we move
+        key = (-cnt, dist)
+        if best is None or key < best[0]:
+            best = (key, ex, ny, cnt)
+    if best is None:
+        return None
+    return best[1], best[2], best[3]
