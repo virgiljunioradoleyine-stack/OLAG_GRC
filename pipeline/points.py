@@ -47,3 +47,10 @@ if __name__ == "__main__":
         x, y, epsg = to_utm(p["lat"], p["lon"])
         print(f"{p['id']:8s} lat={p['lat']:.4f} lon={p['lon']:.4f} -> T{z}{b}{sq}  "
               f"EPSG:{epsg} easting={x:.0f} northing={y:.0f}")
+
+
+def from_utm(x, y, epsg):
+    """Inverse of to_utm: UTM easting/northing -> (lat, lon)."""
+    tr = Transformer.from_crs(f"EPSG:{epsg}", "EPSG:4326", always_xy=True)
+    lon, lat = tr.transform(x, y)
+    return lat, lon

@@ -26,9 +26,22 @@ def _vsicurl(href: str) -> str:
 
 
 def _band_scaling(item, key):
-    """Return (scale, offset) for an asset, from the scene's own STAC metadata."""
+    """Return (scale, offset) for an asset, from the scene's own STAC metadata.
+
+    Sentinel-2 processing baseline >= 04.00 introduced a BOA reflectance offset,
+    and the item's `raster:bands` advertises it as `offset: -0.1`. But Earth
+    Search's COGs have usually already had it applied, flagged by the scene
+    property `earthsearch:boa_offset_applied`. Applying it a second time shifts
+    every band down by 0.1 and drives dark surfaces -- water especially --
+    negative, which silently inverts normalized-difference indices. So honour
+    the flag: when the offset is already in the pixels, do not reapply it.
+    """
     rb = (item["assets"][key].get("raster:bands") or [{}])[0]
-    return float(rb.get("scale", 1.0)), float(rb.get("offset", 0.0))
+    scale = float(rb.get("scale", 1.0))
+    offset = float(rb.get("offset", 0.0))
+    if item.get("properties", {}).get("earthsearch:boa_offset_applied"):
+        offset = 0.0
+    return scale, offset
 
 
 def read_point_window(item, easting, northing, radius_m=DEFAULT_RADIUS_M):
