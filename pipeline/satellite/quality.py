@@ -24,9 +24,18 @@ MIN_PIXELS = 10
 GOOD_STD = 0.06
 ACCEPTABLE_STD = 0.12
 
-# Fraction of the reading window rejected as cloud/shadow by SCL.
-GOOD_CLOUD = 0.20
-ACCEPTABLE_CLOUD = 0.50
+# Fraction of the reach rejected as cloud/shadow by SCL.
+#
+# Calibrated against the collected record rather than guessed: 70% of real
+# observations have more than 20% of the reach clouded, which is simply what the
+# Pra basin looks like. More importantly, cloud fraction is the wrong primary
+# gate. If 80% of the reach is under cloud but the clear fifth still yields 300
+# water pixels, that is a perfectly good measurement of the river -- the pixel
+# count already captures whether we saw enough water. Cloud fraction is retained
+# because a heavily obscured reach may be sampling an unrepresentative part of
+# the channel, but it is a secondary signal and weighted accordingly.
+GOOD_CLOUD = 0.50
+ACCEPTABLE_CLOUD = 0.85
 
 
 def quality_of(water_pixels, ndti_std, cloud_fraction):

@@ -1,7 +1,12 @@
-numpy>=2.0
-pandas>=2.2
-scikit-learn>=1.5
-joblib>=1.4
-rasterio>=1.4
-pyproj>=3.6
-requests>=2.31
+# Pinned for reproducibility. The audit found only >= constraints and no
+# lockfile, which meant a rebuild could silently pick a different numpy/pandas
+# combination than the one the results were produced with.
+numpy==2.4.6
+pandas==3.0.5
+scipy==1.17.1
+scikit-learn==1.9.0
+joblib==1.5.2
+rasterio==1.4.4
+pyproj==3.7.2
+affine==2.4.0
+requests==2.33.1

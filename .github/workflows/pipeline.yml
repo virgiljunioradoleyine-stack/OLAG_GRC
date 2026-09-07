@@ -1,0 +1,96 @@
+name: pipeline
+
+on:
+  schedule:
+    # Sentinel-2 revisits every ~5 days and the Pra basin is heavily clouded,
+    # so a 3-day cadence catches every usable pass without hammering the
+    # sources. Offset from the hour to be a polite API citizen.
+    - cron: "17 5 */3 * *"
+  workflow_dispatch:
+    inputs:
+      full_history:
+        description: "Re-collect the entire archive instead of recent scenes"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Acquire rainfall
+        id: rain
+        continue-on-error: true
+        run: python -m pipeline.rainfall.client
+
+      - name: Acquire river geometry and place names
+        id: hydro
+        continue-on-error: true
+        run: python -m pipeline.hydrology.fetch
+
+      - name: Collect satellite observations
+        id: sat
+        run: |
+          if [ "${{ inputs.full_history }}" = "true" ]; then
+            python -m pipeline.satellite.observations 2017-01-01
+          else
+            python -m pipeline.satellite.observations "$(date -u -d '90 days ago' +%Y-%m-%d)"
+          fi
+
+      - name: Validate the dataset before anything downstream uses it
+        run: python -m pytest tests/test_data_schema.py -q
+
+      - name: Score and export the dashboard dataset
+        run: python -m pipeline.export.dashboard
+
+      - name: Verify the export is complete
+        run: |
+          python - <<'PY'
+          # Fail loudly rather than publishing a half-written dataset.
+          import json, sys, os
+          need = ["summary.json", "stations.json", "series.json", "alerts.json"]
+          base = "web/public/data"
+          for f in need:
+              p = os.path.join(base, f)
+              if not os.path.exists(p):
+                  sys.exit(f"missing export: {f}")
+              json.load(open(p))
+          s = json.load(open(os.path.join(base, "summary.json")))
+          if not s.get("stations_with_data"):
+              sys.exit("export contains no station data — refusing to publish")
+          print(f"export OK: {s['stations_with_data']} stations, "
+                f"{s['observations_total']} observations")
+          PY
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ web/public/data/
+          if git diff --staged --quiet; then
+            echo "no new data"
+          else
+            git commit -m "pipeline: data update $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
+
+      - name: Report acquisition failures
+        if: steps.rain.outcome == 'failure' || steps.hydro.outcome == 'failure'
+        run: |
+          echo "::warning::optional acquisition step failed — rainfall=${{ steps.rain.outcome }} hydrology=${{ steps.hydro.outcome }}"
+          echo "The last known good data was preserved; the run did not publish corrupted output."

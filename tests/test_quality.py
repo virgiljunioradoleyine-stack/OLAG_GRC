@@ -19,8 +19,11 @@ def test_high_scatter_downgrades_even_with_many_pixels():
 
 
 def test_heavy_cloud_downgrades():
-    level, _, _ = quality_of(900, 0.01, 0.85)
-    assert level == "LOW_QUALITY"
+    """Thresholds were recalibrated against the real record; 0.95 is beyond
+    ACCEPTABLE (0.85) whereas 0.85 sits exactly on the boundary."""
+    assert quality_of(900, 0.01, 0.95)[0] == "LOW_QUALITY"
+    assert quality_of(900, 0.01, 0.60)[0] == "ACCEPTABLE"
+    assert quality_of(900, 0.01, 0.10)[0] == "GOOD"
 
 
 def test_all_levels_are_declared():

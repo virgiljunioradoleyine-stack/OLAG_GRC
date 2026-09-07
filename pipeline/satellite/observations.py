@@ -167,9 +167,23 @@ def readings_for_scene(item, stations, masks):
         ni, sw = nir[usable], swir[usable]
 
         def safe_nd(a, b):
+            """Normalised difference with the artifacts guarded out.
+
+            Sentinel-2 L2A atmospheric correction can return slightly negative
+            reflectance over dark targets such as clear water. That is a known
+            processing artifact, not a measurement: reflectance cannot be
+            negative. Left alone it shrinks the denominator of a normalised
+            difference and pushes the result outside [-1, 1] -- we saw MNDWI
+            reach 2.3 that way. Flooring at zero and requiring a meaningful
+            denominator keeps every index inside its mathematical range.
+            """
+            a = np.clip(a, 0.0, None)
+            b = np.clip(b, 0.0, None)
             d = a + b
-            ok = np.abs(d) > 1e-6
-            return ((a - b) / np.where(ok, d, 1.0))[ok]
+            ok = d > 0.01
+            if not ok.any():
+                return np.array([])
+            return np.clip((a[ok] - b[ok]) / d[ok], -1.0, 1.0)
 
         ndti_vals = safe_nd(r, g)
         if ndti_vals.size < MIN_PIXELS:
@@ -180,6 +194,11 @@ def readings_for_scene(item, stations, masks):
 
         std = float(np.std(ndti_vals))
         level, score, _why = quality_of(n_px, std, cloud_frac)
+        if level == "REJECTED":
+            # A rejected observation is not a measurement of the river. Storing
+            # it would leave a plausible-looking row that nothing downstream is
+            # allowed to use, so it is dropped at source.
+            continue
 
         rows.append({
             "date": obs_date,

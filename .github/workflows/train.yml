@@ -1,0 +1,54 @@
+name: train
+
+# Training is deliberately NOT part of the data pipeline. Retraining on every
+# new observation would let the model quietly redefine "normal" to include an
+# ongoing pollution event, and would make results irreproducible. It runs
+# monthly, or on demand, and publishes only if validation passes.
+on:
+  schedule:
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: train
+  cancel-in-progress: false
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+
+      - name: Leakage tests must pass before training
+        run: python -m pytest tests/test_leakage.py -q
+
+      - name: Train
+        run: python -m pipeline.models.train
+
+      - name: Evaluate and gate publication
+        run: python -m pipeline.models.evaluate --gate
+
+      - name: Re-export with the new models
+        run: python -m pipeline.export.dashboard
+
+      - name: Commit models and evaluation
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add models/ data/evaluation/ web/public/data/
+          if git diff --staged --quiet; then
+            echo "no model changes"
+          else
+            git commit -m "train: model update $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
