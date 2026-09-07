@@ -102,8 +102,13 @@ ELEVATED rather than escalated to ALERT because the upstream control rose too:
 date, and so did the upstream control. A catchment-wide rise is weather, not
 mining, and the system correctly declined to cry wolf at both points at once.
 
-Caveat: this test rests on the control point *having* a reading. Per §1(b) it
-frequently does not.
+Two caveats, and the second is severe. First, this test rests on the control
+point *having* a reading, and per §1(b) it frequently does not. Second — see §6 —
+the control and the monitored points only move in the same direction on ~52% of
+dates, which is a coin flip. With agreement that weak, roughly half of any set of
+spikes will show the control rising by chance alone. **These five suppressions
+may be coincidence rather than the logic working.** They are reported here
+because they are what the system did, not as evidence that it reasoned correctly.
 
 ## 3. False-positive rate — PASSES
 
@@ -154,6 +159,82 @@ Unusually clean water is not a reason to warn a treatment plant, so the alert
 rules now require a rise before escalating. Without that filter the system would
 have produced more than twice as many alerts, most of them for good news.
 
+## 6. Is the control point valid? — the premise does not hold in our data
+
+The control's entire job rests on one assumption: **when it rains across the
+catchment, all three points rise together**. If that is true, their date-to-date
+changes should correlate strongly. We tested it.
+
+**Siting first.** Confirmed on OpenStreetMap: the control sits on the **Pra
+mainstem**, and imagery puts it **above** the Pra/Offin confluence — the channel
+is 40 m wide at the point and 120 m wide below the junction 8 km south-west. The
+Offin is the heavily mined tributary, so this is the right side of the junction.
+Siting is not the problem.
+
+**But the correlation is not there.** Matching readings by nearest date:
+
+| Pair | n (same day) | r (NDTI level) | r (NDTI *change*) | move same direction |
+|---|---|---|---|---|
+| control ↔ monitor | 138 | +0.34 | **+0.25** | **53%** |
+| control ↔ intake | 108 | +0.39 | **+0.20** | **52%** |
+| monitor ↔ intake | 135 | +0.39 | **+0.28** | **57%** |
+
+Direction agreement of ~52% is a coin flip. Tightening the match from 10 days to
+same-day helps the level correlation but not the direction agreement at all.
+
+**The sanity check is what makes this interpretable.** `monitor` and `intake` sit
+on the *same river*, 22 km apart, read from the *same tile* on the *same dates* —
+and they agree barely better (r = 0.28, 57%) than the control does. So the weak
+correlation is **not** a badly sited control. Every pair of points behaves this
+way, which points at the measurement rather than the geography.
+
+**The measurement is noise-dominated.** Comparing readings taken close together
+in time (when the river genuinely cannot have changed much) against readings far
+apart:
+
+| Point | median \|ΔNDTI\|, readings ≤3 days apart | ≥20 days apart | implied noise share |
+|---|---|---|---|
+| monitor | 0.0434 (n=7) | 0.0543 (n=57) | **~80%** |
+| intake | 0.0177 (n=6) | 0.0374 (n=53) | ~47% |
+
+For the monitor point, roughly **four fifths of the apparent change between
+readings is measurement noise**, not river. (The ≤3-day samples are small — 7 and
+6 pairs — so treat these as indicative, not precise.) Within-scene pixel scatter
+alone is 0.020–0.030 NDTI against a total date-to-date spread of 0.052–0.061.
+
+**What this means.** The control-suppression logic is not wrong in principle, but
+in this data the shared rainfall signal it depends on is buried under noise. We
+should not claim to a judge that the control demonstrably prevents false alarms —
+we can only claim it is designed to, and that the data so far cannot confirm it.
+
+The fixes are the same ones §1 already points at, which is reassuring: more
+pixels per reading (sample a length of channel rather than a 100 m box),
+absolute reflectance rather than a normalised index, and temporal smoothing
+before comparing points.
+
+## 7. Galamsey upstream of the control — present, growth unproven
+
+True-colour imagery shows extensive bare, blotchy ground and stripped riverbed on
+the Pra immediately upstream of the control point (`docs/`). Visually it appears
+to expand between 2017 and 2026.
+
+We tried to prove that growth by measuring bare bright ground (NDVI < 0.25,
+red > 0.12) in the same 4 × 4 km reach on the clearest dry-season scene each year:
+
+```
+2017  88 ha    2020  80 ha    2023   99 ha    2025  39 ha
+2018  50 ha    2021  84 ha    2024  131 ha    2026  114 ha
+```
+
+88 ha → 114 ha is a 1.3× increase, but the scatter between years is as large as
+the trend (39 ha in 2025). The measure is confounded by *when* in the dry season
+each scene falls — vegetation greenness and exposed riverbed both shift by weeks.
+**We cannot claim from this that mining upstream of the control is growing.**
+What we can say is that ~5–8% of that reach is stripped ground in every year
+measured, directly on the channel. The control point is not in pristine
+catchment, and its median NDTI (+0.0855) is not much cleaner than the intake's
+(+0.0981).
+
 ---
 
 ## What we would fix next, in priority order
@@ -170,6 +251,10 @@ have produced more than twice as many alerts, most of them for good news.
    Daboase. Even a handful of dated NTU values would let us calibrate NDTI (and
    red reflectance) against ground truth instead of inferring sensitivity from
    one event.
-4. **Be honest about latency** (§1c). This system's realistic claim is
+4. **Raise the signal-to-noise ratio** (§6). Sample a length of river channel
+   rather than a 100 m square — more pixels per reading averages the noise down —
+   and smooth over time before comparing points. Until this improves, the control
+   logic cannot be shown to work.
+5. **Be honest about latency** (§1c). This system's realistic claim is
    *"detects multi-day pollution episodes and trends"*, not *"warns hours before
    a slug arrives"*. The competition entry should say so.

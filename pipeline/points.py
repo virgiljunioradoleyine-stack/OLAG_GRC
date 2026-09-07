@@ -10,9 +10,17 @@ POINTS = [
         "id": "control", "name": "Pra Upper Basin (Control)",
         "lat": 5.875062, "lon": -1.522239, "role": "control",
         "pixels": 15,
-        "note": "Upper basin. Confirm whether this sits above or below the "
-                "Pra/Offin confluence -- below it, the point drains both mined "
-                "systems and cannot act as a control.",
+        "note": "On the Pra mainstem, confirmed against OpenStreetMap, and "
+                "ABOVE the Pra/Offin confluence -- imagery shows the channel is "
+                "40 m here and 120 m below the junction 8 km south-west. The "
+                "Offin is the heavily mined tributary, so a control above the "
+                "junction cannot be contaminated by Offin galamsey. This is the "
+                "arrangement the alert suppression logic depends on. BUT: the "
+                "control's readings correlate only weakly with the monitored "
+                "points (direction agreement ~52%, a coin flip), so the shared "
+                "rainfall signal the suppression logic assumes is not visible in "
+                "the data. Two points on the same river agree barely better, so "
+                "this is measurement noise, not siting -- see TEST_RESULTS.md 6.",
     },
     {
         "id": "monitor", "name": "Pra at Beposo Reach",

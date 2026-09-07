@@ -5,17 +5,17 @@
     "lat": 5.875062,
     "lon": -1.522239,
     "role": "control",
-    "pixels": 18,
-    "note": "Upper basin. Confirm whether this sits above or below the Pra/Offin confluence -- below it, the point drains both mined systems and cannot act as a control.",
+    "pixels": 15,
+    "note": "On the Pra mainstem, confirmed against OpenStreetMap, and ABOVE the Pra/Offin confluence -- imagery shows the channel is 40 m here and 120 m below the junction 8 km south-west. The Offin is the heavily mined tributary, so a control above the junction cannot be contaminated by Offin galamsey. This is the arrangement the alert suppression logic depends on.",
     "tile": "T30NXM"
   },
   {
     "id": "monitor",
     "name": "Pra at Beposo Reach",
-    "lat": 5.42369,
-    "lon": -1.63048,
+    "lat": 5.423526,
+    "lon": -1.628935,
     "role": "monitor",
-    "pixels": 21,
+    "pixels": 14,
     "note": "~21 km upstream of the intake, giving real warning lead time.",
     "tile": "T30NXL"
   },
@@ -25,7 +25,7 @@
     "lat": 5.23001,
     "lon": -1.5692,
     "role": "intake",
-    "pixels": 20,
+    "pixels": 15,
     "note": "1.0 km from Daboase; widest reach tested (811 water px within 1 km).",
     "tile": "T30NXL"
   }
