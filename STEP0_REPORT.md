@@ -9,7 +9,7 @@ data, not estimated. Reproduce with `python scripts/step0_verify.py`.
 | 2 | Asset retrieval (windowed COG read) | **PASS** |
 | 3 | NDTI on real pixels | **FAIL — points are not on the river** |
 | 4 | GitHub repo + Actions | **PASS** (run #1 succeeded) |
-| 5 | Vercel deploy | **BLOCKED — needs a linked project** |
+| 5 | Vercel deploy | **PASS** (project created; first build failed on a CVE, fixed) |
 
 ---
 
@@ -72,11 +72,16 @@ scaling, and reads the SCL mask. What it cannot do is find any water, because
 Distance from each supplied coordinate to the nearest detected water pixel,
 measured on the clearest scene available (2026-01-25, 0.47% cloud):
 
-| Point | Supplied coordinate | Nearest water |
-|---|---|---|
-| `control` — Pra Upstream | 6.2100, −1.6500 | **1,785 m away** |
-| `monitor` — Pra at Dunkwa | 5.9700, −1.7800 | **288 m away** |
-| `intake` — Daboase Intake | 5.2300, −1.5600 | **540 m away** |
+| Point | Supplied coordinate | Usable pixels | Nearest persistent water |
+|---|---|---|---|
+| `control` — Pra Upstream | 6.2100, −1.6500 | **0** | 637 m away |
+| `monitor` — Pra at Dunkwa | 5.9700, −1.7800 | **0** | 281 m away |
+| `intake` — Daboase Intake | 5.2300, −1.5600 | **0** | 934 m away |
+
+(Measured against a persistent-water mask built from the 12 clearest scenes in
+18 months, after the offset bug below was fixed. An earlier version of this
+table quoted different distances; those came from the buggy code and are
+superseded. The verdict is unchanged: all three points are off the channel.)
 
 At the control point, a cloud-free window classified as **100% vegetation**.
 Six scenes in a row returned "0 usable water pixels".
@@ -124,25 +129,59 @@ GitHub's network can reach `sentinel-cogs`. The egress restriction that blocks
 Earth Search is specific to this development environment; it does not apply to
 the CI runner that will execute the real monitoring job.
 
-## 5. Vercel — blocked
+## 5. Vercel — pass, after one failure
 
-The Vercel account (`viradotech`, hobby plan) is reachable and has five
-projects, but **none is linked to `OLAG_GRC`**. A placeholder Next.js app is
-committed at `web/`, ready to deploy once a project is created and linked.
+Project `olag-grc` created on the `viradotech` team and linked to this repo,
+root directory `web/`, production branch `claude/new-session-udfegz`.
 
-Separately, `vercel.com` is also denied by this environment's egress policy, so
-deployment must be triggered through the Vercel integration rather than the CLI
-from here.
+- Project: https://vercel.com/viradotech/olag-grc
+- URL: https://olag-grc-viradotech.vercel.app
+
+The **first deploy failed**: Vercel rejected the build with
+`VULNERABLE_NEXTJS_VERSION` (CVE-2025-66478) because the scaffold pinned Next.js
+15.5.4. Bumped to 15.5.25. Logged in HICCUPS.md — the takeaway for demo week is
+that a deploy can fail for reasons unrelated to our code, so the dashboard must
+not be deployed for the first time the night before judging.
+
+Note: `vercel.com` is also denied by this dev environment's egress policy, so
+deploys are driven through the Vercel GitHub integration rather than the CLI.
 
 ---
 
-## Open decisions needed before STEP 1
+## A bug worth recording
 
-1. **New coordinates for all three points.** Rather than snapping each point to
-   the nearest water — which risks latching onto a pond, a flooded mining pit,
-   or the wrong tributary — these should be picked deliberately. The intake
-   point in particular must sit on the Pra *at the GWCL abstraction*, since the
-   whole value proposition is warning that specific plant.
-2. **Cloud-filter policy.** Confirm the move from `eo:cloud_cover < 20`
-   (tile-level) to per-pixel SCL cloud rejection. As specified, 18 months of
-   data yields 3 usable scenes for T30NXM — not enough to train anything.
+While building the water mask we found that the BOA reflectance offset was being
+applied twice, which drove dark surfaces negative and **inverted the sign** of
+every normalized-difference index — water was scoring as not-water.
+
+It was invisible for a while, because all three test points were off-river, so
+"no water" was the expected answer everywhere and everything looked consistent.
+It only surfaced when we tested **Lake Bosumtwi**, an 8 km crater lake, and the
+detector said "no persistent water within 1 km". After the fix it reads
+10,000 of 10,000 pixels as water. Bosumtwi is now a standing positive control.
+
+Full write-up in HICCUPS.md. Everything in this report has been re-measured with
+the corrected code.
+
+## Blocking STEP 1
+
+**Coordinates.** All three points need replacing. See `COORDINATES_GUIDE.md` for
+the selection procedure; candidates can be checked in about a minute with:
+
+```bash
+python scripts/verify_point.py <lat> <lon> --label control
+```
+
+Historical collection stays parked until these are confirmed — 18 months of
+readings taken from the wrong place is worse than no readings, because the
+numbers look plausible.
+
+## Decided, not blocking
+
+**Cloud-filter policy.** Moving from `eo:cloud_cover < 20` (tile-level, over a
+110 × 110 km area) to per-pixel SCL cloud rejection inside the reading window.
+As specified, 18 months yields 3 usable scenes for T30NXM — not enough to train
+anything. Proceeding this way unless the team objects.
+
+**Water detection.** MNDWI rather than SCL class 6, for the turbidity-blindness
+reason in check 3. SCL retained for cloud and shadow rejection.
