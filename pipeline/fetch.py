@@ -37,12 +37,35 @@ MIN_PIXELS = 3
 HISTORY_START = date(2017, 1, 1)
 
 
-def build_channel_mask(items, easting, northing):
-    """Fixed channel mask on the 10 m grid, from the clearest scenes."""
+MASK_DIR = "data/masks"
+
+
+def _mask_path(point_id):
+    return os.path.join(MASK_DIR, f"{point_id}.npy")
+
+
+def build_channel_mask(items, easting, northing, point_id=None, rebuild=False):
+    """The channel mask, cached to disk.
+
+    The mask must be *stable*: it defines which pixels every reading is measured
+    over, so rebuilding it from whatever scenes a given run happens to see would
+    make readings from different runs incomparable. It would also fail exactly
+    when it matters -- a scheduled run looks back only ~30 days, and in the rainy
+    season those scenes can all be too cloudy to derive a mask from, so the run
+    would quietly collect nothing during the pollution season. Build it once from
+    the clearest scenes in the archive, then reuse it.
+    """
+    if point_id and not rebuild and os.path.exists(_mask_path(point_id)):
+        return {"mask": np.load(_mask_path(point_id)), "scenes_used": 0,
+                "cached": True}
+
     pw = persistent_water(items[:MASK_SCENES], easting, northing,
                           half_m=READING_RADIUS_M)
     if pw is None or not pw["mask"].any():
         return None
+    if point_id:
+        os.makedirs(MASK_DIR, exist_ok=True)
+        np.save(_mask_path(point_id), pw["mask"])
     return pw
 
 
@@ -101,15 +124,16 @@ def collect(point, start=HISTORY_START, workers=16, verbose=True):
     items = search(z, b, sq, start, end, max_cloud=101)
     items.sort(key=lambda i: i["properties"]["eo:cloud_cover"])
 
-    pw = build_channel_mask(items, e, n)
+    pw = build_channel_mask(items, e, n, point_id=point["id"])
     if pw is None:
         if verbose:
             print(f"  {point['id']}: no channel mask, skipping")
         return []
     mask = pw["mask"]
     if verbose:
+        src = "cached" if pw.get("cached") else f"{pw['scenes_used']} scenes"
         print(f"  {point['id']}: tile T{z}{b}{sq}, {len(items)} scenes, "
-              f"channel mask {int(mask.sum())} px from {pw['scenes_used']} scenes")
+              f"channel mask {int(mask.sum())} px ({src})")
 
     by_date = sorted(items, key=lambda i: i["properties"]["datetime"])
     with ThreadPoolExecutor(max_workers=workers) as ex:
