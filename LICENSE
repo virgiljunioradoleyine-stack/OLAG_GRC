@@ -1,0 +1,52 @@
+MIT License
+
+Copyright (c) 2026 Pra River Watch contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--------------------------------------------------------------------------
+THIRD-PARTY DATA
+
+This project's CODE is MIT-licensed. The DATA it acquires is not, and carries
+its own terms:
+
+Copernicus Sentinel-2
+  Contains modified Copernicus Sentinel data. Free, full and open access under
+  the Copernicus data policy (Regulation (EU) No 1159/2013).
+  COGs hosted by Element 84 on the AWS Open Data registry.
+  https://registry.opendata.aws/sentinel-2-l2a-cogs/
+
+OpenStreetMap
+  River geometry and place names © OpenStreetMap contributors, licensed under
+  the Open Database License (ODbL) v1.0.
+  https://www.openstreetmap.org/copyright
+
+NASA POWER
+  Free and open, no restrictions on use. Please cite the NASA Langley Research
+  Center POWER Project.
+  https://power.larc.nasa.gov/
+
+Open-Meteo (ERA5 archive)
+  CC-BY-4.0. Underlying ERA5 data © ECMWF / Copernicus Climate Change Service.
+  https://open-meteo.com/en/license
+
+Basemap tiles
+  Esri World Imagery © Esri, Maxar, Earthstar Geographics.
+  OpenStreetMap tiles © OpenStreetMap contributors, subject to the OSMF tile
+  usage policy. Both are used without an account for low-volume display.
