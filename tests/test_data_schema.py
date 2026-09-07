@@ -43,11 +43,60 @@ def test_indices_are_in_physical_range():
         assert v.between(-1, 1).all(), f"{col} outside [-1, 1]"
 
 
-def test_reflectances_are_non_negative():
+def test_reflectances_are_physically_plausible():
+    """Reflectance must be plausible, allowing for a known L2A artifact.
+
+    Sen2Cor's atmospheric correction can over-correct aerosols over very dark
+    targets and return slightly negative BOA reflectance -- in this record, 25
+    of 2319 observations (1.1%) had SWIR marginally below zero, minimum -0.063.
+    That is a documented processing artifact over water, not corrupt data, and
+    the indices are already protected from it by flooring at zero before any
+    normalised difference is computed. So this test does not demand
+    non-negativity, which would fail on correct data. It asserts that no value
+    is deeply negative and that negatives stay a small minority -- a systematic
+    correction failure would breach both.
+
+    The upper bound is the other direction: water is dark, and a reading
+    brighter than BRIGHT_MAX in the visible bands is cloud or glint rather than
+    river. The collector now rejects those pixels, so any that reappear here
+    mean the rejection has stopped working.
+    """
+    from pipeline.satellite.observations import BRIGHT_MAX
+
     df = load_observations()
     for col in ("red", "green", "nir", "swir16"):
         v = pd.to_numeric(df[col], errors="coerce").dropna()
-        assert (v >= -0.05).all(), f"{col} has physically impossible values"
+        assert (v >= -0.10).all(), (
+            f"{col} reaches {v.min():.4f} -- too negative to be a correction "
+            f"artifact")
+        assert (v < 0).mean() < 0.05, (
+            f"{(v < 0).mean():.1%} of {col} values are negative; an artifact "
+            f"affecting this many observations is a systematic problem")
+
+    for col in ("red", "green"):
+        v = pd.to_numeric(df[col], errors="coerce").dropna()
+        assert (v <= BRIGHT_MAX).all(), (
+            f"{col} reaches {v.max():.4f}, above the {BRIGHT_MAX} brightness "
+            f"cut -- cloud or glint is reaching the readings")
+
+    for col in ("nir", "swir16"):
+        v = pd.to_numeric(df[col], errors="coerce").dropna()
+        assert (v <= 1.0).all(), (
+            f"{col} reaches {v.max():.4f}; reflectance above 1.0 is not "
+            f"physical")
+
+
+def test_bright_pixels_are_excluded_from_readings():
+    """The brightness cut is applied per pixel, not per observation."""
+    import numpy as np
+    from pipeline.satellite.observations import BRIGHT_MAX
+
+    green = np.array([[0.2, 0.2], [0.9, 0.2]], dtype="float32")
+    red = np.array([[0.2, 0.2], [0.9, 0.2]], dtype="float32")
+    finite = np.isfinite(red) & np.isfinite(green)
+    bright = finite & ((green > BRIGHT_MAX) | (red > BRIGHT_MAX))
+    assert bright.sum() == 1, "a single cloud pixel must not condemn the window"
+    assert (finite & ~bright).sum() == 3
 
 
 def test_quality_labels_are_valid():

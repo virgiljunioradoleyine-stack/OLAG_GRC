@@ -39,6 +39,16 @@ GRID_RES = 10.0
 MASK_SCENES = 12
 MIN_PIXELS = 3
 
+# Water is dark in the visible bands. Even a river carrying heavy sediment
+# stays below ~0.35 BOA reflectance in green; the median across this record is
+# 0.20. Anything substantially brighter is cloud, haze or sun glint that the
+# scene classification missed -- thin cirrus over water is a known SCL blind
+# spot, and it left 31 readings in the archive with a flat red~green~nir
+# spectrum above 1.0, three of which the quality gate still called GOOD.
+# Rejecting those pixels at source is the only place the contamination can be
+# removed without inventing a correction for it.
+BRIGHT_MAX = 0.5
+
 BANDS = ("red", "green", "nir", "swir16", "scl")
 
 OBS_FIELDS = [
@@ -154,14 +164,19 @@ def readings_for_scene(item, stations, masks):
         scl_raw = np.nan_to_num(scl, nan=0).astype("uint8")
         cloudy = np.isin(scl_raw, list(SCL_CLOUDY))
         finite = np.isfinite(red) & np.isfinite(green) & np.isfinite(nir) & np.isfinite(swir)
-        usable = channel & finite & ~cloudy
+        # Too bright to be water, whatever the scene classification says.
+        bright = finite & ((green > BRIGHT_MAX) | (red > BRIGHT_MAX))
+        contaminated = cloudy | bright
+        usable = channel & finite & ~contaminated
 
         n_px = int(usable.sum())
         n_channel = int(channel.sum())
         if n_px < MIN_PIXELS or n_channel == 0:
             continue
 
-        cloud_frac = float((channel & cloudy).sum() / n_channel)
+        # Reported contamination includes the bright pixels, so the quality
+        # score sees the obstruction that SCL did not label.
+        cloud_frac = float((channel & contaminated).sum() / n_channel)
 
         r, g = red[usable], green[usable]
         ni, sw = nir[usable], swir[usable]
