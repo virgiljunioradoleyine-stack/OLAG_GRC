@@ -23,8 +23,6 @@ from affine import Affine
 from rasterio.enums import Resampling
 from rasterio.windows import from_bounds
 
-from .ndti import _band_scaling, _vsicurl
-
 
 def grid_for(bounds, res):
     """(height, width, transform) for a target grid covering `bounds`."""
@@ -45,3 +43,27 @@ def read_on_grid(item, key, bounds, shape, resampling=Resampling.nearest):
         ).astype("float32")
     arr[arr == 0] = np.nan
     return arr * scale + offset
+
+# ---------------------------------------------------------------- scaling ---
+
+def _vsicurl(href: str) -> str:
+    return href if href.startswith("/vsicurl/") else "/vsicurl/" + href
+
+
+def _band_scaling(item, key):
+    """Return (scale, offset) for an asset, from the scene's own STAC metadata.
+
+    Sentinel-2 processing baseline >= 04.00 introduced a BOA reflectance offset,
+    advertised as `offset: -0.1` in `raster:bands`. Earth Search's COGs have
+    usually already had it applied, flagged by the scene property
+    `earthsearch:boa_offset_applied`. Applying it a second time shifts every band
+    down by 0.1 and drives dark surfaces -- water especially -- negative, which
+    silently inverts normalised-difference indices. So honour the flag: when the
+    offset is already in the pixels, do not reapply it.
+    """
+    rb = (item["assets"][key].get("raster:bands") or [{}])[0]
+    scale = float(rb.get("scale", 1.0))
+    offset = float(rb.get("offset", 0.0))
+    if item.get("properties", {}).get("earthsearch:boa_offset_applied"):
+        offset = 0.0
+    return scale, offset

@@ -26,7 +26,7 @@ from rasterio.windows import from_bounds
 from ..config import STATIONS, HISTORY_START
 from ..io.atomic import atomic_write
 from ..io.env import configure_gdal
-from ..ndti import _band_scaling, _vsicurl
+from ..raster import _band_scaling, _vsicurl
 from ..points import mgrs_tile, to_utm
 from ..raster import grid_for
 from ..search import search
