@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 import pandas as pd
 
@@ -102,10 +102,14 @@ def main():
             print(f"{p['id']}: no trained model, skipping scoring")
             continue
         a = score_latest(p, control_df)
-        if a and (a["point"], a["date"]) not in known:
-            a["generated_at"] = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+        if not a:
+            continue
+        print(f"{p['id']}: {a['tier']} — {a['date']}")
+        # the feed carries things worth reading; NORMAL readings live in the
+        # chart, and appending them would bury the alerts under routine days
+        if a["tier"] != "NORMAL" and (a["point"], a["date"]) not in known:
+            a["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
             alerts.append(a)
-            print(f"{p['id']}: {a['tier']} — {a['date']}")
 
     alerts.sort(key=lambda a: (a["date"], a["point"]), reverse=True)
     os.makedirs("data", exist_ok=True)

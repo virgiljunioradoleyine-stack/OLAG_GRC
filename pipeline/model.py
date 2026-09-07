@@ -125,7 +125,19 @@ class PointModel:
         return float((self.train_scores < score).mean() * 100.0)
 
     def score(self, feature_row):
-        x = self.scaler.transform(np.asarray(feature_row, dtype=float).reshape(1, -1))
+        """Score one reading. Accepts a sequence or a mapping of features.
+
+        The row is rebuilt as a one-row DataFrame with the training column names
+        so the scaler sees the same schema it was fitted on -- passing a bare
+        array works but relies on positional order silently matching, which is
+        exactly the kind of coupling that breaks quietly when a feature is added.
+        """
+        if isinstance(feature_row, dict):
+            values = [feature_row[f] for f in self.features]
+        else:
+            values = list(feature_row)
+        row = pd.DataFrame([values], columns=self.features, dtype=float)
+        x = self.scaler.transform(row)
         return int(self.forest.predict(x)[0]), float(self.forest.score_samples(x)[0])
 
 
