@@ -1,6 +1,8 @@
 {
   "method": "straight_line_fallback",
-  "note": "OSM centreline unavailable or did not cover the stations; distances are straight-line and therefore UNDERESTIMATE the true along-river distance.",
+  "segments_from_centreline": 7,
+  "segments_estimated": 0,
+  "note": "0 of 7 segments could not be measured reliably along the OSM centreline -- Overpass returns the river as disjoint ways, so a cumulative walk can jump between unconnected pieces. Those segments use straight-line distance scaled by a typical sinuosity of 1.4, and are marked method='straight_line_estimate'. Treat them as approximate.",
   "velocity_range_ms": [
     0.3,
     1.0
@@ -45,6 +47,8 @@
       "to": "P02",
       "distance_m": 19615,
       "straight_line_m": 19615,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 5.4,
       "travel_hours_max": 18.2
     },
@@ -53,6 +57,8 @@
       "to": "P03",
       "distance_m": 32327,
       "straight_line_m": 32327,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 9.0,
       "travel_hours_max": 29.9
     },
@@ -61,6 +67,8 @@
       "to": "P04",
       "distance_m": 8740,
       "straight_line_m": 8740,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 2.4,
       "travel_hours_max": 8.1
     },
@@ -69,6 +77,8 @@
       "to": "P05",
       "distance_m": 14039,
       "straight_line_m": 14039,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 3.9,
       "travel_hours_max": 13.0
     },
@@ -77,6 +87,8 @@
       "to": "P06",
       "distance_m": 13190,
       "straight_line_m": 13190,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 3.7,
       "travel_hours_max": 12.2
     },
@@ -85,6 +97,8 @@
       "to": "P07",
       "distance_m": 1093,
       "straight_line_m": 1093,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 0.3,
       "travel_hours_max": 1.0
     },
@@ -93,6 +107,8 @@
       "to": "P08",
       "distance_m": 4844,
       "straight_line_m": 4844,
+      "sinuosity": 1.0,
+      "method": "osm_centreline",
       "travel_hours_min": 1.3,
       "travel_hours_max": 4.5
     }

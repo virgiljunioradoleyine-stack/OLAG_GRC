@@ -30,7 +30,8 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-      - run: pip install -r requirements.txt
+      # dev requirements: the validation step below runs pytest
+      - run: pip install -r requirements-dev.txt
 
       - name: Acquire rainfall
         id: rain

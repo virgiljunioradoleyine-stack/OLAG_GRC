@@ -25,6 +25,12 @@ NETWORK_PATH = os.path.join("data", "hydrology", "network.json")
 VELOCITY_MS_LOW = 0.3
 VELOCITY_MS_HIGH = 1.0
 
+# Plausible bounds on channel sinuosity (river length / straight-line length).
+# Used to detect when the OSM centreline walk has produced nonsense.
+MIN_SINUOSITY = 0.95   # slightly below 1 to tolerate floating-point error
+MAX_SINUOSITY = 3.0
+TYPICAL_SINUOSITY = 1.4
+
 
 def haversine_m(a_lat, a_lon, b_lat, b_lon):
     dlat, dlon = radians(b_lat - a_lat), radians(b_lon - a_lon)
@@ -87,22 +93,53 @@ def build_network(stations, fc=None):
     segments = []
     for i in range(1, len(ordered)):
         up, dn = ordered[i - 1], ordered[i]
+        straight = haversine_m(up.lat, up.lon, dn.lat, dn.lon)
         d = abs(nodes[dn.id]["river_m"] - nodes[up.id]["river_m"])
+
+        # Sanity-check the along-river distance against the straight line.
+        #
+        # Overpass returns the river as many DISJOINT ways in arbitrary order.
+        # Walking a naive cumulative distance over their concatenated vertices
+        # therefore jumps between segments that are not connected, and the first
+        # CI run produced 323 km of river for a 32 km straight line. Real rivers
+        # meander, but sinuosity is bounded: roughly 1.0-3.0 for a channel like
+        # the Pra. Anything outside that says the centreline walk is unreliable
+        # for this pair, so we fall back to the straight line and label the
+        # segment rather than publishing a fabricated distance.
+        sinuosity = (d / straight) if straight > 0 else 0.0
+        seg_method = "osm_centreline"
+        if not (MIN_SINUOSITY <= sinuosity <= MAX_SINUOSITY):
+            d = straight * TYPICAL_SINUOSITY
+            seg_method = "straight_line_estimate"
+
         segments.append({
             "from": up.id, "to": dn.id,
             "distance_m": round(d),
-            "straight_line_m": round(haversine_m(up.lat, up.lon, dn.lat, dn.lon)),
+            "straight_line_m": round(straight),
+            "sinuosity": round(sinuosity, 2) if straight > 0 else None,
+            "method": seg_method,
             "travel_hours_min": round(d / VELOCITY_MS_HIGH / 3600, 1) if d else 0.0,
             "travel_hours_max": round(d / VELOCITY_MS_LOW / 3600, 1) if d else 0.0,
         })
 
+    n_fallback = sum(1 for s in segments if s["method"] != "osm_centreline")
+    if n_fallback:
+        method = ("mixed" if n_fallback < len(segments)
+                  else "straight_line_fallback")
+
     net = {
         "method": method,
-        "note": ("Distances measured along the OSM river centreline."
-                 if method == "osm_centreline" else
-                 "OSM centreline unavailable or did not cover the stations; "
-                 "distances are straight-line and therefore UNDERESTIMATE the "
-                 "true along-river distance."),
+        "segments_from_centreline": len(segments) - n_fallback,
+        "segments_estimated": n_fallback,
+        "note": (
+            "Distances measured along the OSM river centreline."
+            if method == "osm_centreline" else
+            f"{n_fallback} of {len(segments)} segments could not be measured "
+            f"reliably along the OSM centreline -- Overpass returns the river as "
+            f"disjoint ways, so a cumulative walk can jump between unconnected "
+            f"pieces. Those segments use straight-line distance scaled by a "
+            f"typical sinuosity of {TYPICAL_SINUOSITY}, and are marked "
+            f"method='straight_line_estimate'. Treat them as approximate."),
         "velocity_range_ms": [VELOCITY_MS_LOW, VELOCITY_MS_HIGH],
         "stations": {k: {"river_km": round(v["river_m"] / 1000, 2),
                          "snap_distance_m": v["snap_distance_m"]}
