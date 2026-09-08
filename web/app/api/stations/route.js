@@ -4,12 +4,20 @@ import path from "node:path";
 /**
  * Add a monitoring station from the Live Map, in one click.
  *
- * The click used to open a prefilled GitHub issue and leave the user to press
- * Submit. This route does that step server-side instead, so the button just
- * works — but it still creates the issue rather than committing directly,
- * because the issue is the audit trail: it records who asked, what was
- * validated, what the pipeline found, and it is where the workflow reports
- * back. Nothing about the existing add-station workflow changes.
+ * The click dispatches the add-station workflow directly. Nothing is opened,
+ * nothing is filed, and the user stays on the page while the station appears.
+ *
+ * An earlier version created a GitHub issue to carry the request, on the
+ * reasoning that the issue was a useful audit trail. It was also a thing the
+ * user had to look at, which is not what "add a station" should produce. The
+ * audit trail lives where it belongs instead: the workflow run, and the commit
+ * it makes. The issue path still exists in the workflow purely as the
+ * zero-configuration fallback for a deployment holding no token.
+ *
+ * The work itself — nine years of Sentinel-2 history for the new station —
+ * takes minutes, so it cannot happen inside this request. The route dispatches
+ * and returns; the page polls the published station list and reports when the
+ * station is really there.
  *
  * WHY THERE IS A KEY. A public site with a write path and no login is a write
  * path for everyone who finds it. The project forbids third-party auth
@@ -118,24 +126,9 @@ export async function POST(request) {
 
   const req = { lat: Number(clat.toFixed(6)), lon: Number(clon.toFixed(6)),
                 name, role: "monitor" };
-  const issueBody = [
-    "Added from the Live Map.",
-    "",
-    `- **${name}** at \`${req.lat}, ${req.lon}\``,
-    `- ${props.water_pixels} usable water pixels, tile \`${props.tile}\``,
-    `- snapped ${Math.round(bestD)} m from the click`,
-    "",
-    "```json",
-    JSON.stringify(req, null, 2),
-    "```",
-    "",
-    "The add-station workflow will validate this, collect the station's full",
-    "Sentinel-2 history, rebuild the dashboard and report back here.",
-  ].join("\n");
-
   let res;
   try {
-    res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+    res = await fetch(`https://api.github.com/repos/${REPO}/dispatches`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -143,7 +136,12 @@ export async function POST(request) {
         "X-GitHub-Api-Version": "2022-11-28",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title: `[station] ${name}`, body: issueBody }),
+      body: JSON.stringify({
+        event_type: "add-station",
+        client_payload: { ...req, water_pixels: props.water_pixels ?? null,
+                          tile: props.tile ?? null,
+                          snapped_m: Math.round(bestD) },
+      }),
     });
   } catch {
     return bad(502, "Could not reach GitHub.", { fallback: "issue" });
@@ -153,7 +151,6 @@ export async function POST(request) {
     return bad(502, `GitHub refused the request (${res.status}).`,
                { fallback: "issue" });
   }
-  const issue = await res.json();
 
   return Response.json({
     ok: true,
@@ -164,7 +161,6 @@ export async function POST(request) {
     water_pixels: props.water_pixels ?? null,
     tile: props.tile ?? null,
     snapped_m: Math.round(bestD),
-    tracking_url: issue.html_url,
   });
 }
 

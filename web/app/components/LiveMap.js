@@ -24,6 +24,7 @@ export default function LiveMap({ stations, series, river, network, candidates }
   const [needsKey, setNeedsKey] = useState(false);
   const [keyInput, setKeyInput] = useState("");
   const [useIssueFallback, setUseIssueFallback] = useState(false);
+  const [addStage, setAddStage] = useState(null);
   const s = stations.find((x) => x.id === selected);
   const rows = (series?.[selected] || []).slice(-90);
 
@@ -92,6 +93,7 @@ export default function LiveMap({ stations, series, river, network, candidates }
         setAdded(data);
         setNeedsKey(false);
         setKeyInput("");
+        watchFor(data.id);
       } else if (data.fallback === "issue") {
         setUseIssueFallback(true);
       } else if (data.needsKey) {
@@ -105,6 +107,32 @@ export default function LiveMap({ stations, series, river, network, candidates }
     } finally {
       setAdding(false);
     }
+  }
+
+  // Collecting nine years of history for a new station takes minutes, so the
+  // request only starts the work. Rather than claim success the moment it is
+  // dispatched, watch the published station list until the station is really
+  // there -- what the user is told then matches what the system actually has.
+  function watchFor(id) {
+    const started = Date.now();
+    const tick = async () => {
+      if (Date.now() - started > 15 * 60 * 1000) {
+        setAddStage("slow");
+        return;
+      }
+      try {
+        const r = await fetch(`/data/stations.json?t=${Date.now()}`,
+                              { cache: "no-store" });
+        const list = await r.json();
+        if (Array.isArray(list) && list.some((s) => s.id === id)) {
+          setAddStage("done");
+          return;
+        }
+      } catch {}
+      setTimeout(tick, 15000);
+    };
+    setAddStage("working");
+    setTimeout(tick, 15000);
   }
 
   return (
@@ -181,14 +209,27 @@ export default function LiveMap({ stations, series, river, network, candidates }
                   {added ? (
                     <div style={{ marginTop: 12 }}>
                       <p style={{ fontSize: 13, margin: "0 0 6px" }}>
-                        <strong>{added.id} — {added.name}</strong> is being added.
+                        <strong>{added.id} — {added.name}</strong>
+                        {addStage === "done" ? " is on the network."
+                          : " is being added."}
                       </p>
                       <p style={{ fontSize: 12, color: "var(--muted)", margin: 0 }}>
-                        Its full Sentinel-2 history is being collected and the
-                        dashboard rebuilt. That takes a few minutes.{" "}
-                        <a href={added.tracking_url} target="_blank"
-                           rel="noopener noreferrer">Follow progress</a>.
+                        {addStage === "done"
+                          ? "Its nine-year history is collected and the dashboard "
+                            + "is rebuilt. Reload to see it on the map."
+                          : addStage === "slow"
+                          ? "This is taking longer than usual. The run is still "
+                            + "going; the station will appear when it finishes."
+                          : "Collecting its full Sentinel-2 history and rebuilding "
+                            + "the dashboard. This takes a few minutes — you can "
+                            + "leave this page."}
                       </p>
+                      {addStage === "done" && (
+                        <button className="btn" style={{ marginTop: 10 }}
+                                onClick={() => window.location.reload()}>
+                          Reload
+                        </button>
+                      )}
                     </div>
                   ) : useIssueFallback ? (
                     <>

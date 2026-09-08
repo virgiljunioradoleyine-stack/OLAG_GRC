@@ -187,8 +187,9 @@ rebuilt and a model is trained. This works out of the box with **no
 configuration** — the button opens a prefilled GitHub issue and your own GitHub
 login is what authorises the write, so nothing needs a secret.
 
-Two optional environment variables on Vercel turn that into a single in-app
-click, with no tab switch:
+Two environment variables on Vercel turn that into a single in-app click that
+opens nothing at all — the site validates the point, dispatches the pipeline
+directly, and tells you when the station is really on the network:
 
 | Variable | What it is |
 |---|---|
