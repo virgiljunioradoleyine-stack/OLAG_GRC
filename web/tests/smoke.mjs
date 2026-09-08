@@ -69,6 +69,41 @@ try {
   await browser.close();
 }
 
+// ---- the add-station route -------------------------------------------
+// CI has no key and no token, so what is checkable here is the contract the
+// UI depends on: an unconfigured deployment must say so and ask for the
+// GitHub fallback rather than failing, and an unverified point must be
+// refused. The refusal is the security boundary, so it is worth a test that
+// runs without any secret at all.
+{
+  const post = async (body) => {
+    const r = await fetch(BASE + "/api/stations", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    return { status: r.status, json: await r.json().catch(() => ({})) };
+  };
+
+  const unconfigured = await post({ lat: 5.85, lon: -1.54 });
+  if (process.env.ADD_STATION_KEY) {
+    console.log("ok /api/stations — skipped contract check (key is configured)");
+  } else if (unconfigured.status !== 503 || unconfigured.json.fallback !== "issue") {
+    fail(`/api/stations unconfigured returned ${unconfigured.status} `
+         + `${JSON.stringify(unconfigured.json)} — the UI needs 503 + `
+         + `fallback:"issue" to offer the GitHub path`);
+  } else {
+    console.log("ok /api/stations — unconfigured deployment asks for the fallback");
+  }
+
+  const noBody = await post({});
+  if (noBody.status < 400) {
+    fail("/api/stations accepted a request with no coordinates");
+  } else {
+    console.log("ok /api/stations — rejects a request with no coordinates");
+  }
+}
+
 if (failures) {
   console.error(`\n${failures} smoke failure(s)`);
   process.exit(1);

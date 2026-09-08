@@ -179,6 +179,34 @@ In production none of this is run by hand — `pipeline.yml` does it on a schedu
 2. Enable GitHub Actions. `pipeline.yml` needs `contents: write` (already set).
 3. That's all. No secrets, no environment variables, no accounts.
 
+### Adding stations from the map
+
+Clicking a candidate site on the Live Map adds a station: the request is
+validated, the station's full Sentinel-2 history is collected, the dashboard is
+rebuilt and a model is trained. This works out of the box with **no
+configuration** — the button opens a prefilled GitHub issue and your own GitHub
+login is what authorises the write, so nothing needs a secret.
+
+Two optional environment variables on Vercel turn that into a single in-app
+click, with no tab switch:
+
+| Variable | What it is |
+|---|---|
+| `STATION_BOT_TOKEN` | A fine-grained GitHub PAT for this repository with **Issues: read and write**. Nothing else. |
+| `ADD_STATION_KEY` | Any string you choose. The site asks for it once and remembers it in that browser. |
+
+Both must be set for the route to activate; with either missing it reports so
+and the UI falls back to the GitHub link. `STATION_REPO` overrides the target
+repository if you fork.
+
+The key is a shared secret, not a user-accounts system, and it is not pretending
+to be one — the project rules exclude third-party auth. The real containment is
+elsewhere: a request is accepted only if it names a point the pipeline has
+already measured and published in `candidates.geojson`, and not within 400 m of
+an existing station. Even holding the key, nobody can put a station somewhere
+the satellite record does not support. If you would rather hold no secret at
+all, set neither variable and keep the GitHub-issue path.
+
 ## Repository
 
 | Path | Contents |

@@ -18,6 +18,12 @@ export default function LiveMap({ stations, series, river, network, candidates }
   const [pickMode, setPickMode] = useState(false);
   const [picked, setPicked] = useState(null);
   const [stationName, setStationName] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [added, setAdded] = useState(null);
+  const [addError, setAddError] = useState(null);
+  const [needsKey, setNeedsKey] = useState(false);
+  const [keyInput, setKeyInput] = useState("");
+  const [useIssueFallback, setUseIssueFallback] = useState(false);
   const s = stations.find((x) => x.id === selected);
   const rows = (series?.[selected] || []).slice(-90);
 
@@ -60,6 +66,46 @@ export default function LiveMap({ stations, series, river, network, candidates }
     return `${REPO_URL}/issues/new?title=${encodeURIComponent(`[station] ${req.name}`)}`
       + `&body=${encodeURIComponent(body)}`;
   })();
+
+  // One click. The route validates the point server-side and opens the
+  // tracking issue itself, so the user stays here. If the deployment has no
+  // key configured the route says so and we fall back to the GitHub link,
+  // which needs no secret -- the feature degrades rather than breaking.
+  async function addStation() {
+    if (!picked || picked.error) return;
+    setAdding(true);
+    setAddError(null);
+    let stored = "";
+    try { stored = window.localStorage.getItem("prw.addKey") || ""; } catch {}
+    try {
+      const res = await fetch("/api/stations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lat: picked.lat, lon: picked.lon,
+          name: stationName.trim(), key: keyInput || stored,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        try { window.localStorage.setItem("prw.addKey", keyInput || stored); } catch {}
+        setAdded(data);
+        setNeedsKey(false);
+        setKeyInput("");
+      } else if (data.fallback === "issue") {
+        setUseIssueFallback(true);
+      } else if (data.needsKey) {
+        setNeedsKey(true);
+        setAddError(stored || keyInput ? data.error : null);
+      } else {
+        setAddError(data.error || `The request failed (${res.status}).`);
+      }
+    } catch {
+      setUseIssueFallback(true);
+    } finally {
+      setAdding(false);
+    }
+  }
 
   return (
     <>
@@ -132,20 +178,69 @@ export default function LiveMap({ stations, series, river, network, candidates }
                            color: "var(--text)", fontSize: 13,
                          }} />
 
-                  <a className="btn btn-primary" href={addUrl || "#"}
-                     target="_blank" rel="noopener noreferrer"
-                     style={{ display: "block", textAlign: "center",
-                              marginTop: 12, textDecoration: "none" }}>
-                    Add {nextId} to the network
-                  </a>
-
-                  <p style={{ fontSize: 12, color: "var(--faint)", marginTop: 10 }}>
-                    This opens a prefilled request on GitHub — your GitHub login
-                    is what authorises it, so the site never asks you for one.
-                    Confirming it collects the station&apos;s full Sentinel-2
-                    history, rebuilds the dashboard and trains a model, then
-                    replies with what it found. Nothing else needs doing.
-                  </p>
+                  {added ? (
+                    <div style={{ marginTop: 12 }}>
+                      <p style={{ fontSize: 13, margin: "0 0 6px" }}>
+                        <strong>{added.id} — {added.name}</strong> is being added.
+                      </p>
+                      <p style={{ fontSize: 12, color: "var(--muted)", margin: 0 }}>
+                        Its full Sentinel-2 history is being collected and the
+                        dashboard rebuilt. That takes a few minutes.{" "}
+                        <a href={added.tracking_url} target="_blank"
+                           rel="noopener noreferrer">Follow progress</a>.
+                      </p>
+                    </div>
+                  ) : useIssueFallback ? (
+                    <>
+                      <a className="btn btn-primary" href={addUrl || "#"}
+                         target="_blank" rel="noopener noreferrer"
+                         style={{ display: "block", textAlign: "center",
+                                  marginTop: 12, textDecoration: "none" }}>
+                        Add {nextId} to the network
+                      </a>
+                      <p style={{ fontSize: 12, color: "var(--faint)", marginTop: 10 }}>
+                        One-click adding is not configured on this deployment, so
+                        this opens a prefilled request on GitHub instead — your
+                        GitHub login is what authorises it. Confirming it does the
+                        same work.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      {needsKey && (
+                        <>
+                          <label style={{ display: "block", fontSize: 12.5,
+                                          color: "var(--muted)", margin: "14px 0 6px" }}>
+                            Operator key
+                          </label>
+                          <input type="password" value={keyInput} autoComplete="off"
+                                 onChange={(e) => setKeyInput(e.target.value)}
+                                 placeholder="asked once, then remembered"
+                                 style={{
+                                   width: "100%", padding: "8px 10px", borderRadius: 8,
+                                   border: "1px solid var(--border)",
+                                   background: "var(--bg)", color: "var(--text)",
+                                   fontSize: 13,
+                                 }} />
+                        </>
+                      )}
+                      <button className="btn btn-primary" onClick={addStation}
+                              disabled={adding || (needsKey && !keyInput)}
+                              style={{ display: "block", width: "100%",
+                                       marginTop: 12 }}>
+                        {adding ? "Adding…" : `Add ${nextId} to the network`}
+                      </button>
+                      {addError && (
+                        <p style={{ fontSize: 12.5, color: "var(--critical)",
+                                    marginTop: 10 }}>{addError}</p>
+                      )}
+                      <p style={{ fontSize: 12, color: "var(--faint)", marginTop: 10 }}>
+                        This collects the station&apos;s full Sentinel-2 history,
+                        rebuilds the dashboard and trains a model, then reports
+                        back. Nothing else needs doing.
+                      </p>
+                    </>
+                  )}
                 </>
               )}
             </Panel>
