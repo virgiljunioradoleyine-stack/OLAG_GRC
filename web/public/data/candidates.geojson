@@ -27,14 +27,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.547363,
-          5.832886
+          -1.552913,
+          5.826541
         ]
       },
       "properties": {
-        "water_pixels": 296,
+        "water_pixels": 225,
         "tile": "T30NXM",
-        "moved_m": 882
+        "moved_m": 798
       }
     },
     {
@@ -42,14 +42,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.554931,
-          5.822326
+          -1.564549,
+          5.806194
         ]
       },
       "properties": {
-        "water_pixels": 201,
+        "water_pixels": 130,
         "tile": "T30NXM",
-        "moved_m": 895
+        "moved_m": 891
       }
     },
     {
@@ -57,29 +57,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.574217,
-          5.775216
-        ]
-      },
-      "properties": {
-        "water_pixels": 228,
-        "tile": "T30NXM",
-        "moved_m": 873
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -1.573778,
-          5.761244
+          -1.573768,
+          5.761183
         ]
       },
       "properties": {
         "water_pixels": 262,
         "tile": "T30NXM",
-        "moved_m": 381
+        "moved_m": 611
       }
     },
     {
@@ -87,29 +72,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.58128,
-          5.749462
-        ]
-      },
-      "properties": {
-        "water_pixels": 209,
-        "tile": "T30NXM",
-        "moved_m": 674
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -1.580027,
-          5.726942
+          -1.58007,
+          5.726836
         ]
       },
       "properties": {
         "water_pixels": 184,
         "tile": "T30NXM",
-        "moved_m": 535
+        "moved_m": 479
       }
     },
     {

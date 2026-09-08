@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-09-08T14:36:28+00:00",
+  "generated_at": "2026-09-08T16:09:23+00:00",
   "indicator": {
     "name": "Sediment Anomaly Index",
     "short": "SAI",
     "note": "A satellite-derived index of surface-water sediment conditions, not a measured turbidity value. No in-situ measurements exist to calibrate it against, so it is deliberately reported as an index rather than in NTU.",
     "unit": "index (dimensionless)"
   },
-  "stations_total": 10,
-  "stations_with_data": 10,
-  "observations_total": 2856,
+  "stations_total": 11,
+  "stations_with_data": 11,
+  "observations_total": 3177,
   "first_observation": "2017-01-07",
   "latest_observation": "2026-09-02",
-  "mean_indicator": 0.0811,
+  "mean_indicator": 0.0729,
   "mean_rain_7d_mm": 15.7,
   "active_alerts": 0,
   "active_window_days": 30,

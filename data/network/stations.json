@@ -30,6 +30,21 @@
         "tile": "T30NXM",
         "snapped_m": 0.0
       }
+    },
+    {
+      "id": "P11",
+      "name": "Pra Reach P11",
+      "lat": 5.832886,
+      "lon": -1.547363,
+      "role": "monitor",
+      "description": "Added from the Live Map. The persistent-water mask gives 296 usable water pixels here, in Sentinel-2 tile T30NXM.",
+      "radius_m": 500.0,
+      "source": {
+        "method": "map_click",
+        "water_pixels": 296,
+        "tile": "T30NXM",
+        "snapped_m": 0.0
+      }
     }
   ]
 }
