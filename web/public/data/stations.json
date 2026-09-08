@@ -10,6 +10,7 @@
     "radius_m": 500.0,
     "upstream_of": [
       "P02",
+      "P09",
       "P03",
       "P04",
       "P05",
@@ -170,6 +171,7 @@
     "description": "Fills the ~50 km gap between the upper basin and the Beposo reach.",
     "radius_m": 500.0,
     "upstream_of": [
+      "P09",
       "P03",
       "P04",
       "P05",
@@ -323,12 +325,73 @@
     }
   },
   {
+    "id": "P09",
+    "name": "Pra Reach P09",
+    "lat": 5.49995,
+    "lon": -1.619394,
+    "role": "monitor",
+    "order": 3,
+    "description": "Added from the Live Map. The persistent-water mask gives 266 usable water pixels here, in Sentinel-2 tile T30NXM.",
+    "radius_m": 500.0,
+    "upstream_of": [
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08"
+    ],
+    "downstream_of": [
+      "P01",
+      "P02"
+    ],
+    "observations": 303,
+    "latest": {
+      "date": "2026-09-02",
+      "indicator": 0.033304,
+      "expected": null,
+      "z_score": null,
+      "quality": "ACCEPTABLE",
+      "confidence": "low",
+      "rain_7d": null,
+      "rain_context": "unknown"
+    },
+    "status": "NORMAL",
+    "model": null,
+    "assessment": {
+      "station_id": "P09",
+      "station_name": "Pra Reach P09",
+      "date": "2026-09-02",
+      "severity": "NORMAL",
+      "indicator": 0.033304,
+      "expected": null,
+      "residual": null,
+      "z_score": null,
+      "anomaly_score": null,
+      "anomaly_flagged": false,
+      "percentile": null,
+      "rain_7d": null,
+      "rain_7d_anom": null,
+      "rain_context": "unknown",
+      "upstream_id": "P02",
+      "upstream_diff": -0.05214,
+      "persistence": 0,
+      "quality": "ACCEPTABLE",
+      "quality_score": 0.92,
+      "confidence": "low",
+      "signals": [],
+      "headline": "Normal river conditions at Pra Reach P09",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Reach P09 was +0.033. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "recommended_action": "No action required."
+    }
+  },
+  {
     "id": "P03",
     "name": "Pra at Beposo Reach",
     "lat": 5.423526,
     "lon": -1.628935,
     "role": "monitor",
-    "order": 3,
+    "order": 4,
     "description": "About 21 km above the Daboase abstraction; the primary early-warning station for the treatment plant.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -340,7 +403,8 @@
     ],
     "downstream_of": [
       "P01",
-      "P02"
+      "P02",
+      "P09"
     ],
     "observations": 298,
     "latest": {
@@ -470,7 +534,7 @@
       "rain_7d": 31.6,
       "rain_7d_anom": 12.4,
       "rain_context": "near normal",
-      "upstream_id": "P02",
+      "upstream_id": "P09",
       "upstream_diff": null,
       "persistence": 0,
       "quality": "LOW_QUALITY",
@@ -490,7 +554,7 @@
     "lat": 5.345347,
     "lon": -1.620784,
     "role": "monitor",
-    "order": 4,
+    "order": 5,
     "description": "Between Beposo and Daboase; used to check whether a signal is propagating downstream.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -502,6 +566,7 @@
     "downstream_of": [
       "P01",
       "P02",
+      "P09",
       "P03"
     ],
     "observations": 307,
@@ -650,7 +715,7 @@
     "lat": 5.23001,
     "lon": -1.5692,
     "role": "intake",
-    "order": 5,
+    "order": 6,
     "description": "The Ghana Water Company abstraction supplying Sekondi-Takoradi. This is the station the warning exists to protect.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -661,6 +726,7 @@
     "downstream_of": [
       "P01",
       "P02",
+      "P09",
       "P03",
       "P04"
     ],
@@ -812,7 +878,7 @@
     "lat": 5.145801,
     "lon": -1.653094,
     "role": "downstream",
-    "order": 6,
+    "order": 7,
     "description": "Below the intake. Cannot provide early warning for Daboase; used to confirm whether an event propagated past the abstraction.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -822,6 +888,7 @@
     "downstream_of": [
       "P01",
       "P02",
+      "P09",
       "P03",
       "P04",
       "P05"
@@ -972,7 +1039,7 @@
     "lat": 5.137311,
     "lon": -1.648116,
     "role": "downstream",
-    "order": 7,
+    "order": 8,
     "description": "Below the intake.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -981,6 +1048,7 @@
     "downstream_of": [
       "P01",
       "P02",
+      "P09",
       "P03",
       "P04",
       "P05",
@@ -1134,13 +1202,14 @@
     "lat": 5.109413,
     "lon": -1.614529,
     "role": "downstream",
-    "order": 8,
+    "order": 9,
     "description": "Nearest station to the river mouth at Shama. Tidal influence is expected here, so its readings are not comparable to inland stations without care.",
     "radius_m": 500.0,
     "upstream_of": [],
     "downstream_of": [
       "P01",
       "P02",
+      "P09",
       "P03",
       "P04",
       "P05",

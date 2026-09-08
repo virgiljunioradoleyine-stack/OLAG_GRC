@@ -17,8 +17,8 @@
       "date": "2026-05-12",
       "severity": "WATCH",
       "indicator": 0.10943,
-      "expected": 0.08732,
-      "z_score": 0.914,
+      "expected": 0.085807,
+      "z_score": 0.976,
       "rain_7d": 38.61,
       "quality": "ACCEPTABLE"
     },
@@ -56,6 +56,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P03",
+      "station_name": "Pra at Beposo Reach",
+      "date": "2026-04-10",
+      "severity": "WATCH",
+      "indicator": 0.10694,
+      "expected": 0.080569,
+      "z_score": 1.09,
+      "rain_7d": 41.85,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P05",
       "station_name": "Daboase Intake (GWCL)",
       "date": "2026-04-02",
@@ -72,8 +83,8 @@
       "date": "2026-04-02",
       "severity": "WATCH",
       "indicator": 0.04167,
-      "expected": 0.007665,
-      "z_score": 1.405,
+      "expected": 0.009421,
+      "z_score": 1.333,
       "rain_7d": 57.47,
       "quality": "LOW_QUALITY"
     },
@@ -171,8 +182,8 @@
       "date": "2026-01-30",
       "severity": "WATCH",
       "indicator": 0.1082,
-      "expected": 0.083824,
-      "z_score": 1.007,
+      "expected": 0.0841,
+      "z_score": 0.996,
       "rain_7d": 1.04,
       "quality": "ACCEPTABLE"
     },
@@ -292,8 +303,8 @@
       "date": "2025-12-06",
       "severity": "WATCH",
       "indicator": 0.06829,
-      "expected": 0.033161,
-      "z_score": 1.452,
+      "expected": 0.031245,
+      "z_score": 1.531,
       "rain_7d": 35.51,
       "quality": "LOW_QUALITY"
     },
@@ -314,8 +325,8 @@
       "date": "2025-11-03",
       "severity": "WATCH",
       "indicator": 0.10524,
-      "expected": 0.025866,
-      "z_score": 3.28,
+      "expected": 0.025758,
+      "z_score": 3.284,
       "rain_7d": 71.66,
       "quality": "LOW_QUALITY"
     },
@@ -347,8 +358,8 @@
       "date": "2025-10-17",
       "severity": "WATCH",
       "indicator": 0.09296,
-      "expected": 0.012481,
-      "z_score": 3.326,
+      "expected": 0.012201,
+      "z_score": 3.337,
       "rain_7d": 101.89,
       "quality": "LOW_QUALITY"
     },
@@ -362,6 +373,17 @@
       "z_score": 2.219,
       "rain_7d": 101.89,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P03",
+      "station_name": "Pra at Beposo Reach",
+      "date": "2025-10-07",
+      "severity": "WATCH",
+      "indicator": 0.04849,
+      "expected": 0.022649,
+      "z_score": 1.068,
+      "rain_7d": 57.47,
+      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P08",
@@ -424,8 +446,8 @@
       "date": "2025-06-29",
       "severity": "WATCH",
       "indicator": 0.0635,
-      "expected": 0.034529,
-      "z_score": 1.197,
+      "expected": 0.028027,
+      "z_score": 1.466,
       "rain_7d": 93.29,
       "quality": "LOW_QUALITY"
     },
@@ -450,17 +472,6 @@
       "z_score": 1.169,
       "rain_7d": 22.64,
       "quality": "LOW_QUALITY"
-    },
-    {
-      "station_id": "P03",
-      "station_name": "Pra at Beposo Reach",
-      "date": "2025-04-17",
-      "severity": "WATCH",
-      "indicator": 0.07085,
-      "expected": 0.039324,
-      "z_score": 1.303,
-      "rain_7d": 21.89,
-      "quality": "GOOD"
     },
     {
       "station_id": "P05",
@@ -545,8 +556,8 @@
       "date": "2025-03-06",
       "severity": "WATCH",
       "indicator": 0.04762,
-      "expected": 0.009072,
-      "z_score": 1.593,
+      "expected": 0.008783,
+      "z_score": 1.605,
       "rain_7d": 19.4,
       "quality": "LOW_QUALITY"
     },
@@ -578,8 +589,8 @@
       "date": "2025-02-24",
       "severity": "WATCH",
       "indicator": 0.17065,
-      "expected": 0.14898,
-      "z_score": 0.895,
+      "expected": 0.148484,
+      "z_score": 0.916,
       "rain_7d": 34.04,
       "quality": "ACCEPTABLE"
     },
@@ -644,8 +655,8 @@
       "date": "2025-02-04",
       "severity": "HIGH",
       "indicator": 0.21294,
-      "expected": 0.131638,
-      "z_score": 3.36,
+      "expected": 0.130837,
+      "z_score": 3.393,
       "rain_7d": 24.58,
       "quality": "ACCEPTABLE"
     },
@@ -677,8 +688,8 @@
       "date": "2025-01-30",
       "severity": "HIGH",
       "indicator": 0.13366,
-      "expected": 0.053877,
-      "z_score": 3.297,
+      "expected": 0.049153,
+      "z_score": 3.492,
       "rain_7d": 29.53,
       "quality": "ACCEPTABLE"
     },
@@ -732,8 +743,8 @@
       "date": "2025-01-20",
       "severity": "ELEVATED",
       "indicator": 0.16411,
-      "expected": 0.100055,
-      "z_score": 2.647,
+      "expected": 0.112345,
+      "z_score": 2.139,
       "rain_7d": 1.76,
       "quality": "GOOD"
     },
@@ -741,10 +752,10 @@
       "station_id": "P03",
       "station_name": "Pra at Beposo Reach",
       "date": "2025-01-15",
-      "severity": "WATCH",
+      "severity": "ELEVATED",
       "indicator": 0.12564,
-      "expected": 0.087672,
-      "z_score": 1.569,
+      "expected": 0.074669,
+      "z_score": 2.106,
       "rain_7d": 0.82,
       "quality": "GOOD"
     },
@@ -809,8 +820,8 @@
       "date": "2024-12-21",
       "severity": "WATCH",
       "indicator": 0.14572,
-      "expected": 0.110554,
-      "z_score": 1.453,
+      "expected": 0.106217,
+      "z_score": 1.632,
       "rain_7d": 10.98,
       "quality": "GOOD"
     },
@@ -1035,6 +1046,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P03",
+      "station_name": "Pra at Beposo Reach",
+      "date": "2024-04-30",
+      "severity": "WATCH",
+      "indicator": 0.0072,
+      "expected": -0.016935,
+      "z_score": 0.997,
+      "rain_7d": 24.2,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P05",
       "station_name": "Daboase Intake (GWCL)",
       "date": "2024-04-20",
@@ -1112,6 +1134,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P03",
+      "station_name": "Pra at Beposo Reach",
+      "date": "2024-02-20",
+      "severity": "WATCH",
+      "indicator": 0.08184,
+      "expected": 0.050028,
+      "z_score": 1.315,
+      "rain_7d": 33.02,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P05",
       "station_name": "Daboase Intake (GWCL)",
       "date": "2024-01-31",
@@ -1128,8 +1161,8 @@
       "date": "2024-01-31",
       "severity": "WATCH",
       "indicator": 0.15712,
-      "expected": 0.116835,
-      "z_score": 1.665,
+      "expected": 0.120591,
+      "z_score": 1.51,
       "rain_7d": 2.69,
       "quality": "ACCEPTABLE"
     },
