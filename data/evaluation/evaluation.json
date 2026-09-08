@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:20:14+00:00",
+  "generated_at": "2026-09-08T03:50:34+00:00",
   "split": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
   "ground_truth_records": 0,
   "supervised_metrics_available": false,
@@ -152,6 +152,74 @@
       }
     },
     {
+      "station_id": "P09",
+      "station_name": "Pra Reach P09",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-27",
+        "2023-12-27"
+      ],
+      "validation_period": [
+        "2024-01-26",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-09-02"
+      ],
+      "rows": {
+        "train": 220,
+        "validation": 28,
+        "test": 55
+      },
+      "baseline": {
+        "train": {
+          "n": 220,
+          "mae": 0.00326,
+          "rmse": 0.00451,
+          "r2": 0.9917,
+          "residual_std": 0.01959,
+          "naive_mae": 0.02838,
+          "skill_vs_naive": 0.8851
+        },
+        "validation": {
+          "n": 28,
+          "mae": 0.01672,
+          "rmse": 0.02347,
+          "r2": 0.7103,
+          "residual_std": 0.01959,
+          "naive_mae": 0.02453,
+          "skill_vs_naive": 0.3184
+        },
+        "test": {
+          "n": 55,
+          "mae": 0.01433,
+          "rmse": 0.01892,
+          "r2": 0.7881,
+          "residual_std": 0.01959,
+          "naive_mae": 0.02415,
+          "skill_vs_naive": 0.4066
+        },
+        "error_by_season": {
+          "dry": 0.01883,
+          "wet_major": 0.01039,
+          "wet_minor": 0.01087
+        }
+      },
+      "anomaly": {
+        "threshold": -0.530463,
+        "threshold_source": "training quantile \u2014 validation had only 28 rows, too few to calibrate on",
+        "flag_rate": {
+          "train": 0.05,
+          "validation": 0.0714,
+          "test": 0.0545
+        },
+        "stability": 0.0169
+      }
+    },
+    {
       "station_id": "P03",
       "station_name": "Pra at Beposo Reach",
       "status": "evaluated",
@@ -177,43 +245,43 @@
       "baseline": {
         "train": {
           "n": 212,
-          "mae": 0.00282,
-          "rmse": 0.00406,
-          "r2": 0.9943,
-          "residual_std": 0.0242,
+          "mae": 0.0027,
+          "rmse": 0.00383,
+          "r2": 0.9949,
+          "residual_std": 0.02407,
           "naive_mae": 0.02953,
-          "skill_vs_naive": 0.9045
+          "skill_vs_naive": 0.9086
         },
         "validation": {
           "n": 30,
-          "mae": 0.02035,
-          "rmse": 0.03319,
-          "r2": 0.7743,
-          "residual_std": 0.0242,
+          "mae": 0.02153,
+          "rmse": 0.03448,
+          "r2": 0.7564,
+          "residual_std": 0.02407,
           "naive_mae": 0.04416,
-          "skill_vs_naive": 0.5392
+          "skill_vs_naive": 0.5125
         },
         "test": {
           "n": 56,
-          "mae": 0.02421,
-          "rmse": 0.03537,
-          "r2": 0.6631,
-          "residual_std": 0.0242,
+          "mae": 0.02486,
+          "rmse": 0.03706,
+          "r2": 0.6302,
+          "residual_std": 0.02407,
           "naive_mae": 0.03959,
-          "skill_vs_naive": 0.3885
+          "skill_vs_naive": 0.3721
         },
         "error_by_season": {
-          "dry": 0.02797,
-          "wet_major": 0.01857,
-          "wet_minor": 0.02866
+          "dry": 0.02853,
+          "wet_major": 0.01965,
+          "wet_minor": 0.0284
         },
         "error_by_rainfall": {
-          "wetter_half": 0.02488,
-          "drier_half": 0.02353
+          "wetter_half": 0.02692,
+          "drier_half": 0.02281
         }
       },
       "anomaly": {
-        "threshold": -0.610083,
+        "threshold": -0.602155,
         "threshold_source": "validation quantile (30 rows)",
         "flag_rate": {
           "train": 0.0047,
