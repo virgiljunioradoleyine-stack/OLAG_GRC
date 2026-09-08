@@ -1270,7 +1270,7 @@
       "rain_1d": 7.11,
       "expected": 0.028303,
       "z_score": 3.787,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 7.11
     },
@@ -1410,7 +1410,7 @@
       "rain_1d": 0.0,
       "expected": 0.118066,
       "z_score": 4.501,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 0.0
     },
@@ -1900,7 +1900,7 @@
       "rain_1d": 1.07,
       "expected": 0.044786,
       "z_score": 3.813,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.07
     },
@@ -3482,7 +3482,7 @@
       "rain_1d": 0.12,
       "expected": 0.093338,
       "z_score": 6.527,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 0.12
     },
@@ -5332,7 +5332,7 @@
       "rain_1d": 0.01,
       "expected": 0.125274,
       "z_score": 5.058,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 0.01
     },
@@ -5458,7 +5458,7 @@
       "rain_1d": 12.7,
       "expected": 0.044405,
       "z_score": 4.448,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 12.7
     },
@@ -7152,7 +7152,7 @@
       "rain_1d": 1.67,
       "expected": 0.109286,
       "z_score": 5.419,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 1.67
     },
@@ -9030,7 +9030,7 @@
       "rain_1d": 0.01,
       "expected": 0.127566,
       "z_score": 3.735,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 0.01
     },
@@ -13330,7 +13330,7 @@
       "rain_1d": 0.01,
       "expected": 0.117098,
       "z_score": 3.455,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 0.01
     },
@@ -13988,7 +13988,7 @@
       "rain_1d": 0.79,
       "expected": 0.042506,
       "z_score": 2.971,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 0.79
     },
@@ -14492,7 +14492,7 @@
       "rain_1d": 1.09,
       "expected": 0.067099,
       "z_score": 2.991,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.09
     },
@@ -15934,7 +15934,7 @@
       "rain_1d": 1.8,
       "expected": 0.035945,
       "z_score": 3.493,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.8
     },
@@ -16046,7 +16046,7 @@
       "rain_1d": 2.13,
       "expected": 0.039358,
       "z_score": 2.765,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 2.13
     },
@@ -17378,7 +17378,7 @@
       "rain_1d": 1.14,
       "expected": 0.057101,
       "z_score": 3.247,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.14
     },
@@ -17462,7 +17462,7 @@
       "rain_1d": 0.04,
       "expected": 0.113212,
       "z_score": 3.954,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 0.04
     },
@@ -19338,7 +19338,7 @@
       "rain_1d": 1.98,
       "expected": 0.061654,
       "z_score": 2.697,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.98
     },
@@ -19506,7 +19506,7 @@
       "rain_1d": 1.79,
       "expected": 0.143502,
       "z_score": 3.919,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 1.79
     },
@@ -21510,7 +21510,7 @@
       "rain_1d": 0.04,
       "expected": 0.117362,
       "z_score": 3.597,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 0.04
     },
@@ -22644,7 +22644,7 @@
       "rain_1d": 1.94,
       "expected": 0.032793,
       "z_score": 3.409,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.94
     },
@@ -25362,7 +25362,7 @@
       "rain_1d": 0.04,
       "expected": 0.134547,
       "z_score": 3.246,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 0.04
     },
@@ -25740,7 +25740,7 @@
       "rain_1d": 1.74,
       "expected": 0.052971,
       "z_score": 3.15,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.74
     },
@@ -26622,7 +26622,7 @@
       "rain_1d": 1.35,
       "expected": 0.029946,
       "z_score": 2.82,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.35
     },
@@ -28486,7 +28486,7 @@
       "rain_1d": 1.41,
       "expected": 0.020588,
       "z_score": 3.73,
-      "severity": "ELEVATED",
+      "severity": "CRITICAL",
       "anomaly": true,
       "rain_mm": 1.41
     },
@@ -28892,7 +28892,7 @@
       "rain_1d": 1.95,
       "expected": 0.029359,
       "z_score": 3.565,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 1.95
     },
@@ -29088,7 +29088,7 @@
       "rain_1d": 0.04,
       "expected": 0.145779,
       "z_score": 3.424,
-      "severity": "ELEVATED",
+      "severity": "HIGH",
       "anomaly": true,
       "rain_mm": 0.04
     },

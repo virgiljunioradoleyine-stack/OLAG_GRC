@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T21:48:53+00:00",
+  "generated_at": "2026-09-08T02:58:50+00:00",
   "indicator": {
     "name": "Sediment Anomaly Index",
     "short": "SAI",
@@ -19,9 +19,9 @@
   "alerts_total": 370,
   "alerts_by_severity": {
     "WATCH": 274,
-    "ELEVATED": 87,
-    "HIGH": 8,
-    "CRITICAL": 1
+    "ELEVATED": 62,
+    "HIGH": 24,
+    "CRITICAL": 10
   },
   "ground_truth_records": 0,
   "calibrated_to_ntu": false,

@@ -34,9 +34,32 @@ def test_dry_conditions_escalate():
     assert any("BELOW" in s for s in a.signals)
 
 
-def test_single_observation_cannot_reach_high():
-    a = _a(z_score=5.0, rain_7d=2, rain_7d_anom=-25, persistence=0)
-    assert SEVERITIES.index(a.severity) <= SEVERITIES.index("ELEVATED")
+def test_a_single_observation_cannot_be_escalated_into_the_top_tiers():
+    """Corroboration must not substitute for magnitude.
+
+    This replaces a stricter rule -- that a single observation could never
+    reach HIGH at all -- which was written before there was any data to test
+    it against, and which the real record showed to be wrong for this basin.
+    Roughly two thirds of Sentinel-2 scenes over the Pra are unusable, so a
+    station can go three or four weeks between readings; "has not persisted"
+    usually means "we did not look again", and the old rule therefore
+    suppressed precisely the short sharp episode the system exists to catch.
+    It also ran before the CRITICAL check, so the magnitude route to the top
+    tier could never fire.
+
+    The property worth keeping is the one that actually guards against alarm
+    inflation: a moderate reading may not be *stacked* into the top tiers by a
+    dry week plus a detector flag. Its own departure has to earn it.
+    """
+    a = _a(z_score=3.0, rain_7d=2, rain_7d_anom=-25, persistence=0,
+           anomaly_flagged=True)
+    assert SEVERITIES.index(a.severity) <= SEVERITIES.index("HIGH")
+
+
+def test_a_single_extreme_observation_may_stand_on_its_own_magnitude():
+    """A reading extreme enough on its own terms is not held back."""
+    a = _a(z_score=6.0, rain_7d=2, rain_7d_anom=-25, persistence=0)
+    assert SEVERITIES.index(a.severity) >= SEVERITIES.index("HIGH")
 
 
 def test_low_quality_cannot_raise_an_alert():
@@ -91,3 +114,34 @@ def test_alerts_explain_themselves():
     assert a.signals
     assert "rainfall" in a.explanation.lower()
     assert a.confidence in ("low", "moderate", "high")
+
+
+def test_severity_forms_a_pyramid_over_the_real_record():
+    """Each tier must be rarer than the one below it, on the actual data.
+
+    This is the check that was missing. Every unit test here passes on
+    hand-built inputs, and the published record still came out with 8 HIGH
+    against 1 CRITICAL after one fix, and 32 HIGH against 31 CRITICAL before
+    it -- shapes that are impossible for a calibrated ladder and that no
+    single-case test can see. If an operator meets CRITICAL as often as HIGH,
+    the word stops meaning anything.
+    """
+    import json
+    import os
+
+    import pytest
+
+    path = "web/public/data/summary.json"
+    if not os.path.exists(path):
+        pytest.skip("no exported dashboard yet")
+    with open(path) as fh:
+        counts = json.load(fh).get("alerts_by_severity") or {}
+    tiers = ["WATCH", "ELEVATED", "HIGH", "CRITICAL"]
+    seen = [counts.get(t, 0) for t in tiers]
+    if not any(seen):
+        pytest.skip("no alerts in the record yet")
+    for lower, upper in zip(tiers, tiers[1:]):
+        assert counts.get(lower, 0) >= counts.get(upper, 0), (
+            f"{upper} ({counts.get(upper, 0)}) is not rarer than "
+            f"{lower} ({counts.get(lower, 0)}) — the severity ladder is "
+            f"inverted, so the top tier has stopped meaning anything")

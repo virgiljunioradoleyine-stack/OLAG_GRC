@@ -195,12 +195,32 @@ def assess(station, date, indicator, expected=None, z_score=None,
                     "the nearest upstream station is higher, so the signal "
                     "appears to be arriving from further upstream")
 
-        # persistence gate: one observation never reaches the top tiers
+        # Persistence gate. Corroboration is what persistence supplies, so its
+        # absence removes corroboration -- it must not erase the measurement.
+        #
+        # This previously slammed any unpersisted reading down to ELEVATED
+        # outright, which had two consequences that only show up against the
+        # real record. It ran BEFORE the CRITICAL check below, so a reading
+        # extreme enough to be CRITICAL on its own terms was knocked to
+        # ELEVATED and the magnitude route to the top tier could never fire at
+        # all. And it assumes regular sampling: the Pra is heavily clouded and
+        # roughly two thirds of scenes are unusable, so a station can go three
+        # or four weeks between readings. "Has not persisted" then means "we
+        # did not look again", which is not evidence of anything -- and it is
+        # precisely the short, sharp episode this system exists to catch that
+        # gets seen once and suppressed.
+        #
+        # A reading may therefore still stand at the severity its own departure
+        # justifies. What it may not do is climb above that on corroboration
+        # it has not earned.
+        base_idx = SEVERITIES.index(base_severity)
         if idx >= 3 and persistence < 2:
-            idx = 2
-            signals.append(
-                "held below HIGH: this is a single observation and has not yet "
-                "persisted across passes")
+            capped = max(2, base_idx)
+            if capped < idx:
+                idx = capped
+                signals.append(
+                    "not escalated further: a single observation, not yet "
+                    "confirmed by a later pass")
         elif persistence >= 2 and idx >= 2:
             idx = min(idx + 1, len(SEVERITIES) - 1)
             signals.append(f"sustained across {persistence} consecutive observations")
