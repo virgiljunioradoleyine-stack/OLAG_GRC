@@ -1,11 +1,21 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Empty, Indicator, Panel, Severity } from "./Ui";
 import { IndicatorTrend } from "./Charts";
 
 const REPO_URL = "https://github.com/virgiljunioradoleyine-stack/OLAG_GRC";
 const FENCE = "```";
+
+// Adding a station collects nine years of Sentinel-2 history for it, one
+// scene at a time over HTTP range reads. Real runs have taken 19 and 26
+// minutes, and Vercel then has to rebuild before the new station is served.
+// The first version of this watcher gave up at 15 minutes and told the user it
+// had stalled while it was still working -- so the window is now well past the
+// slowest real run, and the wait is stated up front rather than discovered.
+const WATCH_TIMEOUT_MS = 45 * 60 * 1000;
+const POLL_MS = 20000;
+const PENDING_KEY = "prw.pendingStation";
 
 const MapView = dynamic(() => import("./MapView"), {
   ssr: false,
@@ -25,6 +35,7 @@ export default function LiveMap({ stations, series, river, network, candidates }
   const [keyInput, setKeyInput] = useState("");
   const [useIssueFallback, setUseIssueFallback] = useState(false);
   const [addStage, setAddStage] = useState(null);
+  const [addElapsed, setAddElapsed] = useState(0);
   const s = stations.find((x) => x.id === selected);
   const rows = (series?.[selected] || []).slice(-90);
 
@@ -113,10 +124,15 @@ export default function LiveMap({ stations, series, river, network, candidates }
   // request only starts the work. Rather than claim success the moment it is
   // dispatched, watch the published station list until the station is really
   // there -- what the user is told then matches what the system actually has.
-  function watchFor(id) {
-    const started = Date.now();
+  function watchFor(id, startedAt = Date.now()) {
+    try {
+      window.localStorage.setItem(PENDING_KEY,
+                                  JSON.stringify({ id, startedAt }));
+    } catch {}
     const tick = async () => {
-      if (Date.now() - started > 15 * 60 * 1000) {
+      const elapsed = Date.now() - startedAt;
+      setAddElapsed(Math.floor(elapsed / 60000));
+      if (elapsed > WATCH_TIMEOUT_MS) {
         setAddStage("slow");
         return;
       }
@@ -125,15 +141,35 @@ export default function LiveMap({ stations, series, river, network, candidates }
                               { cache: "no-store" });
         const list = await r.json();
         if (Array.isArray(list) && list.some((s) => s.id === id)) {
+          try { window.localStorage.removeItem(PENDING_KEY); } catch {}
           setAddStage("done");
           return;
         }
       } catch {}
-      setTimeout(tick, 15000);
+      setTimeout(tick, POLL_MS);
     };
     setAddStage("working");
-    setTimeout(tick, 15000);
+    setAddElapsed(Math.floor((Date.now() - startedAt) / 60000));
+    tick();
   }
+
+  // Resume watching after a reload. Collection runs for tens of minutes, so a
+  // watcher that lives only as long as the tab is a watcher that usually is
+  // not there when the answer arrives.
+  useEffect(() => {
+    let pending = null;
+    try {
+      pending = JSON.parse(window.localStorage.getItem(PENDING_KEY) || "null");
+    } catch {}
+    if (!pending?.id) return;
+    if (stations.some((s) => s.id === pending.id)) {
+      try { window.localStorage.removeItem(PENDING_KEY); } catch {}
+      return;
+    }
+    setAdded({ id: pending.id, name: `Pra Reach ${pending.id}` });
+    watchFor(pending.id, pending.startedAt);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -211,23 +247,30 @@ export default function LiveMap({ stations, series, river, network, candidates }
                       <p style={{ fontSize: 13, margin: "0 0 6px" }}>
                         <strong>{added.id} — {added.name}</strong>
                         {addStage === "done" ? " is on the network."
+                          : addStage === "slow" ? " has not appeared yet."
                           : " is being added."}
                       </p>
                       <p style={{ fontSize: 12, color: "var(--muted)", margin: 0 }}>
                         {addStage === "done"
-                          ? "Its nine-year history is collected and the dashboard "
-                            + "is rebuilt. Reload to see it on the map."
+                          ? "Its nine-year history is collected, a model is "
+                            + "trained and the dashboard is rebuilt."
                           : addStage === "slow"
-                          ? "This is taking longer than usual. The run is still "
-                            + "going; the station will appear when it finishes."
-                          : "Collecting its full Sentinel-2 history and rebuilding "
-                            + "the dashboard. This takes a few minutes — you can "
-                            + "leave this page."}
+                          ? `Still nothing after ${addElapsed} minutes, which is `
+                            + "longer than any run so far. Check the "
+                            + "repository's Actions tab. Nothing publishes "
+                            + "unless it passes validation, so no bad data can "
+                            + "have got in."
+                          : "Collecting its full Sentinel-2 history — nine "
+                            + "years, one scene at a time. This usually takes "
+                            + "20 to 30 minutes"
+                            + (addElapsed ? `, ${addElapsed} min so far` : "")
+                            + ". You can leave this page; it keeps watching "
+                            + "when you come back."}
                       </p>
                       {addStage === "done" && (
                         <button className="btn" style={{ marginTop: 10 }}
                                 onClick={() => window.location.reload()}>
-                          Reload
+                          Reload to see it
                         </button>
                       )}
                     </div>
