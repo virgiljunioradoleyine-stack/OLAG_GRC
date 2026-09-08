@@ -27,6 +27,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write   # gh workflow run, to train a model for the new station
 
 concurrency:
   group: add-station
@@ -170,9 +171,24 @@ jobs:
           git push
 
       - name: Train a model for it
+        id: train
+        # The station is already committed by this point. A model can be
+        # trained later -- the monthly run will pick it up -- so failing to
+        # dispatch must not report the whole addition as failed, which is what
+        # happened on the first successful add: P09 was on the network and the
+        # run showed red.
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run train.yml --ref "${GITHUB_REF_NAME}"
+
+      - name: Note that training was not dispatched
+        if: steps.train.outcome == 'failure'
+        run: |
+          echo "::warning::The station was added and committed, but training "\
+               "could not be dispatched. It will be trained by the next "\
+               "scheduled run; until then the station shows readings but no "\
+               "expected-condition baseline and raises no alerts."
 
       - name: Say what happened
         if: github.event_name == 'issues'
