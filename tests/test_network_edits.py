@@ -104,3 +104,28 @@ def test_added_stations_survive_a_reload(tmp_path):
     got = next(s for s in chain if s.id == rec["id"])
     assert got.name == "Somewhere"
     assert _haversine_m(got.lat, got.lon, lat, lon) < 1.0
+
+
+def test_the_workflow_refreshes_candidates_before_validating():
+    """Ordering, asserted because getting it wrong cost a real request.
+
+    Adding a station at a candidate site makes that candidate a duplicate of
+    the station, and a test asserts no candidate sits on top of one. So the
+    add-station workflow must regenerate the candidate list BEFORE it runs the
+    suite. The first real request from a user died exactly here: the station
+    was added and its history collected, then validation failed on the run's
+    own half-applied change and nothing was committed.
+    """
+    import re
+
+    wf = open(".github/workflows/add-station.yml").read()
+    steps = re.findall(r"^      - name: (.+)$", wf, re.M)
+    names = " | ".join(steps)
+    refresh = next((i for i, n in enumerate(steps) if "candidate" in n.lower()), None)
+    validate = next((i for i, n in enumerate(steps) if "validat" in n.lower()
+                     and "point" not in n.lower()), None)
+    assert refresh is not None, f"no candidate-refresh step: {names}"
+    assert validate is not None, f"no validation step: {names}"
+    assert refresh < validate, (
+        "the workflow validates before refreshing candidates, so adding a "
+        "station will fail on its own half-applied change")

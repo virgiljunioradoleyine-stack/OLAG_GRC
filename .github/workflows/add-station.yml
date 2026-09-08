@@ -112,13 +112,22 @@ jobs:
           # stored rows are untouched because they collected nothing this run.
           python -m pipeline.satellite.observations 2017-01-01
 
-      - name: Validate the dataset before publishing it
+      - name: Refresh the candidate sites
+        run: |
+          # BEFORE validation, not after. Adding a station at a candidate site
+          # turns that candidate into a duplicate of it by definition, and a
+          # test asserts no candidate sits on top of a station. Validating
+          # first therefore fails on a state this run has not finished
+          # updating -- which is exactly what happened on the first real
+          # request: the station was added and collected, then the run died on
+          # its own half-applied change and committed nothing.
+          python -m pipeline.satellite.candidates
+
+      - name: Validate everything before publishing it
         run: python -m pytest tests/ -q
 
-      - name: Refresh candidates and export the dashboard
-        run: |
-          python -m pipeline.satellite.candidates || true
-          python -m pipeline.export.dashboard
+      - name: Export the dashboard
+        run: python -m pipeline.export.dashboard
 
       - name: Commit
         run: |

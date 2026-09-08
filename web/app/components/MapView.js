@@ -5,6 +5,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 const FALLBACK_CENTER = [5.5, -1.6];
 const FALLBACK_ZOOM = 9;
 
+// How far a click may be from a verified site before snapping stops being
+// helpful. The map has 25 candidates along ~90 km of river, so a click near
+// the channel lands within a kilometre or so of one. Beyond this the "nearest"
+// site is somewhere the user was not looking -- one real pick snapped 6.5 km
+// and offered a stretch of river the user had never pointed at.
+const MAX_SNAP_M = 2000;
+
 const SEV_COLOR = {
   CRITICAL: "#dc2626", HIGH: "#ea580c", ELEVATED: "#f59e0b",
   WATCH: "#eab308", NORMAL: "#16a34a", NO_DATA: "#94a3b8",
@@ -103,6 +110,18 @@ export default function MapView({
           const [lon, lat] = f.geometry.coordinates;
           const d = map.distance(e.latlng, L.latLng(lat, lon));
           if (d < bestD) { best = f; bestD = d; }
+        }
+        if (bestD > MAX_SNAP_M) {
+          if (pickMarkerRef.current) {
+            map.removeLayer(pickMarkerRef.current);
+            pickMarkerRef.current = null;
+          }
+          onPickRef.current({
+            error: `No verified site near there — the closest is `
+                 + `${(bestD / 1000).toFixed(1)} km away. Click closer to the `
+                 + `river, on or near one of the marked sites.`,
+          });
+          return;
         }
         const [lon, lat] = best.geometry.coordinates;
         if (pickMarkerRef.current) map.removeLayer(pickMarkerRef.current);
