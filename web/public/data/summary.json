@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T16:09:23+00:00",
+  "generated_at": "2026-09-08T16:11:24+00:00",
   "indicator": {
     "name": "Sediment Anomaly Index",
     "short": "SAI",
@@ -15,12 +15,12 @@
   "mean_rain_7d_mm": 15.7,
   "active_alerts": 0,
   "active_window_days": 30,
-  "raised_alerts_total": 123,
-  "alerts_total": 467,
+  "raised_alerts_total": 131,
+  "alerts_total": 529,
   "alerts_by_severity": {
-    "WATCH": 344,
-    "ELEVATED": 79,
-    "HIGH": 33,
+    "WATCH": 398,
+    "ELEVATED": 81,
+    "HIGH": 39,
     "CRITICAL": 11
   },
   "ground_truth_records": 0,

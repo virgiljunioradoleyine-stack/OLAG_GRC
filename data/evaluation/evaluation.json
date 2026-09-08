@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T14:36:19+00:00",
+  "generated_at": "2026-09-08T16:11:13+00:00",
   "split": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
   "ground_truth_records": 0,
   "supervised_metrics_available": false,
@@ -148,6 +148,74 @@
       }
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "status": "evaluated",
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "training_period": [
+        "2017-01-07",
+        "2023-12-22"
+      ],
+      "validation_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "test_period": [
+        "2025-01-05",
+        "2026-09-02"
+      ],
+      "rows": {
+        "train": 239,
+        "validation": 30,
+        "test": 52
+      },
+      "baseline": {
+        "train": {
+          "n": 239,
+          "mae": 0.00332,
+          "rmse": 0.00502,
+          "r2": 0.9909,
+          "residual_std": 0.02239,
+          "naive_mae": 0.03292,
+          "skill_vs_naive": 0.8991
+        },
+        "validation": {
+          "n": 30,
+          "mae": 0.01562,
+          "rmse": 0.02426,
+          "r2": 0.769,
+          "residual_std": 0.02239,
+          "naive_mae": 0.0276,
+          "skill_vs_naive": 0.4341
+        },
+        "test": {
+          "n": 52,
+          "mae": 0.01465,
+          "rmse": 0.02088,
+          "r2": 0.8112,
+          "residual_std": 0.02239,
+          "naive_mae": 0.02649,
+          "skill_vs_naive": 0.447
+        },
+        "error_by_season": {
+          "dry": 0.0179,
+          "wet_major": 0.01395,
+          "wet_minor": 0.00861
+        }
+      },
+      "anomaly": {
+        "threshold": -0.541005,
+        "threshold_source": "validation quantile (30 rows)",
+        "flag_rate": {
+          "train": 0.0377,
+          "validation": 0.0667,
+          "test": 0.0577
+        },
+        "stability": 0.009
+      }
+    },
+    {
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "status": "evaluated",
@@ -173,50 +241,50 @@
       "baseline": {
         "train": {
           "n": 184,
-          "mae": 0.0018,
-          "rmse": 0.00277,
-          "r2": 0.9956,
-          "residual_std": 0.01565,
+          "mae": 0.00156,
+          "rmse": 0.0023,
+          "r2": 0.997,
+          "residual_std": 0.01242,
           "naive_mae": 0.02124,
-          "skill_vs_naive": 0.9153
+          "skill_vs_naive": 0.9266
         },
         "validation": {
           "n": 24,
-          "mae": 0.00841,
-          "rmse": 0.01396,
-          "r2": 0.5817,
-          "residual_std": 0.01565,
+          "mae": 0.00742,
+          "rmse": 0.01018,
+          "r2": 0.7777,
+          "residual_std": 0.01242,
           "naive_mae": 0.01005,
-          "skill_vs_naive": 0.1632
+          "skill_vs_naive": 0.2617
         },
         "test": {
           "n": 46,
-          "mae": 0.01157,
-          "rmse": 0.01715,
-          "r2": 0.7223,
-          "residual_std": 0.01565,
+          "mae": 0.01369,
+          "rmse": 0.01913,
+          "r2": 0.6544,
+          "residual_std": 0.01242,
           "naive_mae": 0.01475,
-          "skill_vs_naive": 0.2156
+          "skill_vs_naive": 0.0719
         },
         "error_by_season": {
-          "dry": 0.0158,
-          "wet_major": 0.00729,
-          "wet_minor": 0.01082
+          "dry": 0.02059,
+          "wet_major": 0.00721,
+          "wet_minor": 0.01158
         },
         "error_by_rainfall": {
-          "wetter_half": 0.00974,
-          "drier_half": 0.0134
+          "wetter_half": 0.01092,
+          "drier_half": 0.01646
         }
       },
       "anomaly": {
-        "threshold": -0.533625,
+        "threshold": -0.53642,
         "threshold_source": "training quantile \u2014 validation had only 24 rows, too few to calibrate on",
         "flag_rate": {
           "train": 0.0543,
           "validation": 0.0417,
-          "test": 0.0652
+          "test": 0.087
         },
-        "stability": 0.0235
+        "stability": 0.0453
       }
     },
     {

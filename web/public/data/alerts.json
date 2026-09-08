@@ -1,6 +1,17 @@
 {
   "alerts": [
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2026-07-21",
+      "severity": "WATCH",
+      "indicator": 0.14843,
+      "expected": 0.128484,
+      "z_score": 0.891,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",
       "date": "2026-05-30",
@@ -23,6 +34,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2026-05-12",
+      "severity": "WATCH",
+      "indicator": 0.11186,
+      "expected": 0.079577,
+      "z_score": 1.442,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P03",
       "station_name": "Pra at Beposo Reach",
       "date": "2026-05-12",
@@ -43,6 +65,17 @@
       "z_score": 1.483,
       "rain_7d": 43.04,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2026-04-15",
+      "severity": "WATCH",
+      "indicator": 0.11,
+      "expected": 0.095857,
+      "z_score": 1.138,
+      "rain_7d": 54.89,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P06",
@@ -127,8 +160,8 @@
       "date": "2026-04-02",
       "severity": "WATCH",
       "indicator": 0.0529,
-      "expected": 0.031258,
-      "z_score": 1.382,
+      "expected": 0.033126,
+      "z_score": 1.592,
       "rain_7d": 57.47,
       "quality": "GOOD"
     },
@@ -153,6 +186,17 @@
       "z_score": 2.765,
       "rain_7d": 42.14,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2026-03-26",
+      "severity": "WATCH",
+      "indicator": 0.09815,
+      "expected": 0.085392,
+      "z_score": 1.027,
+      "rain_7d": 42.14,
+      "quality": "GOOD"
     },
     {
       "station_id": "P05",
@@ -219,6 +263,17 @@
       "z_score": 1.564,
       "rain_7d": 20.06,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2026-02-09",
+      "severity": "WATCH",
+      "indicator": 0.13052,
+      "expected": 0.115207,
+      "z_score": 0.684,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P09",
@@ -309,6 +364,39 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2026-01-05",
+      "severity": "WATCH",
+      "indicator": 0.13411,
+      "expected": 0.123507,
+      "z_score": 0.853,
+      "rain_7d": 28.14,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-12-31",
+      "severity": "HIGH",
+      "indicator": 0.11901,
+      "expected": 0.051634,
+      "z_score": 3.009,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-12-23",
+      "severity": "WATCH",
+      "indicator": 0.13684,
+      "expected": 0.114178,
+      "z_score": 1.012,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P06",
       "station_name": "Pra Lower Reach",
       "date": "2025-12-23",
@@ -331,6 +419,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-12-16",
+      "severity": "ELEVATED",
+      "indicator": 0.13388,
+      "expected": 0.084017,
+      "z_score": 2.227,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",
       "date": "2025-12-16",
@@ -347,8 +446,8 @@
       "date": "2025-12-16",
       "severity": "WATCH",
       "indicator": 0.13729,
-      "expected": 0.120625,
-      "z_score": 1.064,
+      "expected": 0.122238,
+      "z_score": 1.211,
       "rain_7d": 27.91,
       "quality": "ACCEPTABLE"
     },
@@ -419,6 +518,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-11-01",
+      "severity": "WATCH",
+      "indicator": 0.11529,
+      "expected": 0.099143,
+      "z_score": 0.721,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P08",
       "station_name": "Pra Estuary Approach",
       "date": "2025-10-22",
@@ -468,8 +578,8 @@
       "date": "2025-10-17",
       "severity": "ELEVATED",
       "indicator": 0.11822,
-      "expected": 0.079031,
-      "z_score": 2.504,
+      "expected": 0.082568,
+      "z_score": 2.87,
       "rain_7d": 101.89,
       "quality": "ACCEPTABLE"
     },
@@ -490,10 +600,21 @@
       "date": "2025-09-04",
       "severity": "WATCH",
       "indicator": 0.10558,
-      "expected": 0.089402,
-      "z_score": 1.033,
+      "expected": 0.09202,
+      "z_score": 1.091,
       "rain_7d": 2.74,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-07-29",
+      "severity": "WATCH",
+      "indicator": 0.07379,
+      "expected": 0.051293,
+      "z_score": 1.005,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P06",
@@ -573,6 +694,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-06-09",
+      "severity": "WATCH",
+      "indicator": 0.1069,
+      "expected": 0.08164,
+      "z_score": 1.128,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P08",
       "station_name": "Pra Estuary Approach",
       "date": "2025-06-09",
@@ -584,6 +716,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2025-05-15",
+      "severity": "WATCH",
+      "indicator": 0.0986,
+      "expected": 0.08809,
+      "z_score": 0.846,
+      "rain_7d": 38.62,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2025-05-05",
@@ -593,6 +736,28 @@
       "z_score": 2.008,
       "rain_7d": null,
       "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-04-25",
+      "severity": "WATCH",
+      "indicator": 0.08742,
+      "expected": 0.070826,
+      "z_score": 0.741,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-04-17",
+      "severity": "WATCH",
+      "indicator": 0.0747,
+      "expected": 0.053946,
+      "z_score": 0.927,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P06",
@@ -710,10 +875,21 @@
       "date": "2025-03-06",
       "severity": "WATCH",
       "indicator": 0.15968,
-      "expected": 0.125205,
-      "z_score": 2.202,
+      "expected": 0.112931,
+      "z_score": 3.763,
       "rain_7d": 19.4,
       "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-03-01",
+      "severity": "WATCH",
+      "indicator": 0.05403,
+      "expected": 0.028496,
+      "z_score": 1.141,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P10",
@@ -738,14 +914,14 @@
       "quality": "GOOD"
     },
     {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2025-02-24",
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-02-14",
       "severity": "WATCH",
-      "indicator": 0.13905,
-      "expected": 0.126028,
-      "z_score": 0.832,
-      "rain_7d": 34.04,
+      "indicator": 0.15493,
+      "expected": 0.13256,
+      "z_score": 0.999,
+      "rain_7d": null,
       "quality": "LOW_QUALITY"
     },
     {
@@ -831,8 +1007,8 @@
       "date": "2025-02-04",
       "severity": "HIGH",
       "indicator": 0.19437,
-      "expected": 0.116431,
-      "z_score": 4.979,
+      "expected": 0.12969,
+      "z_score": 5.206,
       "rain_7d": 24.58,
       "quality": "ACCEPTABLE"
     },
@@ -846,6 +1022,17 @@
       "z_score": 2.47,
       "rain_7d": 23.14,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2025-01-30",
+      "severity": "WATCH",
+      "indicator": 0.11911,
+      "expected": 0.095442,
+      "z_score": 1.057,
+      "rain_7d": null,
+      "quality": "GOOD"
     },
     {
       "station_id": "P09",
@@ -963,8 +1150,8 @@
       "date": "2025-01-15",
       "severity": "WATCH",
       "indicator": 0.09538,
-      "expected": 0.078123,
-      "z_score": 1.102,
+      "expected": 0.080656,
+      "z_score": 1.185,
       "rain_7d": 0.82,
       "quality": "GOOD"
     },
@@ -1035,6 +1222,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-12-16",
+      "severity": "WATCH",
+      "indicator": 0.13296,
+      "expected": 0.117282,
+      "z_score": 0.7,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2024-12-16",
@@ -1055,6 +1253,17 @@
       "z_score": 6.527,
       "rain_7d": 0.73,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-12-11",
+      "severity": "WATCH",
+      "indicator": 0.14286,
+      "expected": 0.106831,
+      "z_score": 1.609,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P08",
@@ -1079,6 +1288,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-12-06",
+      "severity": "WATCH",
+      "indicator": 0.18441,
+      "expected": 0.156517,
+      "z_score": 1.246,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2024-12-06",
@@ -1093,10 +1313,10 @@
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2024-12-06",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.18775,
-      "expected": 0.133802,
-      "z_score": 3.446,
+      "expected": 0.162685,
+      "z_score": 2.018,
       "rain_7d": 3.66,
       "quality": "GOOD"
     },
@@ -1110,6 +1330,17 @@
       "z_score": 2.062,
       "rain_7d": 1.05,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-12-01",
+      "severity": "WATCH",
+      "indicator": 0.11846,
+      "expected": 0.072522,
+      "z_score": 2.052,
+      "rain_7d": null,
+      "quality": "GOOD"
     },
     {
       "station_id": "P05",
@@ -1189,6 +1420,17 @@
       "quality": "ACCEPTABLE"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-11-21",
+      "severity": "WATCH",
+      "indicator": 0.10606,
+      "expected": 0.092557,
+      "z_score": 0.603,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P06",
       "station_name": "Pra Lower Reach",
       "date": "2024-11-21",
@@ -1222,6 +1464,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-11-11",
+      "severity": "WATCH",
+      "indicator": 0.00216,
+      "expected": -0.030856,
+      "z_score": 1.475,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2024-11-06",
@@ -1240,6 +1493,17 @@
       "indicator": 0.12209,
       "expected": 0.072086,
       "z_score": 2.552,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-09-27",
+      "severity": "WATCH",
+      "indicator": 0.08304,
+      "expected": 0.068278,
+      "z_score": 0.659,
       "rain_7d": null,
       "quality": "ACCEPTABLE"
     },
@@ -1376,6 +1640,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2024-03-31",
+      "severity": "WATCH",
+      "indicator": 0.10089,
+      "expected": 0.087685,
+      "z_score": 1.063,
+      "rain_7d": 25.43,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P08",
       "station_name": "Pra Estuary Approach",
       "date": "2024-03-21",
@@ -1418,6 +1693,17 @@
       "z_score": 1.126,
       "rain_7d": 34.56,
       "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-01-31",
+      "severity": "HIGH",
+      "indicator": 0.15411,
+      "expected": 0.068132,
+      "z_score": 3.84,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P10",
@@ -1552,6 +1838,28 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2024-01-06",
+      "severity": "WATCH",
+      "indicator": 0.12285,
+      "expected": 0.112574,
+      "z_score": 0.827,
+      "rain_7d": 14.86,
+      "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2024-01-01",
+      "severity": "WATCH",
+      "indicator": 0.09713,
+      "expected": 0.083665,
+      "z_score": 0.602,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2024-01-01",
@@ -1612,8 +1920,8 @@
       "date": "2023-12-02",
       "severity": "WATCH",
       "indicator": 0.1313,
-      "expected": 0.109787,
-      "z_score": 1.374,
+      "expected": 0.113136,
+      "z_score": 1.462,
       "rain_7d": 57.25,
       "quality": "ACCEPTABLE"
     },
@@ -1737,17 +2045,6 @@
       "z_score": 1.361,
       "rain_7d": 61.94,
       "quality": "ACCEPTABLE"
-    },
-    {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2023-05-31",
-      "severity": "WATCH",
-      "indicator": 0.09439,
-      "expected": 0.081262,
-      "z_score": 0.839,
-      "rain_7d": 31.71,
-      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P04",
@@ -1951,10 +2248,10 @@
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2023-01-31",
-      "severity": "WATCH",
+      "severity": "ELEVATED",
       "indicator": 0.12995,
-      "expected": 0.109825,
-      "z_score": 1.285,
+      "expected": 0.092664,
+      "z_score": 3.001,
       "rain_7d": 9.95,
       "quality": "ACCEPTABLE"
     },
@@ -2025,17 +2322,6 @@
       "quality": "GOOD"
     },
     {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2023-01-11",
-      "severity": "WATCH",
-      "indicator": 0.08847,
-      "expected": 0.075689,
-      "z_score": 0.817,
-      "rain_7d": 0.94,
-      "quality": "LOW_QUALITY"
-    },
-    {
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2023-01-11",
@@ -2058,6 +2344,28 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2022-12-27",
+      "severity": "WATCH",
+      "indicator": 0.12745,
+      "expected": 0.109222,
+      "z_score": 0.814,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2022-12-22",
+      "severity": "WATCH",
+      "indicator": 0.02357,
+      "expected": -0.023086,
+      "z_score": 2.084,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2022-12-22",
@@ -2069,6 +2377,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2022-12-22",
+      "severity": "WATCH",
+      "indicator": 0.10943,
+      "expected": 0.085683,
+      "z_score": 1.911,
+      "rain_7d": 12.04,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2022-12-22",
@@ -2078,6 +2397,28 @@
       "z_score": 2.957,
       "rain_7d": 6.13,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2022-11-27",
+      "severity": "HIGH",
+      "indicator": 0.11392,
+      "expected": 0.063416,
+      "z_score": 2.255,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2022-11-22",
+      "severity": "WATCH",
+      "indicator": 0.07008,
+      "expected": -0.030849,
+      "z_score": 4.508,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P05",
@@ -2129,9 +2470,20 @@
       "date": "2022-11-17",
       "severity": "ELEVATED",
       "indicator": 0.12388,
-      "expected": 0.101995,
-      "z_score": 1.398,
+      "expected": 0.092989,
+      "z_score": 2.487,
       "rain_7d": 41.8,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2022-11-02",
+      "severity": "WATCH",
+      "indicator": 0.11855,
+      "expected": 0.103467,
+      "z_score": 0.674,
+      "rain_7d": null,
       "quality": "GOOD"
     },
     {
@@ -2256,6 +2608,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2022-07-20",
+      "severity": "WATCH",
+      "indicator": 0.12984,
+      "expected": 0.11757,
+      "z_score": 0.988,
+      "rain_7d": 19.41,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2022-05-11",
@@ -2287,6 +2650,17 @@
       "z_score": 1.412,
       "rain_7d": 37.81,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2022-03-07",
+      "severity": "WATCH",
+      "indicator": 0.09718,
+      "expected": 0.085789,
+      "z_score": 0.917,
+      "rain_7d": 37.81,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P05",
@@ -2351,6 +2725,17 @@
       "indicator": 0.14685,
       "expected": 0.067099,
       "z_score": 2.991,
+      "rain_7d": 6.5,
+      "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2022-02-10",
+      "severity": "WATCH",
+      "indicator": 0.06724,
+      "expected": 0.051053,
+      "z_score": 1.303,
       "rain_7d": 6.5,
       "quality": "ACCEPTABLE"
     },
@@ -2465,17 +2850,6 @@
       "quality": "GOOD"
     },
     {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2021-12-22",
-      "severity": "WATCH",
-      "indicator": 0.15098,
-      "expected": 0.135646,
-      "z_score": 0.98,
-      "rain_7d": 2.79,
-      "quality": "GOOD"
-    },
-    {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2021-12-17",
@@ -2520,6 +2894,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-12-02",
+      "severity": "WATCH",
+      "indicator": 0.12659,
+      "expected": 0.113124,
+      "z_score": 0.602,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P07",
       "station_name": "Pra Lower Reach South",
       "date": "2021-12-02",
@@ -2558,8 +2943,8 @@
       "date": "2021-11-27",
       "severity": "WATCH",
       "indicator": 0.10071,
-      "expected": 0.051604,
-      "z_score": 3.137,
+      "expected": 0.051774,
+      "z_score": 3.939,
       "rain_7d": 20.39,
       "quality": "LOW_QUALITY"
     },
@@ -2608,6 +2993,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-11-07",
+      "severity": "WATCH",
+      "indicator": 0.10446,
+      "expected": 0.088666,
+      "z_score": 0.705,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P08",
       "station_name": "Pra Estuary Approach",
       "date": "2021-10-28",
@@ -2652,6 +3048,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-10-18",
+      "severity": "WATCH",
+      "indicator": 0.11627,
+      "expected": 0.102239,
+      "z_score": 0.627,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2021-10-18",
@@ -2693,6 +3100,17 @@
       "expected": 0.045585,
       "z_score": 1.611,
       "rain_7d": 73.65,
+      "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-10-13",
+      "severity": "WATCH",
+      "indicator": 0.07848,
+      "expected": 0.032578,
+      "z_score": 2.05,
+      "rain_7d": null,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2762,6 +3180,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-09-18",
+      "severity": "WATCH",
+      "indicator": 0.09717,
+      "expected": 0.061966,
+      "z_score": 1.572,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2021-09-18",
@@ -2789,8 +3218,8 @@
       "date": "2021-09-18",
       "severity": "HIGH",
       "indicator": 0.11731,
-      "expected": 0.047369,
-      "z_score": 4.468,
+      "expected": 0.055586,
+      "z_score": 4.968,
       "rain_7d": 94.67,
       "quality": "ACCEPTABLE"
     },
@@ -2804,6 +3233,28 @@
       "z_score": 1.086,
       "rain_7d": 43.27,
       "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-08-29",
+      "severity": "WATCH",
+      "indicator": 0.0974,
+      "expected": 0.039919,
+      "z_score": 2.567,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-08-19",
+      "severity": "WATCH",
+      "indicator": 0.10609,
+      "expected": 0.091313,
+      "z_score": 0.66,
+      "rain_7d": null,
+      "quality": "GOOD"
     },
     {
       "station_id": "P08",
@@ -2844,8 +3295,8 @@
       "date": "2021-07-30",
       "severity": "WATCH",
       "indicator": 0.15258,
-      "expected": 0.136803,
-      "z_score": 1.008,
+      "expected": 0.140476,
+      "z_score": 0.974,
       "rain_7d": 3.74,
       "quality": "GOOD"
     },
@@ -2861,6 +3312,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-07-25",
+      "severity": "WATCH",
+      "indicator": 0.11727,
+      "expected": 0.061528,
+      "z_score": 2.49,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P08",
       "station_name": "Pra Estuary Approach",
       "date": "2021-07-25",
@@ -2870,6 +3332,17 @@
       "z_score": 2.683,
       "rain_7d": 3.55,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2021-07-10",
+      "severity": "WATCH",
+      "indicator": 0.13329,
+      "expected": 0.109285,
+      "z_score": 1.932,
+      "rain_7d": 78.96,
+      "quality": "GOOD"
     },
     {
       "station_id": "P03",
@@ -2916,6 +3389,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-05-21",
+      "severity": "WATCH",
+      "indicator": -0.0154,
+      "expected": -0.030068,
+      "z_score": 0.655,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",
       "date": "2021-05-11",
@@ -2924,6 +3408,17 @@
       "expected": 0.129908,
       "z_score": 1.092,
       "rain_7d": 10.74,
+      "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-05-01",
+      "severity": "WATCH",
+      "indicator": 0.07665,
+      "expected": 0.055705,
+      "z_score": 0.935,
+      "rain_7d": null,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2954,8 +3449,8 @@
       "date": "2021-05-01",
       "severity": "ELEVATED",
       "indicator": 0.12196,
-      "expected": 0.091766,
-      "z_score": 1.929,
+      "expected": 0.086445,
+      "z_score": 2.859,
       "rain_7d": 27.04,
       "quality": "GOOD"
     },
@@ -3037,6 +3532,17 @@
       "quality": "ACCEPTABLE"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-02-25",
+      "severity": "WATCH",
+      "indicator": 0.04102,
+      "expected": 0.009294,
+      "z_score": 1.417,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P03",
       "station_name": "Pra at Beposo Reach",
       "date": "2021-02-25",
@@ -3081,13 +3587,24 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-02-10",
+      "severity": "WATCH",
+      "indicator": 0.10153,
+      "expected": 0.076074,
+      "z_score": 1.137,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2021-02-10",
       "severity": "ELEVATED",
       "indicator": 0.10286,
-      "expected": 0.051411,
-      "z_score": 3.287,
+      "expected": 0.056105,
+      "z_score": 3.764,
       "rain_7d": 13.23,
       "quality": "GOOD"
     },
@@ -3169,6 +3686,17 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2021-01-16",
+      "severity": "HIGH",
+      "indicator": 0.13494,
+      "expected": 0.052725,
+      "z_score": 3.672,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2021-01-16",
@@ -3200,17 +3728,6 @@
       "z_score": 2.653,
       "rain_7d": 17.63,
       "quality": "GOOD"
-    },
-    {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2021-01-16",
-      "severity": "WATCH",
-      "indicator": 0.0546,
-      "expected": 0.040283,
-      "z_score": 0.915,
-      "rain_7d": 17.63,
-      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P01",
@@ -3279,6 +3796,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2020-12-27",
+      "severity": "ELEVATED",
+      "indicator": 0.15691,
+      "expected": 0.092395,
+      "z_score": 2.881,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2020-12-27",
@@ -3317,8 +3845,8 @@
       "date": "2020-12-27",
       "severity": "ELEVATED",
       "indicator": 0.17028,
-      "expected": 0.113309,
-      "z_score": 3.639,
+      "expected": 0.116179,
+      "z_score": 4.355,
       "rain_7d": 7.38,
       "quality": "GOOD"
     },
@@ -3453,6 +3981,17 @@
       "z_score": 1.799,
       "rain_7d": 170.33,
       "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2020-10-28",
+      "severity": "WATCH",
+      "indicator": 0.06001,
+      "expected": 0.035528,
+      "z_score": 1.093,
+      "rain_7d": null,
+      "quality": "GOOD"
     },
     {
       "station_id": "P01",
@@ -3636,8 +4175,8 @@
       "date": "2020-08-04",
       "severity": "WATCH",
       "indicator": 0.13714,
-      "expected": 0.118024,
-      "z_score": 1.221,
+      "expected": 0.124524,
+      "z_score": 1.015,
       "rain_7d": 2.82,
       "quality": "GOOD"
     },
@@ -3680,8 +4219,8 @@
       "date": "2020-07-25",
       "severity": "WATCH",
       "indicator": 0.02672,
-      "expected": 0.012491,
-      "z_score": 0.909,
+      "expected": 0.007394,
+      "z_score": 1.556,
       "rain_7d": 20.57,
       "quality": "ACCEPTABLE"
     },
@@ -3777,10 +4316,10 @@
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2020-05-26",
-      "severity": "CRITICAL",
+      "severity": "HIGH",
       "indicator": 0.11424,
-      "expected": 0.034814,
-      "z_score": 5.073,
+      "expected": 0.044278,
+      "z_score": 5.631,
       "rain_7d": 56.79,
       "quality": "GOOD"
     },
@@ -3840,6 +4379,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2020-03-12",
+      "severity": "HIGH",
+      "indicator": 0.11508,
+      "expected": 0.046681,
+      "z_score": 3.055,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2020-03-12",
@@ -3884,17 +4434,6 @@
       "quality": "GOOD"
     },
     {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2020-02-21",
-      "severity": "WATCH",
-      "indicator": 0.0567,
-      "expected": 0.043174,
-      "z_score": 0.864,
-      "rain_7d": 2.84,
-      "quality": "ACCEPTABLE"
-    },
-    {
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2020-02-16",
@@ -3925,6 +4464,17 @@
       "expected": 0.043428,
       "z_score": 1.81,
       "rain_7d": 0.35,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2020-01-27",
+      "severity": "HIGH",
+      "indicator": 0.21313,
+      "expected": 0.134454,
+      "z_score": 3.514,
+      "rain_7d": null,
       "quality": "GOOD"
     },
     {
@@ -4019,10 +4569,10 @@
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2020-01-27",
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "indicator": 0.20469,
-      "expected": 0.128133,
-      "z_score": 4.89,
+      "expected": 0.129067,
+      "z_score": 6.087,
       "rain_7d": 0.39,
       "quality": "GOOD"
     },
@@ -4035,6 +4585,17 @@
       "expected": 0.118066,
       "z_score": 4.501,
       "rain_7d": 0.0,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2020-01-22",
+      "severity": "WATCH",
+      "indicator": 0.12555,
+      "expected": 0.112114,
+      "z_score": 0.6,
+      "rain_7d": null,
       "quality": "GOOD"
     },
     {
@@ -4068,6 +4629,17 @@
       "expected": 0.105233,
       "z_score": 0.951,
       "rain_7d": 2.26,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2020-01-17",
+      "severity": "WATCH",
+      "indicator": 0.11675,
+      "expected": 0.103954,
+      "z_score": 1.03,
+      "rain_7d": 4.37,
       "quality": "GOOD"
     },
     {
@@ -4112,6 +4684,17 @@
       "expected": 0.116484,
       "z_score": 1.412,
       "rain_7d": 0.02,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2020-01-02",
+      "severity": "WATCH",
+      "indicator": 0.12549,
+      "expected": 0.107391,
+      "z_score": 0.809,
+      "rain_7d": null,
       "quality": "GOOD"
     },
     {
@@ -4203,6 +4786,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2019-12-13",
+      "severity": "WATCH",
+      "indicator": 0.0998,
+      "expected": 0.081313,
+      "z_score": 0.826,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P06",
       "station_name": "Pra Lower Reach",
       "date": "2019-12-13",
@@ -4234,6 +4828,17 @@
       "z_score": 3.787,
       "rain_7d": 17.08,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2019-12-03",
+      "severity": "WATCH",
+      "indicator": 0.12809,
+      "expected": 0.09763,
+      "z_score": 1.36,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P10",
@@ -4300,17 +4905,6 @@
       "z_score": 1.245,
       "rain_7d": 14.45,
       "quality": "ACCEPTABLE"
-    },
-    {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2019-11-28",
-      "severity": "WATCH",
-      "indicator": 0.11568,
-      "expected": 0.102317,
-      "z_score": 0.854,
-      "rain_7d": 15.77,
-      "quality": "GOOD"
     },
     {
       "station_id": "P01",
@@ -4384,8 +4978,8 @@
       "date": "2019-11-13",
       "severity": "WATCH",
       "indicator": 0.1079,
-      "expected": 0.086147,
-      "z_score": 1.389,
+      "expected": 0.08113,
+      "z_score": 2.154,
       "rain_7d": 47.43,
       "quality": "ACCEPTABLE"
     },
@@ -4428,10 +5022,21 @@
       "date": "2019-10-29",
       "severity": "WATCH",
       "indicator": 0.12717,
-      "expected": 0.108578,
-      "z_score": 1.188,
+      "expected": 0.116937,
+      "z_score": 0.823,
       "rain_7d": 114.18,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2019-10-24",
+      "severity": "WATCH",
+      "indicator": 0.10499,
+      "expected": 0.052644,
+      "z_score": 2.338,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P10",
@@ -4483,8 +5088,8 @@
       "date": "2019-10-04",
       "severity": "WATCH",
       "indicator": 0.02932,
-      "expected": 0.014604,
-      "z_score": 0.94,
+      "expected": 0.013762,
+      "z_score": 1.252,
       "rain_7d": 53.98,
       "quality": "ACCEPTABLE"
     },
@@ -4566,6 +5171,17 @@
       "quality": "ACCEPTABLE"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2019-05-17",
+      "severity": "WATCH",
+      "indicator": 0.12893,
+      "expected": 0.103472,
+      "z_score": 2.049,
+      "rain_7d": 64.86,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2019-05-17",
@@ -4632,6 +5248,17 @@
       "quality": "GOOD"
     },
     {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2019-03-18",
+      "severity": "WATCH",
+      "indicator": 0.11075,
+      "expected": 0.094058,
+      "z_score": 1.344,
+      "rain_7d": 21.93,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P01",
       "station_name": "Pra Upper Basin",
       "date": "2019-03-18",
@@ -4674,6 +5301,17 @@
       "z_score": 1.44,
       "rain_7d": 14.11,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2019-02-21",
+      "severity": "WATCH",
+      "indicator": 0.06741,
+      "expected": 0.025695,
+      "z_score": 1.863,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
     },
     {
       "station_id": "P10",
@@ -4775,6 +5413,28 @@
       "quality": "LOW_QUALITY"
     },
     {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2019-01-07",
+      "severity": "WATCH",
+      "indicator": 0.11105,
+      "expected": 0.081586,
+      "z_score": 1.316,
+      "rain_7d": null,
+      "quality": "GOOD"
+    },
+    {
+      "station_id": "P02",
+      "station_name": "Pra Mid-Upper Reach",
+      "date": "2019-01-07",
+      "severity": "WATCH",
+      "indicator": 0.11337,
+      "expected": 0.100568,
+      "z_score": 1.03,
+      "rain_7d": 1.91,
+      "quality": "GOOD"
+    },
+    {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2019-01-02",
@@ -4857,10 +5517,21 @@
       "date": "2018-12-23",
       "severity": "ELEVATED",
       "indicator": 0.04674,
-      "expected": 0.022687,
-      "z_score": 1.537,
+      "expected": 0.007402,
+      "z_score": 3.166,
       "rain_7d": 4.11,
       "quality": "GOOD"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2018-12-18",
+      "severity": "WATCH",
+      "indicator": 0.097,
+      "expected": 0.045527,
+      "z_score": 2.299,
+      "rain_7d": null,
+      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P08",
@@ -4976,10 +5647,10 @@
       "station_id": "P02",
       "station_name": "Pra Mid-Upper Reach",
       "date": "2018-11-23",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.10832,
-      "expected": 0.083,
-      "z_score": 1.617,
+      "expected": 0.078847,
+      "z_score": 2.372,
       "rain_7d": 22.65,
       "quality": "GOOD"
     },
@@ -5013,6 +5684,17 @@
       "indicator": 0.10489,
       "expected": 0.063703,
       "z_score": 2.102,
+      "rain_7d": null,
+      "quality": "ACCEPTABLE"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2018-10-19",
+      "severity": "ELEVATED",
+      "indicator": 0.059,
+      "expected": 0.004246,
+      "z_score": 2.446,
       "rain_7d": null,
       "quality": "ACCEPTABLE"
     },
@@ -5059,17 +5741,6 @@
       "z_score": 2.474,
       "rain_7d": 55.58,
       "quality": "ACCEPTABLE"
-    },
-    {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2018-09-24",
-      "severity": "WATCH",
-      "indicator": 0.05011,
-      "expected": 0.03668,
-      "z_score": 0.858,
-      "rain_7d": 24.38,
-      "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P05",
@@ -5136,6 +5807,17 @@
       "z_score": 1.993,
       "rain_7d": null,
       "quality": "LOW_QUALITY"
+    },
+    {
+      "station_id": "P11",
+      "station_name": "Pra Reach P11",
+      "date": "2017-11-18",
+      "severity": "WATCH",
+      "indicator": 0.14338,
+      "expected": 0.128342,
+      "z_score": 0.672,
+      "rain_7d": null,
+      "quality": "GOOD"
     }
   ],
   "detailed": []
