@@ -12,12 +12,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.539747,
-          5.853077
+          -1.537936,
+          5.868157
         ]
       },
       "properties": {
-        "water_pixels": 206,
+        "water_pixels": 220,
+        "tile": "T30NXM",
+        "moved_m": 892
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.547363,
+          5.832886
+        ]
+      },
+      "properties": {
+        "water_pixels": 296,
         "tile": "T30NXM",
         "moved_m": 882
       }
@@ -27,14 +42,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.544665,
-          5.841215
+          -1.554931,
+          5.822326
         ]
       },
       "properties": {
-        "water_pixels": 170,
+        "water_pixels": 201,
         "tile": "T30NXM",
-        "moved_m": 899
+        "moved_m": 895
       }
     },
     {
@@ -42,14 +57,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.547773,
-          5.830615
+          -1.574217,
+          5.775216
         ]
       },
       "properties": {
-        "water_pixels": 279,
+        "water_pixels": 228,
         "tile": "T30NXM",
-        "moved_m": 865
+        "moved_m": 873
       }
     },
     {
@@ -57,14 +72,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.573647,
-          5.761178
+          -1.573778,
+          5.761244
         ]
       },
       "properties": {
         "water_pixels": 262,
         "tile": "T30NXM",
-        "moved_m": 614
+        "moved_m": 381
       }
     },
     {
@@ -72,14 +87,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.581272,
-          5.749503
+          -1.58128,
+          5.749462
         ]
       },
       "properties": {
         "water_pixels": 209,
         "tile": "T30NXM",
-        "moved_m": 891
+        "moved_m": 674
       }
     },
     {
@@ -87,14 +102,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -1.580085,
-          5.726835
+          -1.580027,
+          5.726942
         ]
       },
       "properties": {
         "water_pixels": 184,
         "tile": "T30NXM",
-        "moved_m": 483
+        "moved_m": 535
       }
     },
     {

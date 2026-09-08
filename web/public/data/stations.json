@@ -9,6 +9,7 @@
     "description": "Reference station on the Pra mainstem above the Pra/Offin confluence. The Offin is the heavily mined tributary, so this station is not exposed to Offin disturbance.",
     "radius_m": 500.0,
     "upstream_of": [
+      "P10",
       "P02",
       "P09",
       "P03",
@@ -162,12 +163,74 @@
     }
   },
   {
+    "id": "P10",
+    "name": "Pra Reach P10",
+    "lat": 5.853077,
+    "lon": -1.539747,
+    "role": "monitor",
+    "order": 2,
+    "description": "Added from the Live Map. The persistent-water mask gives 206 usable water pixels here, in Sentinel-2 tile T30NXM.",
+    "radius_m": 500.0,
+    "upstream_of": [
+      "P02",
+      "P09",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08"
+    ],
+    "downstream_of": [
+      "P01"
+    ],
+    "observations": 287,
+    "latest": {
+      "date": "2026-08-18",
+      "indicator": 0.118478,
+      "expected": null,
+      "z_score": null,
+      "quality": "ACCEPTABLE",
+      "confidence": "low",
+      "rain_7d": null,
+      "rain_context": "unknown"
+    },
+    "status": "NORMAL",
+    "model": null,
+    "assessment": {
+      "station_id": "P10",
+      "station_name": "Pra Reach P10",
+      "date": "2026-08-18",
+      "severity": "NORMAL",
+      "indicator": 0.118478,
+      "expected": null,
+      "residual": null,
+      "z_score": null,
+      "anomaly_score": null,
+      "anomaly_flagged": false,
+      "percentile": null,
+      "rain_7d": null,
+      "rain_7d_anom": null,
+      "rain_context": "unknown",
+      "upstream_id": "P01",
+      "upstream_diff": null,
+      "persistence": 0,
+      "quality": "ACCEPTABLE",
+      "quality_score": 0.88,
+      "confidence": "low",
+      "signals": [],
+      "headline": "Normal river conditions at Pra Reach P10",
+      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Reach P10 was +0.118. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "recommended_action": "No action required."
+    }
+  },
+  {
     "id": "P02",
     "name": "Pra Mid-Upper Reach",
     "lat": 5.711454,
     "lon": -1.58853,
     "role": "monitor",
-    "order": 2,
+    "order": 3,
     "description": "Fills the ~50 km gap between the upper basin and the Beposo reach.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -180,7 +243,8 @@
       "P08"
     ],
     "downstream_of": [
-      "P01"
+      "P01",
+      "P10"
     ],
     "observations": 254,
     "latest": {
@@ -310,7 +374,7 @@
       "rain_7d": 15.8,
       "rain_7d_anom": -5.2,
       "rain_context": "drier than normal",
-      "upstream_id": "P01",
+      "upstream_id": "P10",
       "upstream_diff": null,
       "persistence": 0,
       "quality": "LOW_QUALITY",
@@ -330,7 +394,7 @@
     "lat": 5.49995,
     "lon": -1.619394,
     "role": "monitor",
-    "order": 3,
+    "order": 4,
     "description": "Added from the Live Map. The persistent-water mask gives 266 usable water pixels here, in Sentinel-2 tile T30NXM.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -343,6 +407,7 @@
     ],
     "downstream_of": [
       "P01",
+      "P10",
       "P02"
     ],
     "observations": 303,
@@ -491,7 +556,7 @@
     "lat": 5.423526,
     "lon": -1.628935,
     "role": "monitor",
-    "order": 4,
+    "order": 5,
     "description": "About 21 km above the Daboase abstraction; the primary early-warning station for the treatment plant.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -503,6 +568,7 @@
     ],
     "downstream_of": [
       "P01",
+      "P10",
       "P02",
       "P09"
     ],
@@ -654,7 +720,7 @@
     "lat": 5.345347,
     "lon": -1.620784,
     "role": "monitor",
-    "order": 5,
+    "order": 6,
     "description": "Between Beposo and Daboase; used to check whether a signal is propagating downstream.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -665,6 +731,7 @@
     ],
     "downstream_of": [
       "P01",
+      "P10",
       "P02",
       "P09",
       "P03"
@@ -815,7 +882,7 @@
     "lat": 5.23001,
     "lon": -1.5692,
     "role": "intake",
-    "order": 6,
+    "order": 7,
     "description": "The Ghana Water Company abstraction supplying Sekondi-Takoradi. This is the station the warning exists to protect.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -825,6 +892,7 @@
     ],
     "downstream_of": [
       "P01",
+      "P10",
       "P02",
       "P09",
       "P03",
@@ -978,7 +1046,7 @@
     "lat": 5.145801,
     "lon": -1.653094,
     "role": "downstream",
-    "order": 7,
+    "order": 8,
     "description": "Below the intake. Cannot provide early warning for Daboase; used to confirm whether an event propagated past the abstraction.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -987,6 +1055,7 @@
     ],
     "downstream_of": [
       "P01",
+      "P10",
       "P02",
       "P09",
       "P03",
@@ -1139,7 +1208,7 @@
     "lat": 5.137311,
     "lon": -1.648116,
     "role": "downstream",
-    "order": 8,
+    "order": 9,
     "description": "Below the intake.",
     "radius_m": 500.0,
     "upstream_of": [
@@ -1147,6 +1216,7 @@
     ],
     "downstream_of": [
       "P01",
+      "P10",
       "P02",
       "P09",
       "P03",
@@ -1302,12 +1372,13 @@
     "lat": 5.109413,
     "lon": -1.614529,
     "role": "downstream",
-    "order": 9,
+    "order": 10,
     "description": "Nearest station to the river mouth at Shama. Tidal influence is expected here, so its readings are not comparable to inland stations without care.",
     "radius_m": 500.0,
     "upstream_of": [],
     "downstream_of": [
       "P01",
+      "P10",
       "P02",
       "P09",
       "P03",
