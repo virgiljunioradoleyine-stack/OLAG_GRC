@@ -46,7 +46,7 @@
       "training_rows": 217,
       "validation_rows": 35,
       "test_rows": 45,
-      "created_at": "2026-09-08T03:50:15+00:00",
+      "created_at": "2026-09-08T14:35:57+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 35,
@@ -188,27 +188,127 @@
     "latest": {
       "date": "2026-08-18",
       "indicator": 0.118478,
-      "expected": null,
-      "z_score": null,
+      "expected": 0.127886,
+      "z_score": -0.45,
       "quality": "ACCEPTABLE",
       "confidence": "low",
       "rain_7d": null,
       "rain_context": "unknown"
     },
     "status": "NORMAL",
-    "model": null,
+    "model": {
+      "model_version": "2.0",
+      "feature_version": "2.0",
+      "algorithm": "ExpectedCondition(HistGradientBoosting) + IsolationForest",
+      "n_features": 40,
+      "training_start": "2017-01-07",
+      "training_end": "2023-12-22",
+      "validation_start": "2024-01-01",
+      "validation_end": "2024-12-21",
+      "test_start": "2025-01-05",
+      "test_end": "2026-08-18",
+      "training_rows": 215,
+      "validation_rows": 26,
+      "test_rows": 46,
+      "created_at": "2026-09-08T14:35:58+00:00",
+      "validation_metrics": {
+        "baseline": {
+          "n": 26,
+          "mae": 0.01483,
+          "rmse": 0.0227,
+          "r2": 0.8449,
+          "residual_std": 0.02092,
+          "naive_mae": 0.01408,
+          "skill_vs_naive": -0.0533
+        },
+        "anomaly": {
+          "threshold": -0.541309,
+          "threshold_source": "training quantile \u2014 validation had only 26 rows, too few to calibrate on",
+          "validation_flag_rate": 0.0769,
+          "test_flag_rate": 0.087
+        },
+        "split": {
+          "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
+          "train": {
+            "n": 215,
+            "range": "2017-01-07 .. 2023-12-22"
+          },
+          "validation": {
+            "n": 26,
+            "range": "2024-01-01 .. 2024-12-21"
+          },
+          "test": {
+            "n": 46,
+            "range": "2025-01-05 .. 2026-08-18"
+          }
+        }
+      },
+      "test_metrics": {
+        "baseline": {
+          "n": 46,
+          "mae": 0.01613,
+          "rmse": 0.02324,
+          "r2": 0.7781,
+          "residual_std": 0.02092,
+          "naive_mae": 0.02767,
+          "skill_vs_naive": 0.4171
+        }
+      },
+      "features": [
+        "ndti",
+        "red",
+        "green",
+        "nir",
+        "swir16",
+        "ndwi",
+        "mndwi",
+        "red_green_ratio",
+        "ndti_delta",
+        "ndti_change_3d",
+        "ndti_change_7d",
+        "ndti_mean_7d",
+        "ndti_mean_14d",
+        "ndti_mean_30d",
+        "ndti_anom_30d",
+        "red_delta",
+        "red_mean_30d",
+        "red_anom_30d",
+        "month_sin",
+        "month_cos",
+        "seasonal_baseline",
+        "seasonal_anomaly",
+        "rain_1d",
+        "rain_3d",
+        "rain_7d",
+        "rain_14d",
+        "rain_30d",
+        "rain_7d_anom",
+        "rain_30d_anom",
+        "upstream_ndti",
+        "upstream_delta",
+        "upstream_lag_days",
+        "upstream_diff",
+        "control_ndti",
+        "control_delta",
+        "control_diff",
+        "water_pixel_count",
+        "cloud_fraction",
+        "ndti_std",
+        "quality_score"
+      ]
+    },
     "assessment": {
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2026-08-18",
       "severity": "NORMAL",
       "indicator": 0.118478,
-      "expected": null,
-      "residual": null,
-      "z_score": null,
-      "anomaly_score": null,
+      "expected": 0.127886,
+      "residual": -0.009408,
+      "z_score": -0.45,
+      "anomaly_score": -0.495253,
       "anomaly_flagged": false,
-      "percentile": null,
+      "percentile": 15.8,
       "rain_7d": null,
       "rain_7d_anom": null,
       "rain_context": "unknown",
@@ -218,9 +318,11 @@
       "quality": "ACCEPTABLE",
       "quality_score": 0.88,
       "confidence": "low",
-      "signals": [],
+      "signals": [
+        "index is below expected conditions, not above"
+      ],
       "headline": "Normal river conditions at Pra Reach P10",
-      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Reach P10 was +0.118. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
+      "explanation": "On 2026-08-18 the satellite sediment indicator at Pra Reach P10 was +0.118, against an expected +0.128 for these conditions. Rainfall over the previous 7 days was unknown. Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -250,8 +352,8 @@
     "latest": {
       "date": "2026-09-02",
       "indicator": 0.085444,
-      "expected": 0.090098,
-      "z_score": -0.296,
+      "expected": 0.089292,
+      "z_score": -0.246,
       "quality": "LOW_QUALITY",
       "confidence": "low",
       "rain_7d": 15.8,
@@ -272,22 +374,22 @@
       "training_rows": 184,
       "validation_rows": 24,
       "test_rows": 46,
-      "created_at": "2026-09-08T03:50:17+00:00",
+      "created_at": "2026-09-08T14:36:00+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 24,
-          "mae": 0.00888,
-          "rmse": 0.01402,
-          "r2": 0.5784,
-          "residual_std": 0.0157,
+          "mae": 0.00841,
+          "rmse": 0.01396,
+          "r2": 0.5817,
+          "residual_std": 0.01565,
           "naive_mae": 0.01005,
-          "skill_vs_naive": 0.1164
+          "skill_vs_naive": 0.1632
         },
         "anomaly": {
-          "threshold": -0.532235,
+          "threshold": -0.533625,
           "threshold_source": "training quantile \u2014 validation had only 24 rows, too few to calibrate on",
           "validation_flag_rate": 0.0417,
-          "test_flag_rate": 0.087
+          "test_flag_rate": 0.0652
         },
         "split": {
           "spec": "train <= 2023-12-31; validation 2023-12-31 < t <= 2024-12-31; test > 2024-12-31",
@@ -308,12 +410,12 @@
       "test_metrics": {
         "baseline": {
           "n": 46,
-          "mae": 0.01313,
-          "rmse": 0.01919,
-          "r2": 0.6524,
-          "residual_std": 0.0157,
+          "mae": 0.01157,
+          "rmse": 0.01715,
+          "r2": 0.7223,
+          "residual_std": 0.01565,
           "naive_mae": 0.01475,
-          "skill_vs_naive": 0.1098
+          "skill_vs_naive": 0.2156
         }
       },
       "features": [
@@ -365,12 +467,12 @@
       "date": "2026-09-02",
       "severity": "NORMAL",
       "indicator": 0.085444,
-      "expected": 0.090098,
-      "residual": -0.004654,
-      "z_score": -0.296,
-      "anomaly_score": -0.415533,
+      "expected": 0.089292,
+      "residual": -0.003848,
+      "z_score": -0.246,
+      "anomaly_score": -0.412829,
       "anomaly_flagged": false,
-      "percentile": 76.6,
+      "percentile": 79.3,
       "rain_7d": 15.8,
       "rain_7d_anom": -5.2,
       "rain_context": "drier than normal",
@@ -384,7 +486,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra Mid-Upper Reach",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Upper Reach was +0.085, against an expected +0.090 for these conditions. Rainfall over the previous 7 days was drier than normal (16 mm). Nothing here requires attention.",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Mid-Upper Reach was +0.085, against an expected +0.089 for these conditions. Rainfall over the previous 7 days was drier than normal (16 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -436,7 +538,7 @@
       "training_rows": 220,
       "validation_rows": 28,
       "test_rows": 55,
-      "created_at": "2026-09-08T03:50:18+00:00",
+      "created_at": "2026-09-08T14:36:01+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 28,
@@ -598,7 +700,7 @@
       "training_rows": 212,
       "validation_rows": 30,
       "test_rows": 56,
-      "created_at": "2026-09-08T03:50:20+00:00",
+      "created_at": "2026-09-08T14:36:03+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 30,
@@ -762,7 +864,7 @@
       "training_rows": 225,
       "validation_rows": 28,
       "test_rows": 54,
-      "created_at": "2026-09-08T03:50:21+00:00",
+      "created_at": "2026-09-08T14:36:05+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 28,
@@ -924,7 +1026,7 @@
       "training_rows": 200,
       "validation_rows": 32,
       "test_rows": 52,
-      "created_at": "2026-09-08T03:50:23+00:00",
+      "created_at": "2026-09-08T14:36:06+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 32,
@@ -1088,7 +1190,7 @@
       "training_rows": 205,
       "validation_rows": 29,
       "test_rows": 50,
-      "created_at": "2026-09-08T03:50:24+00:00",
+      "created_at": "2026-09-08T14:36:08+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 29,
@@ -1250,7 +1352,7 @@
       "training_rows": 193,
       "validation_rows": 23,
       "test_rows": 48,
-      "created_at": "2026-09-08T03:50:26+00:00",
+      "created_at": "2026-09-08T14:36:10+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 23,
@@ -1413,7 +1515,7 @@
       "training_rows": 203,
       "validation_rows": 28,
       "test_rows": 47,
-      "created_at": "2026-09-08T03:50:27+00:00",
+      "created_at": "2026-09-08T14:36:11+00:00",
       "validation_metrics": {
         "baseline": {
           "n": 28,

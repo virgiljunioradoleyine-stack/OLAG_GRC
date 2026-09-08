@@ -1,6 +1,6 @@
 # Evaluation
 
-Generated 2026-09-08T03:50:34+00:00 by `python -m pipeline.models.evaluate`.
+Generated 2026-09-08T14:36:19+00:00 by `python -m pipeline.models.evaluate`.
 Do not edit by hand — this file is regenerated from
 `data/evaluation/evaluation.json`.
 
@@ -27,7 +27,8 @@ adds information; zero or below means it does not.
 | Station | Train | Val | Test | Test MAE | Test RMSE | Skill vs naive |
 |---|---|---|---|---|---|---|
 | P01 Pra Upper Basin | 217 | 35 | 45 | 0.013 | 0.02023 | 0.4817 |
-| P02 Pra Mid-Upper Reach | 184 | 24 | 46 | 0.01313 | 0.01919 | 0.1098 |
+| P10 Pra Reach P10 | 215 | 26 | 46 | 0.01613 | 0.02324 | 0.4171 |
+| P02 Pra Mid-Upper Reach | 184 | 24 | 46 | 0.01157 | 0.01715 | 0.2156 |
 | P09 Pra Reach P09 | 220 | 28 | 55 | 0.01433 | 0.01892 | 0.4066 |
 | P03 Pra at Beposo Reach | 212 | 30 | 56 | 0.02486 | 0.03706 | 0.3721 |
 | P04 Pra Mid-Lower Reach | 225 | 28 | 54 | 0.01913 | 0.02969 | 0.4099 |
@@ -41,7 +42,8 @@ adds information; zero or below means it does not.
 | Station | dry | wet major | wet minor |
 |---|---|---|---|
 | P01 | 0.01795 | 0.00927 | 0.01222 |
-| P02 | 0.01997 | 0.00733 | 0.01001 |
+| P10 | 0.02152 | 0.01163 | 0.01156 |
+| P02 | 0.0158 | 0.00729 | 0.01082 |
 | P09 | 0.01883 | 0.01039 | 0.01087 |
 | P03 | 0.02853 | 0.01965 | 0.0284 |
 | P04 | 0.02522 | 0.01724 | 0.00641 |
@@ -55,7 +57,8 @@ adds information; zero or below means it does not.
 | Station | Wetter half | Drier half |
 |---|---|---|
 | P01 | 0.01202 | 0.01403 |
-| P02 | 0.01013 | 0.01613 |
+| P10 | — | — |
+| P02 | 0.00974 | 0.0134 |
 | P09 | — | — |
 | P03 | 0.02692 | 0.02281 |
 | P04 | 0.01564 | 0.02262 |
@@ -74,7 +77,8 @@ detector behaves the same on data it has never seen.
 | Station | Threshold | Source | Train | Val | Test | Stability |
 |---|---|---|---|---|---|---|
 | P01 | -0.58551 | validation quantile | 0.0138 | 0.0571 | 0.0 | 0.0571 |
-| P02 | -0.532235 | training quantile — validation had only 24 rows, too few to calibrate on | 0.0543 | 0.0417 | 0.087 | 0.0453 |
+| P10 | -0.541309 | training quantile — validation had only 26 rows, too few to calibrate on | 0.0512 | 0.0769 | 0.087 | 0.0101 |
+| P02 | -0.533625 | training quantile — validation had only 24 rows, too few to calibrate on | 0.0543 | 0.0417 | 0.0652 | 0.0235 |
 | P09 | -0.530463 | training quantile — validation had only 28 rows, too few to calibrate on | 0.05 | 0.0714 | 0.0545 | 0.0169 |
 | P03 | -0.602155 | validation quantile | 0.0047 | 0.0667 | 0.0536 | 0.0131 |
 | P04 | -0.539448 | training quantile — validation had only 28 rows, too few to calibrate on | 0.0533 | 0.0 | 0.0185 | 0.0185 |
