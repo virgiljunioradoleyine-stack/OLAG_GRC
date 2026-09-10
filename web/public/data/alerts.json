@@ -8,7 +8,7 @@
       "indicator": 0.14843,
       "expected": 0.128484,
       "z_score": 0.891,
-      "rain_7d": null,
+      "rain_7d": 6.38,
       "quality": "LOW_QUALITY"
     },
     {
@@ -30,7 +30,7 @@
       "indicator": -0.03529,
       "expected": -0.079098,
       "z_score": 2.094,
-      "rain_7d": null,
+      "rain_7d": 89.01,
       "quality": "LOW_QUALITY"
     },
     {
@@ -41,7 +41,7 @@
       "indicator": 0.11186,
       "expected": 0.079577,
       "z_score": 1.442,
-      "rain_7d": null,
+      "rain_7d": 31.31,
       "quality": "GOOD"
     },
     {
@@ -118,7 +118,7 @@
       "indicator": 0.06654,
       "expected": 0.04313,
       "z_score": 1.195,
-      "rain_7d": null,
+      "rain_7d": 43.58,
       "quality": "GOOD"
     },
     {
@@ -129,7 +129,7 @@
       "indicator": 0.05309,
       "expected": 0.031122,
       "z_score": 1.121,
-      "rain_7d": null,
+      "rain_7d": 57.47,
       "quality": "ACCEPTABLE"
     },
     {
@@ -173,7 +173,7 @@
       "indicator": -0.00577,
       "expected": -0.02061,
       "z_score": 0.757,
-      "rain_7d": null,
+      "rain_7d": 59.32,
       "quality": "LOW_QUALITY"
     },
     {
@@ -228,7 +228,7 @@
       "indicator": 0.13594,
       "expected": 0.113037,
       "z_score": 1.169,
-      "rain_7d": null,
+      "rain_7d": 51.21,
       "quality": "GOOD"
     },
     {
@@ -272,18 +272,18 @@
       "indicator": 0.13052,
       "expected": 0.115207,
       "z_score": 0.684,
-      "rain_7d": null,
+      "rain_7d": 76.93,
       "quality": "LOW_QUALITY"
     },
     {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2026-02-09",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.14105,
       "expected": 0.108143,
       "z_score": 1.68,
-      "rain_7d": null,
+      "rain_7d": 98.86,
       "quality": "GOOD"
     },
     {
@@ -294,7 +294,7 @@
       "indicator": 0.08845,
       "expected": 0.062628,
       "z_score": 1.318,
-      "rain_7d": null,
+      "rain_7d": 30.03,
       "quality": "ACCEPTABLE"
     },
     {
@@ -378,11 +378,11 @@
       "station_id": "P11",
       "station_name": "Pra Reach P11",
       "date": "2025-12-31",
-      "severity": "HIGH",
+      "severity": "WATCH",
       "indicator": 0.11901,
       "expected": 0.051634,
       "z_score": 3.009,
-      "rain_7d": null,
+      "rain_7d": 27.42,
       "quality": "ACCEPTABLE"
     },
     {
@@ -393,7 +393,7 @@
       "indicator": 0.13684,
       "expected": 0.114178,
       "z_score": 1.012,
-      "rain_7d": null,
+      "rain_7d": 17.16,
       "quality": "GOOD"
     },
     {
@@ -415,7 +415,7 @@
       "indicator": 0.12297,
       "expected": 0.100626,
       "z_score": 1.14,
-      "rain_7d": null,
+      "rain_7d": 14.83,
       "quality": "GOOD"
     },
     {
@@ -426,7 +426,7 @@
       "indicator": 0.13388,
       "expected": 0.084017,
       "z_score": 2.227,
-      "rain_7d": null,
+      "rain_7d": 16.08,
       "quality": "GOOD"
     },
     {
@@ -503,7 +503,7 @@
       "indicator": 0.10905,
       "expected": 0.087994,
       "z_score": 1.007,
-      "rain_7d": null,
+      "rain_7d": 27.28,
       "quality": "ACCEPTABLE"
     },
     {
@@ -525,7 +525,7 @@
       "indicator": 0.11529,
       "expected": 0.099143,
       "z_score": 0.721,
-      "rain_7d": null,
+      "rain_7d": 54.78,
       "quality": "ACCEPTABLE"
     },
     {
@@ -558,7 +558,7 @@
       "indicator": 0.11124,
       "expected": 0.070561,
       "z_score": 2.076,
-      "rain_7d": null,
+      "rain_7d": 101.89,
       "quality": "LOW_QUALITY"
     },
     {
@@ -613,7 +613,7 @@
       "indicator": 0.07379,
       "expected": 0.051293,
       "z_score": 1.005,
-      "rain_7d": null,
+      "rain_7d": 5.59,
       "quality": "ACCEPTABLE"
     },
     {
@@ -646,7 +646,7 @@
       "indicator": 0.12283,
       "expected": 0.107182,
       "z_score": 0.799,
-      "rain_7d": null,
+      "rain_7d": 5.8,
       "quality": "LOW_QUALITY"
     },
     {
@@ -679,7 +679,7 @@
       "indicator": 0.05803,
       "expected": 0.012482,
       "z_score": 2.325,
-      "rain_7d": null,
+      "rain_7d": 93.29,
       "quality": "LOW_QUALITY"
     },
     {
@@ -701,7 +701,7 @@
       "indicator": 0.1069,
       "expected": 0.08164,
       "z_score": 1.128,
-      "rain_7d": null,
+      "rain_7d": 60.88,
       "quality": "GOOD"
     },
     {
@@ -734,7 +734,7 @@
       "indicator": 0.07153,
       "expected": 0.029518,
       "z_score": 2.008,
-      "rain_7d": null,
+      "rain_7d": 50.65,
       "quality": "LOW_QUALITY"
     },
     {
@@ -745,7 +745,7 @@
       "indicator": 0.08742,
       "expected": 0.070826,
       "z_score": 0.741,
-      "rain_7d": null,
+      "rain_7d": 30.84,
       "quality": "LOW_QUALITY"
     },
     {
@@ -756,7 +756,7 @@
       "indicator": 0.0747,
       "expected": 0.053946,
       "z_score": 0.927,
-      "rain_7d": null,
+      "rain_7d": 16.0,
       "quality": "ACCEPTABLE"
     },
     {
@@ -888,7 +888,7 @@
       "indicator": 0.05403,
       "expected": 0.028496,
       "z_score": 1.141,
-      "rain_7d": null,
+      "rain_7d": 13.67,
       "quality": "ACCEPTABLE"
     },
     {
@@ -899,7 +899,7 @@
       "indicator": 0.18518,
       "expected": 0.103094,
       "z_score": 3.924,
-      "rain_7d": null,
+      "rain_7d": 34.26,
       "quality": "LOW_QUALITY"
     },
     {
@@ -921,7 +921,7 @@
       "indicator": 0.15493,
       "expected": 0.13256,
       "z_score": 0.999,
-      "rain_7d": null,
+      "rain_7d": 16.76,
       "quality": "LOW_QUALITY"
     },
     {
@@ -943,7 +943,7 @@
       "indicator": 0.19886,
       "expected": 0.134351,
       "z_score": 3.083,
-      "rain_7d": null,
+      "rain_7d": 23.14,
       "quality": "ACCEPTABLE"
     },
     {
@@ -954,7 +954,7 @@
       "indicator": 0.231,
       "expected": 0.182086,
       "z_score": 2.497,
-      "rain_7d": null,
+      "rain_7d": 24.58,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1031,18 +1031,18 @@
       "indicator": 0.11911,
       "expected": 0.095442,
       "z_score": 1.057,
-      "rain_7d": null,
+      "rain_7d": 22.04,
       "quality": "GOOD"
     },
     {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2025-01-30",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.12862,
       "expected": 0.095608,
       "z_score": 1.685,
-      "rain_7d": null,
+      "rain_7d": 29.53,
       "quality": "GOOD"
     },
     {
@@ -1097,7 +1097,7 @@
       "indicator": 0.14368,
       "expected": 0.101376,
       "z_score": 2.022,
-      "rain_7d": null,
+      "rain_7d": 0.0,
       "quality": "GOOD"
     },
     {
@@ -1108,7 +1108,7 @@
       "indicator": 0.13533,
       "expected": 0.097571,
       "z_score": 1.927,
-      "rain_7d": null,
+      "rain_7d": 1.76,
       "quality": "GOOD"
     },
     {
@@ -1163,7 +1163,7 @@
       "indicator": 0.10244,
       "expected": 0.074532,
       "z_score": 1.425,
-      "rain_7d": null,
+      "rain_7d": 8.13,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1229,7 +1229,7 @@
       "indicator": 0.13296,
       "expected": 0.117282,
       "z_score": 0.7,
-      "rain_7d": null,
+      "rain_7d": 0.73,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1240,7 +1240,7 @@
       "indicator": 0.20223,
       "expected": 0.158763,
       "z_score": 2.219,
-      "rain_7d": null,
+      "rain_7d": 2.75,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1262,7 +1262,7 @@
       "indicator": 0.14286,
       "expected": 0.106831,
       "z_score": 1.609,
-      "rain_7d": null,
+      "rain_7d": 0.47,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1295,7 +1295,7 @@
       "indicator": 0.18441,
       "expected": 0.156517,
       "z_score": 1.246,
-      "rain_7d": null,
+      "rain_7d": 1.05,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1306,7 +1306,7 @@
       "indicator": 0.20338,
       "expected": 0.12802,
       "z_score": 3.602,
-      "rain_7d": null,
+      "rain_7d": 1.05,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1339,7 +1339,7 @@
       "indicator": 0.11846,
       "expected": 0.072522,
       "z_score": 2.052,
-      "rain_7d": null,
+      "rain_7d": 0.59,
       "quality": "GOOD"
     },
     {
@@ -1372,7 +1372,7 @@
       "indicator": 0.12419,
       "expected": 0.108567,
       "z_score": 0.797,
-      "rain_7d": null,
+      "rain_7d": 10.84,
       "quality": "GOOD"
     },
     {
@@ -1427,7 +1427,7 @@
       "indicator": 0.10606,
       "expected": 0.092557,
       "z_score": 0.603,
-      "rain_7d": null,
+      "rain_7d": 13.15,
       "quality": "GOOD"
     },
     {
@@ -1449,7 +1449,7 @@
       "indicator": 0.09338,
       "expected": 0.051291,
       "z_score": 2.148,
-      "rain_7d": null,
+      "rain_7d": 44.24,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1471,7 +1471,7 @@
       "indicator": 0.00216,
       "expected": -0.030856,
       "z_score": 1.475,
-      "rain_7d": null,
+      "rain_7d": 15.63,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1489,11 +1489,11 @@
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2024-10-27",
-      "severity": "HIGH",
+      "severity": "ELEVATED",
       "indicator": 0.12209,
       "expected": 0.072086,
       "z_score": 2.552,
-      "rain_7d": null,
+      "rain_7d": 109.39,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1504,7 +1504,7 @@
       "indicator": 0.08304,
       "expected": 0.068278,
       "z_score": 0.659,
-      "rain_7d": null,
+      "rain_7d": 37.94,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1515,7 +1515,7 @@
       "indicator": -0.04896,
       "expected": -0.067225,
       "z_score": 0.873,
-      "rain_7d": null,
+      "rain_7d": 8.4,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1592,7 +1592,7 @@
       "indicator": 0.08023,
       "expected": 0.034938,
       "z_score": 2.312,
-      "rain_7d": null,
+      "rain_7d": 24.2,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1603,7 +1603,7 @@
       "indicator": 0.05311,
       "expected": 0.022388,
       "z_score": 1.568,
-      "rain_7d": null,
+      "rain_7d": 13.5,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1702,7 +1702,7 @@
       "indicator": 0.15411,
       "expected": 0.068132,
       "z_score": 3.84,
-      "rain_7d": null,
+      "rain_7d": 1.76,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1713,7 +1713,7 @@
       "indicator": 0.17383,
       "expected": 0.130313,
       "z_score": 2.08,
-      "rain_7d": null,
+      "rain_7d": 1.76,
       "quality": "GOOD"
     },
     {
@@ -1768,7 +1768,7 @@
       "indicator": 0.08921,
       "expected": 0.06414,
       "z_score": 1.198,
-      "rain_7d": null,
+      "rain_7d": 1.46,
       "quality": "ACCEPTABLE"
     },
     {
@@ -1856,7 +1856,7 @@
       "indicator": 0.09713,
       "expected": 0.083665,
       "z_score": 0.602,
-      "rain_7d": null,
+      "rain_7d": 1.16,
       "quality": "GOOD"
     },
     {
@@ -1867,7 +1867,7 @@
       "indicator": 0.097,
       "expected": 0.078563,
       "z_score": 0.881,
-      "rain_7d": null,
+      "rain_7d": 1.16,
       "quality": "LOW_QUALITY"
     },
     {
@@ -1940,11 +1940,11 @@
       "station_id": "P10",
       "station_name": "Pra Reach P10",
       "date": "2023-11-12",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.12725,
       "expected": 0.077285,
       "z_score": 2.388,
-      "rain_7d": null,
+      "rain_7d": 61.33,
       "quality": "GOOD"
     },
     {
@@ -2006,11 +2006,11 @@
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2023-10-08",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.10051,
       "expected": 0.060237,
       "z_score": 2.056,
-      "rain_7d": null,
+      "rain_7d": 111.71,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2021,7 +2021,7 @@
       "indicator": 0.08843,
       "expected": 0.058568,
       "z_score": 1.524,
-      "rain_7d": null,
+      "rain_7d": 49.64,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2131,7 +2131,7 @@
       "indicator": 0.08831,
       "expected": 0.051841,
       "z_score": 1.743,
-      "rain_7d": null,
+      "rain_7d": 29.23,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2142,7 +2142,7 @@
       "indicator": 0.06616,
       "expected": 0.033546,
       "z_score": 1.559,
-      "rain_7d": null,
+      "rain_7d": 4.14,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2186,7 +2186,7 @@
       "indicator": 0.12025,
       "expected": 0.105013,
       "z_score": 0.778,
-      "rain_7d": null,
+      "rain_7d": 22.26,
       "quality": "GOOD"
     },
     {
@@ -2340,7 +2340,7 @@
       "indicator": 0.15434,
       "expected": 0.104372,
       "z_score": 2.388,
-      "rain_7d": null,
+      "rain_7d": 0.0,
       "quality": "GOOD"
     },
     {
@@ -2351,7 +2351,7 @@
       "indicator": 0.12745,
       "expected": 0.109222,
       "z_score": 0.814,
-      "rain_7d": null,
+      "rain_7d": 0.17,
       "quality": "GOOD"
     },
     {
@@ -2362,7 +2362,7 @@
       "indicator": 0.02357,
       "expected": -0.023086,
       "z_score": 2.084,
-      "rain_7d": null,
+      "rain_7d": 6.13,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2373,7 +2373,7 @@
       "indicator": 0.12296,
       "expected": 0.0407,
       "z_score": 3.932,
-      "rain_7d": null,
+      "rain_7d": 6.13,
       "quality": "GOOD"
     },
     {
@@ -2406,7 +2406,7 @@
       "indicator": 0.11392,
       "expected": 0.063416,
       "z_score": 2.255,
-      "rain_7d": null,
+      "rain_7d": 18.12,
       "quality": "GOOD"
     },
     {
@@ -2417,7 +2417,7 @@
       "indicator": 0.07008,
       "expected": -0.030849,
       "z_score": 4.508,
-      "rain_7d": null,
+      "rain_7d": 41.14,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2461,7 +2461,7 @@
       "indicator": 0.12289,
       "expected": 0.103082,
       "z_score": 0.947,
-      "rain_7d": null,
+      "rain_7d": 32.65,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2483,18 +2483,18 @@
       "indicator": 0.11855,
       "expected": 0.103467,
       "z_score": 0.674,
-      "rain_7d": null,
+      "rain_7d": 34.88,
       "quality": "GOOD"
     },
     {
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2022-10-28",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.10872,
       "expected": 0.065162,
       "z_score": 2.223,
-      "rain_7d": null,
+      "rain_7d": 85.82,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2560,7 +2560,7 @@
       "indicator": 0.11013,
       "expected": 0.091987,
       "z_score": 0.926,
-      "rain_7d": null,
+      "rain_7d": 76.28,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2593,7 +2593,7 @@
       "indicator": 0.10143,
       "expected": 0.082542,
       "z_score": 0.964,
-      "rain_7d": null,
+      "rain_7d": 24.47,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2626,7 +2626,7 @@
       "indicator": 0.11591,
       "expected": 0.097195,
       "z_score": 0.894,
-      "rain_7d": null,
+      "rain_7d": 39.85,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2637,7 +2637,7 @@
       "indicator": 0.10676,
       "expected": 0.078978,
       "z_score": 1.328,
-      "rain_7d": null,
+      "rain_7d": 39.5,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2747,7 +2747,7 @@
       "indicator": 0.19084,
       "expected": 0.138108,
       "z_score": 2.52,
-      "rain_7d": null,
+      "rain_7d": 0.0,
       "quality": "GOOD"
     },
     {
@@ -2776,11 +2776,11 @@
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2022-01-06",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.09934,
       "expected": 0.059684,
       "z_score": 2.024,
-      "rain_7d": null,
+      "rain_7d": 37.84,
       "quality": "GOOD"
     },
     {
@@ -2857,7 +2857,7 @@
       "indicator": 0.12107,
       "expected": 0.102479,
       "z_score": 0.949,
-      "rain_7d": null,
+      "rain_7d": 6.14,
       "quality": "ACCEPTABLE"
     },
     {
@@ -2901,7 +2901,7 @@
       "indicator": 0.12659,
       "expected": 0.113124,
       "z_score": 0.602,
-      "rain_7d": null,
+      "rain_7d": 16.4,
       "quality": "GOOD"
     },
     {
@@ -2934,7 +2934,7 @@
       "indicator": 0.0391,
       "expected": 0.012619,
       "z_score": 1.352,
-      "rain_7d": null,
+      "rain_7d": 20.39,
       "quality": "LOW_QUALITY"
     },
     {
@@ -2956,7 +2956,7 @@
       "indicator": 0.12196,
       "expected": 0.103134,
       "z_score": 0.9,
-      "rain_7d": null,
+      "rain_7d": 33.8,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3000,7 +3000,7 @@
       "indicator": 0.10446,
       "expected": 0.088666,
       "z_score": 0.705,
-      "rain_7d": null,
+      "rain_7d": 39.04,
       "quality": "GOOD"
     },
     {
@@ -3033,7 +3033,7 @@
       "indicator": 0.02969,
       "expected": 0.006997,
       "z_score": 1.085,
-      "rain_7d": null,
+      "rain_7d": 125.26,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3055,7 +3055,7 @@
       "indicator": 0.11627,
       "expected": 0.102239,
       "z_score": 0.627,
-      "rain_7d": null,
+      "rain_7d": 73.65,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3066,7 +3066,7 @@
       "indicator": 0.06742,
       "expected": 0.020814,
       "z_score": 2.228,
-      "rain_7d": null,
+      "rain_7d": 73.65,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3110,7 +3110,7 @@
       "indicator": 0.07848,
       "expected": 0.032578,
       "z_score": 2.05,
-      "rain_7d": null,
+      "rain_7d": 60.05,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3121,7 +3121,7 @@
       "indicator": -0.03035,
       "expected": -0.05148,
       "z_score": 1.01,
-      "rain_7d": null,
+      "rain_7d": 60.05,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3132,7 +3132,7 @@
       "indicator": 0.13187,
       "expected": 0.115109,
       "z_score": 0.856,
-      "rain_7d": null,
+      "rain_7d": 70.83,
       "quality": "GOOD"
     },
     {
@@ -3154,7 +3154,7 @@
       "indicator": 0.12173,
       "expected": 0.078042,
       "z_score": 2.088,
-      "rain_7d": null,
+      "rain_7d": 126.52,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3187,7 +3187,7 @@
       "indicator": 0.09717,
       "expected": 0.061966,
       "z_score": 1.572,
-      "rain_7d": null,
+      "rain_7d": 76.0,
       "quality": "GOOD"
     },
     {
@@ -3198,7 +3198,7 @@
       "indicator": 0.11929,
       "expected": 0.094265,
       "z_score": 1.196,
-      "rain_7d": null,
+      "rain_7d": 76.0,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3242,7 +3242,7 @@
       "indicator": 0.0974,
       "expected": 0.039919,
       "z_score": 2.567,
-      "rain_7d": null,
+      "rain_7d": 83.18,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3253,7 +3253,7 @@
       "indicator": 0.10609,
       "expected": 0.091313,
       "z_score": 0.66,
-      "rain_7d": null,
+      "rain_7d": 2.85,
       "quality": "GOOD"
     },
     {
@@ -3319,7 +3319,7 @@
       "indicator": 0.11727,
       "expected": 0.061528,
       "z_score": 2.49,
-      "rain_7d": null,
+      "rain_7d": 6.27,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3396,7 +3396,7 @@
       "indicator": -0.0154,
       "expected": -0.030068,
       "z_score": 0.655,
-      "rain_7d": null,
+      "rain_7d": 32.1,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3418,7 +3418,7 @@
       "indicator": 0.07665,
       "expected": 0.055705,
       "z_score": 0.935,
-      "rain_7d": null,
+      "rain_7d": 18.5,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3429,7 +3429,7 @@
       "indicator": 0.07119,
       "expected": 0.046154,
       "z_score": 1.278,
-      "rain_7d": null,
+      "rain_7d": 27.04,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3473,7 +3473,7 @@
       "indicator": 0.12975,
       "expected": 0.102936,
       "z_score": 1.282,
-      "rain_7d": null,
+      "rain_7d": 35.87,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3528,7 +3528,7 @@
       "indicator": 0.04584,
       "expected": 0.021417,
       "z_score": 1.167,
-      "rain_7d": null,
+      "rain_7d": 19.65,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3539,7 +3539,7 @@
       "indicator": 0.04102,
       "expected": 0.009294,
       "z_score": 1.417,
-      "rain_7d": null,
+      "rain_7d": 9.69,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3572,7 +3572,7 @@
       "indicator": 0.11446,
       "expected": 0.085061,
       "z_score": 1.405,
-      "rain_7d": null,
+      "rain_7d": 28.04,
       "quality": "GOOD"
     },
     {
@@ -3594,7 +3594,7 @@
       "indicator": 0.10153,
       "expected": 0.076074,
       "z_score": 1.137,
-      "rain_7d": null,
+      "rain_7d": 8.49,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3627,7 +3627,7 @@
       "indicator": 0.08757,
       "expected": 0.062334,
       "z_score": 1.288,
-      "rain_7d": null,
+      "rain_7d": 4.58,
       "quality": "GOOD"
     },
     {
@@ -3682,7 +3682,7 @@
       "indicator": 0.05893,
       "expected": -0.006339,
       "z_score": 3.12,
-      "rain_7d": null,
+      "rain_7d": 10.74,
       "quality": "LOW_QUALITY"
     },
     {
@@ -3693,7 +3693,7 @@
       "indicator": 0.13494,
       "expected": 0.052725,
       "z_score": 3.672,
-      "rain_7d": null,
+      "rain_7d": 11.15,
       "quality": "GOOD"
     },
     {
@@ -3704,7 +3704,7 @@
       "indicator": 0.14118,
       "expected": 0.119935,
       "z_score": 1.084,
-      "rain_7d": null,
+      "rain_7d": 17.63,
       "quality": "GOOD"
     },
     {
@@ -3803,7 +3803,7 @@
       "indicator": 0.15691,
       "expected": 0.092395,
       "z_score": 2.881,
-      "rain_7d": null,
+      "rain_7d": 4.27,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3814,7 +3814,7 @@
       "indicator": 0.15427,
       "expected": 0.137898,
       "z_score": 0.836,
-      "rain_7d": null,
+      "rain_7d": 7.38,
       "quality": "GOOD"
     },
     {
@@ -3913,7 +3913,7 @@
       "indicator": 0.09927,
       "expected": 0.076273,
       "z_score": 1.099,
-      "rain_7d": null,
+      "rain_7d": 10.45,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3924,7 +3924,7 @@
       "indicator": 0.10401,
       "expected": 0.085608,
       "z_score": 0.94,
-      "rain_7d": null,
+      "rain_7d": 54.49,
       "quality": "GOOD"
     },
     {
@@ -3935,7 +3935,7 @@
       "indicator": 0.09323,
       "expected": 0.043291,
       "z_score": 2.549,
-      "rain_7d": null,
+      "rain_7d": 38.3,
       "quality": "ACCEPTABLE"
     },
     {
@@ -3990,7 +3990,7 @@
       "indicator": 0.06001,
       "expected": 0.035528,
       "z_score": 1.093,
-      "rain_7d": null,
+      "rain_7d": 74.37,
       "quality": "GOOD"
     },
     {
@@ -4023,7 +4023,7 @@
       "indicator": -0.01005,
       "expected": -0.039247,
       "z_score": 1.396,
-      "rain_7d": null,
+      "rain_7d": 65.91,
       "quality": "LOW_QUALITY"
     },
     {
@@ -4144,7 +4144,7 @@
       "indicator": 0.13458,
       "expected": 0.111289,
       "z_score": 1.113,
-      "rain_7d": null,
+      "rain_7d": 1.9,
       "quality": "ACCEPTABLE"
     },
     {
@@ -4199,7 +4199,7 @@
       "indicator": 0.12895,
       "expected": 0.096223,
       "z_score": 1.564,
-      "rain_7d": null,
+      "rain_7d": 9.96,
       "quality": "ACCEPTABLE"
     },
     {
@@ -4239,11 +4239,11 @@
       "station_id": "P09",
       "station_name": "Pra Reach P09",
       "date": "2020-05-31",
-      "severity": "ELEVATED",
+      "severity": "WATCH",
       "indicator": 0.12439,
       "expected": 0.09663,
       "z_score": 1.417,
-      "rain_7d": null,
+      "rain_7d": 85.19,
       "quality": "GOOD"
     },
     {
@@ -4375,18 +4375,18 @@
       "indicator": 0.08863,
       "expected": 0.062294,
       "z_score": 1.259,
-      "rain_7d": null,
+      "rain_7d": 9.21,
       "quality": "GOOD"
     },
     {
       "station_id": "P11",
       "station_name": "Pra Reach P11",
       "date": "2020-03-12",
-      "severity": "HIGH",
+      "severity": "ELEVATED",
       "indicator": 0.11508,
       "expected": 0.046681,
       "z_score": 3.055,
-      "rain_7d": null,
+      "rain_7d": 56.4,
       "quality": "GOOD"
     },
     {
@@ -4397,7 +4397,7 @@
       "indicator": 0.06515,
       "expected": 0.041238,
       "z_score": 1.143,
-      "rain_7d": null,
+      "rain_7d": 56.4,
       "quality": "GOOD"
     },
     {
@@ -4474,7 +4474,7 @@
       "indicator": 0.21313,
       "expected": 0.134454,
       "z_score": 3.514,
-      "rain_7d": null,
+      "rain_7d": 0.0,
       "quality": "GOOD"
     },
     {
@@ -4485,7 +4485,7 @@
       "indicator": 0.21369,
       "expected": 0.119469,
       "z_score": 4.503,
-      "rain_7d": null,
+      "rain_7d": 0.0,
       "quality": "GOOD"
     },
     {
@@ -4496,7 +4496,7 @@
       "indicator": 0.22918,
       "expected": 0.143228,
       "z_score": 4.387,
-      "rain_7d": null,
+      "rain_7d": 0.39,
       "quality": "GOOD"
     },
     {
@@ -4595,7 +4595,7 @@
       "indicator": 0.12555,
       "expected": 0.112114,
       "z_score": 0.6,
-      "rain_7d": null,
+      "rain_7d": 0.91,
       "quality": "GOOD"
     },
     {
@@ -4606,7 +4606,7 @@
       "indicator": 0.10895,
       "expected": 0.06028,
       "z_score": 2.326,
-      "rain_7d": null,
+      "rain_7d": 0.91,
       "quality": "LOW_QUALITY"
     },
     {
@@ -4694,7 +4694,7 @@
       "indicator": 0.12549,
       "expected": 0.107391,
       "z_score": 0.809,
-      "rain_7d": null,
+      "rain_7d": 1.45,
       "quality": "GOOD"
     },
     {
@@ -4793,7 +4793,7 @@
       "indicator": 0.0998,
       "expected": 0.081313,
       "z_score": 0.826,
-      "rain_7d": null,
+      "rain_7d": 21.4,
       "quality": "GOOD"
     },
     {
@@ -4837,7 +4837,7 @@
       "indicator": 0.12809,
       "expected": 0.09763,
       "z_score": 1.36,
-      "rain_7d": null,
+      "rain_7d": 7.75,
       "quality": "ACCEPTABLE"
     },
     {
@@ -4848,7 +4848,7 @@
       "indicator": 0.12205,
       "expected": 0.086121,
       "z_score": 1.717,
-      "rain_7d": null,
+      "rain_7d": 7.75,
       "quality": "ACCEPTABLE"
     },
     {
@@ -4925,7 +4925,7 @@
       "indicator": 0.1144,
       "expected": 0.096101,
       "z_score": 0.934,
-      "rain_7d": null,
+      "rain_7d": 16.67,
       "quality": "ACCEPTABLE"
     },
     {
@@ -4947,7 +4947,7 @@
       "indicator": 0.09755,
       "expected": 0.072867,
       "z_score": 1.18,
-      "rain_7d": null,
+      "rain_7d": 34.69,
       "quality": "ACCEPTABLE"
     },
     {
@@ -4991,7 +4991,7 @@
       "indicator": 0.06785,
       "expected": 0.042703,
       "z_score": 1.202,
-      "rain_7d": null,
+      "rain_7d": 27.19,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5035,7 +5035,7 @@
       "indicator": 0.10499,
       "expected": 0.052644,
       "z_score": 2.338,
-      "rain_7d": null,
+      "rain_7d": 130.7,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5046,7 +5046,7 @@
       "indicator": 0.01165,
       "expected": -0.028505,
       "z_score": 1.919,
-      "rain_7d": null,
+      "rain_7d": 130.7,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5057,7 +5057,7 @@
       "indicator": 0.02499,
       "expected": 0.004741,
       "z_score": 1.034,
-      "rain_7d": null,
+      "rain_7d": 123.31,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5101,7 +5101,7 @@
       "indicator": -0.02373,
       "expected": -0.043485,
       "z_score": 0.944,
-      "rain_7d": null,
+      "rain_7d": 77.75,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5145,7 +5145,7 @@
       "indicator": 0.02454,
       "expected": -0.004709,
       "z_score": 1.493,
-      "rain_7d": null,
+      "rain_7d": 18.53,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5167,7 +5167,7 @@
       "indicator": 0.12084,
       "expected": 0.068973,
       "z_score": 2.479,
-      "rain_7d": null,
+      "rain_7d": 53.75,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5222,7 +5222,7 @@
       "indicator": 0.04411,
       "expected": 0.018286,
       "z_score": 1.318,
-      "rain_7d": null,
+      "rain_7d": 39.59,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5244,7 +5244,7 @@
       "indicator": 0.08854,
       "expected": 0.050262,
       "z_score": 1.829,
-      "rain_7d": null,
+      "rain_7d": 29.99,
       "quality": "GOOD"
     },
     {
@@ -5310,7 +5310,7 @@
       "indicator": 0.06741,
       "expected": 0.025695,
       "z_score": 1.863,
-      "rain_7d": null,
+      "rain_7d": 11.51,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5321,7 +5321,7 @@
       "indicator": 0.08917,
       "expected": 0.025302,
       "z_score": 3.053,
-      "rain_7d": null,
+      "rain_7d": 11.51,
       "quality": "GOOD"
     },
     {
@@ -5376,7 +5376,7 @@
       "indicator": 0.07028,
       "expected": 0.050603,
       "z_score": 0.941,
-      "rain_7d": null,
+      "rain_7d": 8.24,
       "quality": "GOOD"
     },
     {
@@ -5398,7 +5398,7 @@
       "indicator": 0.09719,
       "expected": 0.081736,
       "z_score": 0.789,
-      "rain_7d": null,
+      "rain_7d": 6.85,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5420,7 +5420,7 @@
       "indicator": 0.11105,
       "expected": 0.081586,
       "z_score": 1.316,
-      "rain_7d": null,
+      "rain_7d": 0.47,
       "quality": "GOOD"
     },
     {
@@ -5442,7 +5442,7 @@
       "indicator": 0.06884,
       "expected": 0.018009,
       "z_score": 2.594,
-      "rain_7d": null,
+      "rain_7d": 0.97,
       "quality": "GOOD"
     },
     {
@@ -5486,7 +5486,7 @@
       "indicator": -0.02072,
       "expected": -0.045993,
       "z_score": 1.208,
-      "rain_7d": null,
+      "rain_7d": 0.03,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5530,7 +5530,7 @@
       "indicator": 0.097,
       "expected": 0.045527,
       "z_score": 2.299,
-      "rain_7d": null,
+      "rain_7d": 2.44,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5662,7 +5662,7 @@
       "indicator": 0.0388,
       "expected": 0.022981,
       "z_score": 0.807,
-      "rain_7d": null,
+      "rain_7d": 24.98,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5684,7 +5684,7 @@
       "indicator": 0.10489,
       "expected": 0.063703,
       "z_score": 2.102,
-      "rain_7d": null,
+      "rain_7d": 35.31,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5695,7 +5695,7 @@
       "indicator": 0.059,
       "expected": 0.004246,
       "z_score": 2.446,
-      "rain_7d": null,
+      "rain_7d": 45.86,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5706,7 +5706,7 @@
       "indicator": 0.11371,
       "expected": 0.096423,
       "z_score": 0.883,
-      "rain_7d": null,
+      "rain_7d": 72.38,
       "quality": "GOOD"
     },
     {
@@ -5794,7 +5794,7 @@
       "indicator": 0.13067,
       "expected": 0.112276,
       "z_score": 0.879,
-      "rain_7d": null,
+      "rain_7d": 44.79,
       "quality": "ACCEPTABLE"
     },
     {
@@ -5805,7 +5805,7 @@
       "indicator": -0.00161,
       "expected": -0.043298,
       "z_score": 1.993,
-      "rain_7d": null,
+      "rain_7d": 86.73,
       "quality": "LOW_QUALITY"
     },
     {
@@ -5816,7 +5816,7 @@
       "indicator": 0.14338,
       "expected": 0.128342,
       "z_score": 0.672,
-      "rain_7d": null,
+      "rain_7d": 34.52,
       "quality": "GOOD"
     }
   ],

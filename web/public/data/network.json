@@ -1,66 +1,108 @@
 {
   "method": "mixed",
-  "segments_from_centreline": 4,
-  "segments_estimated": 3,
-  "note": "3 of 7 segments could not be measured reliably along the OSM centreline -- Overpass returns the river as disjoint ways, so a cumulative walk can jump between unconnected pieces. Those segments use straight-line distance scaled by a typical sinuosity of 1.4, and are marked method='straight_line_estimate'. Treat them as approximate.",
+  "segments_from_centreline": 6,
+  "segments_estimated": 4,
+  "note": "4 of 10 segments could not be measured reliably along the OSM centreline -- Overpass returns the river as disjoint ways, so a cumulative walk can jump between unconnected pieces. Those segments use straight-line distance scaled by a typical sinuosity of 1.4, and are marked method='straight_line_estimate'. Treat them as approximate.",
   "velocity_range_ms": [
     0.3,
     1.0
   ],
   "stations": {
     "P01": {
-      "river_km": 277.44,
+      "river_km": 0.0,
       "snap_distance_m": 32
     },
+    "P10": {
+      "river_km": 4.37,
+      "snap_distance_m": 32
+    },
+    "P11": {
+      "river_km": 7.27,
+      "snap_distance_m": 60
+    },
     "P02": {
-      "river_km": 10.18,
+      "river_km": 27.22,
       "snap_distance_m": 97
     },
+    "P09": {
+      "river_km": 60.49,
+      "snap_distance_m": 235
+    },
     "P03": {
-      "river_km": 333.59,
+      "river_km": 71.45,
       "snap_distance_m": 107
     },
     "P04": {
-      "river_km": 343.18,
+      "river_km": 81.04,
       "snap_distance_m": 143
     },
     "P05": {
-      "river_km": 363.64,
+      "river_km": 101.5,
       "snap_distance_m": 35
     },
     "P06": {
-      "river_km": 96.12,
+      "river_km": 119.96,
       "snap_distance_m": 139
     },
     "P07": {
-      "river_km": 97.35,
+      "river_km": 121.2,
       "snap_distance_m": 243
     },
     "P08": {
-      "river_km": 102.78,
+      "river_km": 126.62,
       "snap_distance_m": 155
     }
   },
   "segments": [
     {
       "from": "P01",
-      "to": "P02",
-      "distance_m": 27461,
-      "straight_line_m": 19615,
-      "sinuosity": 13.63,
+      "to": "P10",
+      "distance_m": 4366,
+      "straight_line_m": 3119,
+      "sinuosity": 57.08,
       "method": "straight_line_estimate",
-      "travel_hours_min": 7.6,
-      "travel_hours_max": 25.4
+      "travel_hours_min": 1.2,
+      "travel_hours_max": 4.0
+    },
+    {
+      "from": "P10",
+      "to": "P11",
+      "distance_m": 2908,
+      "straight_line_m": 2398,
+      "sinuosity": 1.21,
+      "method": "osm_centreline",
+      "travel_hours_min": 0.8,
+      "travel_hours_max": 2.7
+    },
+    {
+      "from": "P11",
+      "to": "P02",
+      "distance_m": 19950,
+      "straight_line_m": 14250,
+      "sinuosity": 31.45,
+      "method": "straight_line_estimate",
+      "travel_hours_min": 5.5,
+      "travel_hours_max": 18.5
     },
     {
       "from": "P02",
-      "to": "P03",
-      "distance_m": 45258,
-      "straight_line_m": 32327,
-      "sinuosity": 10.0,
+      "to": "P09",
+      "distance_m": 33271,
+      "straight_line_m": 23765,
+      "sinuosity": 13.15,
       "method": "straight_line_estimate",
-      "travel_hours_min": 12.6,
-      "travel_hours_max": 41.9
+      "travel_hours_min": 9.2,
+      "travel_hours_max": 30.8
+    },
+    {
+      "from": "P09",
+      "to": "P03",
+      "distance_m": 10957,
+      "straight_line_m": 8563,
+      "sinuosity": 1.28,
+      "method": "osm_centreline",
+      "travel_hours_min": 3.0,
+      "travel_hours_max": 10.1
     },
     {
       "from": "P03",
