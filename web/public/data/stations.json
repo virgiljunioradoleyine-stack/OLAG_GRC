@@ -359,8 +359,8 @@
       "z_score": -0.13,
       "quality": "LOW_QUALITY",
       "confidence": "low",
-      "rain_7d": 39.7,
-      "rain_context": "near normal"
+      "rain_7d": 60.4,
+      "rain_context": "wetter than normal"
     },
     "status": "NORMAL",
     "model": {
@@ -476,9 +476,9 @@
       "anomaly_score": -0.479384,
       "anomaly_flagged": false,
       "percentile": 23.8,
-      "rain_7d": 39.7,
-      "rain_7d_anom": 12.6,
-      "rain_context": "near normal",
+      "rain_7d": 60.4,
+      "rain_7d_anom": 33.4,
+      "rain_context": "wetter than normal",
       "upstream_id": "P10",
       "upstream_diff": null,
       "persistence": 0,
@@ -489,7 +489,7 @@
         "index is below expected conditions, not above"
       ],
       "headline": "Normal river conditions at Pra Reach P11",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Reach P11 was -0.009, against an expected -0.006 for these conditions. Rainfall over the previous 7 days was near normal (40 mm). Nothing here requires attention.",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Reach P11 was -0.009, against an expected -0.006 for these conditions. Rainfall over the previous 7 days was wetter than normal (60 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },
@@ -687,8 +687,8 @@
       "z_score": 0.623,
       "quality": "ACCEPTABLE",
       "confidence": "moderate",
-      "rain_7d": 15.8,
-      "rain_context": "drier than normal"
+      "rain_7d": 32.0,
+      "rain_context": "near normal"
     },
     "status": "NORMAL",
     "model": {
@@ -804,9 +804,9 @@
       "anomaly_score": -0.4493,
       "anomaly_flagged": false,
       "percentile": 50.5,
-      "rain_7d": 15.8,
-      "rain_7d_anom": -5.2,
-      "rain_context": "drier than normal",
+      "rain_7d": 32.0,
+      "rain_7d_anom": 10.9,
+      "rain_context": "near normal",
       "upstream_id": "P02",
       "upstream_diff": -0.05214,
       "persistence": 0,
@@ -815,7 +815,7 @@
       "confidence": "moderate",
       "signals": [],
       "headline": "Normal river conditions at Pra Reach P09",
-      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Reach P09 was +0.033, against an expected +0.021 for these conditions. Rainfall over the previous 7 days was drier than normal (16 mm). Nothing here requires attention.",
+      "explanation": "On 2026-09-02 the satellite sediment indicator at Pra Reach P09 was +0.033, against an expected +0.021 for these conditions. Rainfall over the previous 7 days was near normal (32 mm). Nothing here requires attention.",
       "recommended_action": "No action required."
     }
   },

@@ -12666,13 +12666,13 @@
       "quality": "LOW_QUALITY",
       "water_pixels": 40,
       "cloud_fraction": 0.967,
-      "rain_7d": 39.67,
-      "rain_1d": null,
+      "rain_7d": 60.4,
+      "rain_1d": 3.26,
       "expected": -0.006205,
       "z_score": -0.13,
       "severity": "NORMAL",
       "anomaly": false,
-      "rain_mm": null
+      "rain_mm": 3.26
     }
   ],
   "P02": [
@@ -20482,13 +20482,13 @@
       "quality": "ACCEPTABLE",
       "water_pixels": 206,
       "cloud_fraction": 0.788,
-      "rain_7d": 15.84,
-      "rain_1d": null,
+      "rain_7d": 31.99,
+      "rain_1d": 3.94,
       "expected": 0.021107,
       "z_score": 0.623,
       "severity": "NORMAL",
       "anomaly": false,
-      "rain_mm": null
+      "rain_mm": 3.94
     }
   ],
   "P03": [
