@@ -3560,3 +3560,6 @@ date,precip_mm,source
 2026-09-29,7.0,open_meteo
 2026-09-30,1.5,open_meteo
 2026-10-01,0.2,open_meteo
+2026-10-02,0.0,open_meteo
+2026-10-03,0.0,open_meteo
+2026-10-04,13.6,open_meteo

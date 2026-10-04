@@ -4157,6 +4157,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.46
+    },
+    {
+      "date": "2026-10-02",
+      "indicator": 0.11497,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 20,
+      "cloud_fraction": 0.973,
+      "rain_7d": 19.8,
+      "rain_1d": 0.0,
+      "expected": 0.129677,
+      "z_score": -0.634,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.0
     }
   ],
   "P10": [
@@ -12673,6 +12687,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 3.26
+    },
+    {
+      "date": "2026-10-02",
+      "indicator": 0.1403,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 230,
+      "cloud_fraction": 0.811,
+      "rain_7d": 21.67,
+      "rain_1d": null,
+      "expected": 0.125206,
+      "z_score": 0.713,
+      "severity": "ELEVATED",
+      "anomaly": true,
+      "rain_mm": null
     }
   ],
   "P02": [
@@ -16245,6 +16273,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 23.5
+    },
+    {
+      "date": "2026-10-02",
+      "indicator": 0.13533,
+      "quality": "GOOD",
+      "water_pixels": 776,
+      "cloud_fraction": 0.114,
+      "rain_7d": 19.6,
+      "rain_1d": 0.0,
+      "expected": 0.149792,
+      "z_score": -1.164,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.0
     }
   ],
   "P09": [
@@ -24663,6 +24705,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 3.26
+    },
+    {
+      "date": "2026-10-02",
+      "indicator": 0.12994,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 226,
+      "cloud_fraction": 0.749,
+      "rain_7d": 13.7,
+      "rain_1d": 0.0,
+      "expected": 0.126406,
+      "z_score": 0.147,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.0
     }
   ],
   "P04": [
@@ -28963,6 +29019,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 7.8
+    },
+    {
+      "date": "2026-10-02",
+      "indicator": 0.14078,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 12,
+      "cloud_fraction": 0.988,
+      "rain_7d": 14.1,
+      "rain_1d": 0.0,
+      "expected": 0.075786,
+      "z_score": 2.437,
+      "severity": "WATCH",
+      "anomaly": true,
+      "rain_mm": 0.0
     }
   ],
   "P05": [
@@ -32955,6 +33025,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 14.4
+    },
+    {
+      "date": "2026-10-02",
+      "indicator": 0.08489,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 133,
+      "cloud_fraction": 0.839,
+      "rain_7d": 21.2,
+      "rain_1d": 0.0,
+      "expected": 0.119684,
+      "z_score": -1.639,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.0
     }
   ],
   "P06": [
