@@ -1,17 +1,6 @@
 {
   "alerts": [
     {
-      "station_id": "P11",
-      "station_name": "Pra Reach P11",
-      "date": "2026-10-02",
-      "severity": "ELEVATED",
-      "indicator": 0.1403,
-      "expected": 0.125206,
-      "z_score": 0.713,
-      "rain_7d": 21.67,
-      "quality": "ACCEPTABLE"
-    },
-    {
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",
       "date": "2026-10-02",
@@ -5843,37 +5832,6 @@
     }
   ],
   "detailed": [
-    {
-      "station_id": "P11",
-      "station_name": "Pra Reach P11",
-      "date": "2026-10-02",
-      "severity": "ELEVATED",
-      "indicator": 0.140303,
-      "expected": 0.125206,
-      "residual": 0.015097,
-      "z_score": 0.713,
-      "anomaly_score": -0.546976,
-      "anomaly_flagged": true,
-      "percentile": 3.3,
-      "rain_7d": 21.7,
-      "rain_7d_anom": -40.4,
-      "rain_context": "drier than normal",
-      "upstream_id": "P10",
-      "upstream_diff": null,
-      "persistence": 0,
-      "quality": "ACCEPTABLE",
-      "quality_score": 0.92,
-      "confidence": "moderate",
-      "signals": [
-        "sediment index is +0.015 above expected, which this station exceeds in under 40% of its history",
-        "independently flagged by the anomaly detector",
-        "rainfall over the past 7 days (22 mm) is BELOW its seasonal norm, so rain does not explain this rise",
-        "not escalated further: a single observation, not yet confirmed by a later pass"
-      ],
-      "headline": "Elevated river-condition anomaly at Pra Reach P11",
-      "explanation": "On 2026-10-02 the satellite sediment indicator at Pra Reach P11 (P11) read +0.140. Given the season, recent rainfall and upstream conditions, +0.125 would have been expected \u2014 the reading is 0.7 standard deviations above that. Rainfall over the preceding 7 days totalled 22 mm, which is drier than normal for this time of year. This is the first observation showing the change. Observation quality is ACCEPTABLE; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
-      "recommended_action": "Monitor the next satellite pass. If the signal persists, or downstream stations begin to rise, escalate to field verification."
-    },
     {
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",

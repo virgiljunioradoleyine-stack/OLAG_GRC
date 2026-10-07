@@ -12694,13 +12694,13 @@
       "quality": "ACCEPTABLE",
       "water_pixels": 230,
       "cloud_fraction": 0.811,
-      "rain_7d": 21.67,
-      "rain_1d": null,
-      "expected": 0.125206,
-      "z_score": 0.713,
-      "severity": "ELEVATED",
-      "anomaly": true,
-      "rain_mm": null
+      "rain_7d": 21.8,
+      "rain_1d": 0.13,
+      "expected": 0.126664,
+      "z_score": 0.644,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.13
     }
   ],
   "P02": [
