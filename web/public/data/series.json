@@ -4171,6 +4171,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.0
+    },
+    {
+      "date": "2026-10-07",
+      "indicator": 0.09871,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 144,
+      "cloud_fraction": 0.807,
+      "rain_7d": 66.7,
+      "rain_1d": 12.5,
+      "expected": 0.104937,
+      "z_score": -0.268,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 12.5
     }
   ],
   "P10": [
@@ -8191,6 +8205,34 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 10.09
+    },
+    {
+      "date": "2026-10-07",
+      "indicator": 0.11282,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 338,
+      "cloud_fraction": 0.52,
+      "rain_7d": 54.86,
+      "rain_1d": 17.36,
+      "expected": 0.0995,
+      "z_score": 0.605,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 17.36
+    },
+    {
+      "date": "2026-10-09",
+      "indicator": 0.09756,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 344,
+      "cloud_fraction": 0.511,
+      "rain_7d": 53.81,
+      "rain_1d": null,
+      "expected": 0.10528,
+      "z_score": -0.35,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": null
     }
   ],
   "P11": [
@@ -12701,6 +12743,34 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.13
+    },
+    {
+      "date": "2026-10-07",
+      "indicator": 0.1058,
+      "quality": "GOOD",
+      "water_pixels": 616,
+      "cloud_fraction": 0.493,
+      "rain_7d": 54.86,
+      "rain_1d": 17.36,
+      "expected": 0.11547,
+      "z_score": -0.457,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 17.36
+    },
+    {
+      "date": "2026-10-09",
+      "indicator": -0.01977,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 26,
+      "cloud_fraction": 0.979,
+      "rain_7d": 53.81,
+      "rain_1d": null,
+      "expected": 0.055898,
+      "z_score": -3.574,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": null
     }
   ],
   "P02": [
@@ -16287,6 +16357,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.0
+    },
+    {
+      "date": "2026-10-07",
+      "indicator": 0.11801,
+      "quality": "GOOD",
+      "water_pixels": 632,
+      "cloud_fraction": 0.279,
+      "rain_7d": 65.6,
+      "rain_1d": 8.9,
+      "expected": 0.124643,
+      "z_score": -0.534,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 8.9
     }
   ],
   "P09": [
@@ -24719,6 +24803,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.0
+    },
+    {
+      "date": "2026-10-07",
+      "indicator": -0.01399,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 32,
+      "cloud_fraction": 0.964,
+      "rain_7d": 41.7,
+      "rain_1d": 9.9,
+      "expected": 0.021518,
+      "z_score": -1.476,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 9.9
     }
   ],
   "P04": [
@@ -29033,6 +29131,20 @@
       "severity": "WATCH",
       "anomaly": true,
       "rain_mm": 0.0
+    },
+    {
+      "date": "2026-10-07",
+      "indicator": 0.1227,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 240,
+      "cloud_fraction": 0.755,
+      "rain_7d": 49.8,
+      "rain_1d": 8.2,
+      "expected": 0.115132,
+      "z_score": 0.284,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 8.2
     }
   ],
   "P05": [
@@ -33039,6 +33151,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.0
+    },
+    {
+      "date": "2026-10-09",
+      "indicator": 0.11765,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 395,
+      "cloud_fraction": 0.523,
+      "rain_7d": 65.5,
+      "rain_1d": 1.1,
+      "expected": 0.112765,
+      "z_score": 0.23,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 1.1
     }
   ],
   "P06": [
@@ -37017,6 +37143,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 1.13
+    },
+    {
+      "date": "2026-10-09",
+      "indicator": 0.10665,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 418,
+      "cloud_fraction": 0.574,
+      "rain_7d": 46.4,
+      "rain_1d": 0.8,
+      "expected": 0.112701,
+      "z_score": -0.254,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.8
     }
   ],
   "P07": [
@@ -40715,6 +40855,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 2.03
+    },
+    {
+      "date": "2026-10-09",
+      "indicator": 0.12648,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 432,
+      "cloud_fraction": 0.708,
+      "rain_7d": 46.4,
+      "rain_1d": 0.8,
+      "expected": 0.131988,
+      "z_score": -0.264,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.8
     }
   ],
   "P08": [
@@ -44609,6 +44763,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 2.83
+    },
+    {
+      "date": "2026-10-09",
+      "indicator": 0.10861,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 54,
+      "cloud_fraction": 0.943,
+      "rain_7d": 27.3,
+      "rain_1d": 1.0,
+      "expected": 0.101334,
+      "z_score": 0.338,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 1.0
     }
   ]
 }
