@@ -8226,13 +8226,13 @@
       "quality": "ACCEPTABLE",
       "water_pixels": 344,
       "cloud_fraction": 0.511,
-      "rain_7d": 53.81,
-      "rain_1d": null,
-      "expected": 0.10528,
-      "z_score": -0.35,
+      "rain_7d": 65.44,
+      "rain_1d": 3.66,
+      "expected": 0.101651,
+      "z_score": -0.186,
       "severity": "NORMAL",
       "anomaly": false,
-      "rain_mm": null
+      "rain_mm": 3.66
     }
   ],
   "P11": [
@@ -12764,13 +12764,13 @@
       "quality": "LOW_QUALITY",
       "water_pixels": 26,
       "cloud_fraction": 0.979,
-      "rain_7d": 53.81,
-      "rain_1d": null,
-      "expected": 0.055898,
-      "z_score": -3.574,
+      "rain_7d": 65.44,
+      "rain_1d": 3.66,
+      "expected": 0.048542,
+      "z_score": -3.227,
       "severity": "NORMAL",
       "anomaly": false,
-      "rain_mm": null
+      "rain_mm": 3.66
     }
   ],
   "P02": [
@@ -33165,6 +33165,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 1.1
+    },
+    {
+      "date": "2026-10-12",
+      "indicator": -0.00765,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 23,
+      "cloud_fraction": 0.972,
+      "rain_7d": 52.8,
+      "rain_1d": 4.5,
+      "expected": 0.041183,
+      "z_score": -2.301,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 4.5
     }
   ],
   "P06": [
