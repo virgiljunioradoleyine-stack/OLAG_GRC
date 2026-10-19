@@ -1,6 +1,17 @@
 {
   "alerts": [
     {
+      "station_id": "P05",
+      "station_name": "Daboase Intake (GWCL)",
+      "date": "2026-10-17",
+      "severity": "WATCH",
+      "indicator": 0.06676,
+      "expected": 0.047346,
+      "z_score": 0.915,
+      "rain_7d": 44.4,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P04",
       "station_name": "Pra Mid-Lower Reach",
       "date": "2026-10-02",
@@ -5831,5 +5842,34 @@
       "quality": "LOW_QUALITY"
     }
   ],
-  "detailed": []
+  "detailed": [
+    {
+      "station_id": "P05",
+      "station_name": "Daboase Intake (GWCL)",
+      "date": "2026-10-17",
+      "severity": "WATCH",
+      "indicator": 0.066761,
+      "expected": 0.047346,
+      "residual": 0.019415,
+      "z_score": 0.915,
+      "anomaly_score": -0.474967,
+      "anomaly_flagged": false,
+      "percentile": 22.5,
+      "rain_7d": 44.4,
+      "rain_7d_anom": -33.9,
+      "rain_context": "drier than normal",
+      "upstream_id": "P04",
+      "upstream_diff": -0.043668,
+      "persistence": 0,
+      "quality": "LOW_QUALITY",
+      "quality_score": 0.64,
+      "confidence": "low",
+      "signals": [
+        "sediment index is +0.019 above expected, which this station exceeds in under 40% of its history"
+      ],
+      "headline": "Possible change river-condition anomaly at Daboase Intake (GWCL)",
+      "explanation": "On 2026-10-17 the satellite sediment indicator at Daboase Intake (GWCL) (P05) read +0.067. Given the season, recent rainfall and upstream conditions, +0.047 would have been expected \u2014 the reading is 0.9 standard deviations above that. Rainfall over the preceding 7 days totalled 44 mm, which is drier than normal for this time of year. The index here is 0.044 lower than the nearest upstream station (P04). This is the first observation showing the change. Observation quality is LOW_QUALITY; overall confidence is low. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
+    }
+  ]
 }
