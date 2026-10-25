@@ -4199,6 +4199,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 6.9
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.00067,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 44,
+      "cloud_fraction": 0.941,
+      "rain_7d": 55.7,
+      "rain_1d": 0.4,
+      "expected": 0.04604,
+      "z_score": -1.955,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.4
     }
   ],
   "P10": [
@@ -8261,6 +8275,20 @@
       "severity": "WATCH",
       "anomaly": true,
       "rain_mm": 56.4
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": -0.0236,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 17,
+      "cloud_fraction": 0.976,
+      "rain_7d": 275.14,
+      "rain_1d": null,
+      "expected": -0.015444,
+      "z_score": -0.37,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": null
     }
   ],
   "P11": [
@@ -12827,6 +12855,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 56.4
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.02851,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 34,
+      "cloud_fraction": 0.972,
+      "rain_7d": 275.14,
+      "rain_1d": null,
+      "expected": 0.04659,
+      "z_score": -0.854,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": null
     }
   ],
   "P02": [
@@ -16441,6 +16483,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 8.5
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.02859,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 40,
+      "cloud_fraction": 0.954,
+      "rain_7d": 44.6,
+      "rain_1d": 0.8,
+      "expected": 0.058074,
+      "z_score": -2.373,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.8
     }
   ],
   "P09": [
@@ -29299,6 +29355,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 4.2
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.11948,
+      "quality": "GOOD",
+      "water_pixels": 884,
+      "cloud_fraction": 0.098,
+      "rain_7d": 56.6,
+      "rain_1d": 2.6,
+      "expected": 0.086471,
+      "z_score": 1.238,
+      "severity": "WATCH",
+      "anomaly": true,
+      "rain_mm": 2.6
     }
   ],
   "P05": [
@@ -33347,6 +33417,20 @@
       "severity": "WATCH",
       "anomaly": true,
       "rain_mm": 1.5
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.04638,
+      "quality": "GOOD",
+      "water_pixels": 479,
+      "cloud_fraction": 0.421,
+      "rain_7d": 44.8,
+      "rain_1d": 0.6,
+      "expected": 0.069843,
+      "z_score": -1.105,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.6
     }
   ],
   "P06": [
@@ -37339,6 +37423,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.8
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.12549,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 432,
+      "cloud_fraction": 0.559,
+      "rain_7d": 48.7,
+      "rain_1d": 0.6,
+      "expected": 0.123231,
+      "z_score": 0.095,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.6
     }
   ],
   "P07": [
@@ -41051,6 +41149,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.8
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.12209,
+      "quality": "ACCEPTABLE",
+      "water_pixels": 340,
+      "cloud_fraction": 0.77,
+      "rain_7d": 48.7,
+      "rain_1d": 0.6,
+      "expected": 0.121697,
+      "z_score": 0.019,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.6
     }
   ],
   "P08": [
@@ -44959,6 +45071,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 1.0
+    },
+    {
+      "date": "2026-10-22",
+      "indicator": 0.12923,
+      "quality": "LOW_QUALITY",
+      "water_pixels": 104,
+      "cloud_fraction": 0.89,
+      "rain_7d": 29.3,
+      "rain_1d": 0.0,
+      "expected": 0.129612,
+      "z_score": -0.018,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 0.0
     }
   ]
 }
