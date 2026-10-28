@@ -4213,6 +4213,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.4
+    },
+    {
+      "date": "2026-10-27",
+      "indicator": 0.10744,
+      "quality": "GOOD",
+      "water_pixels": 748,
+      "cloud_fraction": 0.0,
+      "rain_7d": 40.4,
+      "rain_1d": 8.1,
+      "expected": 0.074877,
+      "z_score": 1.404,
+      "severity": "WATCH",
+      "anomaly": true,
+      "rain_mm": 8.1
     }
   ],
   "P10": [
@@ -8282,13 +8296,13 @@
       "quality": "LOW_QUALITY",
       "water_pixels": 17,
       "cloud_fraction": 0.976,
-      "rain_7d": 275.14,
-      "rain_1d": null,
-      "expected": -0.015444,
-      "z_score": -0.37,
+      "rain_7d": 275.64,
+      "rain_1d": 0.5,
+      "expected": -0.012463,
+      "z_score": -0.506,
       "severity": "NORMAL",
       "anomaly": false,
-      "rain_mm": null
+      "rain_mm": 0.5
     }
   ],
   "P11": [
@@ -12862,13 +12876,13 @@
       "quality": "LOW_QUALITY",
       "water_pixels": 34,
       "cloud_fraction": 0.972,
-      "rain_7d": 275.14,
-      "rain_1d": null,
-      "expected": 0.04659,
-      "z_score": -0.854,
+      "rain_7d": 275.44,
+      "rain_1d": 0.3,
+      "expected": 0.050321,
+      "z_score": -1.03,
       "severity": "NORMAL",
       "anomaly": false,
-      "rain_mm": null
+      "rain_mm": 0.3
     }
   ],
   "P02": [
@@ -16497,6 +16511,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 0.8
+    },
+    {
+      "date": "2026-10-27",
+      "indicator": 0.11213,
+      "quality": "GOOD",
+      "water_pixels": 440,
+      "cloud_fraction": 0.498,
+      "rain_7d": 35.4,
+      "rain_1d": 9.2,
+      "expected": 0.071879,
+      "z_score": 3.24,
+      "severity": "ELEVATED",
+      "anomaly": true,
+      "rain_mm": 9.2
     }
   ],
   "P09": [
@@ -20769,6 +20797,20 @@
       "severity": "NORMAL",
       "anomaly": false,
       "rain_mm": 101.04
+    },
+    {
+      "date": "2026-10-27",
+      "indicator": 0.11389,
+      "quality": "GOOD",
+      "water_pixels": 552,
+      "cloud_fraction": 0.432,
+      "rain_7d": 69.7,
+      "rain_1d": 10.1,
+      "expected": 0.107157,
+      "z_score": 0.362,
+      "severity": "NORMAL",
+      "anomaly": false,
+      "rain_mm": 10.1
     }
   ],
   "P03": [
