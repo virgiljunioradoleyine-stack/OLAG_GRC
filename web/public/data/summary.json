@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T11:27:45+00:00",
+  "generated_at": "2026-10-31T11:02:36+00:00",
   "indicator": {
     "name": "Sediment Anomaly Index",
     "short": "SAI",
@@ -8,17 +8,17 @@
   },
   "stations_total": 11,
   "stations_with_data": 11,
-  "observations_total": 3222,
+  "observations_total": 3232,
   "first_observation": "2017-01-07",
-  "latest_observation": "2026-10-27",
-  "mean_indicator": 0.0901,
-  "mean_rain_7d_mm": 87.5,
+  "latest_observation": "2026-10-29",
+  "mean_indicator": 0.0922,
+  "mean_rain_7d_mm": 32.5,
   "active_alerts": 1,
   "active_window_days": 30,
   "raised_alerts_total": 132,
-  "alerts_total": 535,
+  "alerts_total": 537,
   "alerts_by_severity": {
-    "WATCH": 403,
+    "WATCH": 405,
     "ELEVATED": 83,
     "HIGH": 37,
     "CRITICAL": 12
