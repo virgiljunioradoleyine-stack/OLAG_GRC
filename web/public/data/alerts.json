@@ -1,6 +1,17 @@
 {
   "alerts": [
     {
+      "station_id": "P06",
+      "station_name": "Pra Lower Reach",
+      "date": "2026-11-01",
+      "severity": "WATCH",
+      "indicator": 0.0447,
+      "expected": 0.012419,
+      "z_score": 1.354,
+      "rain_7d": 32.5,
+      "quality": "LOW_QUALITY"
+    },
+    {
       "station_id": "P05",
       "station_name": "Daboase Intake (GWCL)",
       "date": "2026-10-29",
@@ -5910,59 +5921,31 @@
   ],
   "detailed": [
     {
-      "station_id": "P02",
-      "station_name": "Pra Mid-Upper Reach",
-      "date": "2026-10-29",
+      "station_id": "P06",
+      "station_name": "Pra Lower Reach",
+      "date": "2026-11-01",
       "severity": "WATCH",
-      "indicator": 0.127697,
-      "expected": 0.114567,
-      "residual": 0.01313,
-      "z_score": 1.057,
-      "anomaly_score": -0.464804,
+      "indicator": 0.044696,
+      "expected": 0.012419,
+      "residual": 0.032277,
+      "z_score": 1.354,
+      "anomaly_score": -0.437307,
       "anomaly_flagged": false,
-      "percentile": 28.8,
-      "rain_7d": 24.2,
-      "rain_7d_anom": -49.6,
+      "percentile": 62.4,
+      "rain_7d": 32.5,
+      "rain_7d_anom": -21.1,
       "rain_context": "drier than normal",
-      "upstream_id": "P11",
-      "upstream_diff": 0.010553,
-      "persistence": 2,
-      "quality": "LOW_QUALITY",
-      "quality_score": 0.64,
-      "confidence": "moderate",
-      "signals": [
-        "sediment index is +0.013 above expected, which this station exceeds in under 40% of its history"
-      ],
-      "headline": "Possible change river-condition anomaly at Pra Mid-Upper Reach",
-      "explanation": "On 2026-10-29 the satellite sediment indicator at Pra Mid-Upper Reach (P02) read +0.128. Given the season, recent rainfall and upstream conditions, +0.115 would have been expected \u2014 the reading is 1.1 standard deviations above that. Rainfall over the preceding 7 days totalled 24 mm, which is drier than normal for this time of year. The index here is 0.011 higher than the nearest upstream station (P11). The signal has persisted across 2 consecutive observation(s). Observation quality is LOW_QUALITY; overall confidence is moderate. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
-      "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
-    },
-    {
-      "station_id": "P05",
-      "station_name": "Daboase Intake (GWCL)",
-      "date": "2026-10-29",
-      "severity": "WATCH",
-      "indicator": 0.052449,
-      "expected": 0.033711,
-      "residual": 0.018738,
-      "z_score": 0.883,
-      "anomaly_score": -0.417996,
-      "anomaly_flagged": false,
-      "percentile": 83.0,
-      "rain_7d": 31.0,
-      "rain_7d_anom": -26.8,
-      "rain_context": "drier than normal",
-      "upstream_id": "P04",
-      "upstream_diff": -0.028572,
+      "upstream_id": "P05",
+      "upstream_diff": 0.017484,
       "persistence": 0,
       "quality": "LOW_QUALITY",
-      "quality_score": 0.49,
+      "quality_score": 0.64,
       "confidence": "low",
       "signals": [
-        "sediment index is +0.019 above expected, which this station exceeds in under 40% of its history"
+        "sediment index is +0.032 above expected, which this station exceeds in under 40% of its history"
       ],
-      "headline": "Possible change river-condition anomaly at Daboase Intake (GWCL)",
-      "explanation": "On 2026-10-29 the satellite sediment indicator at Daboase Intake (GWCL) (P05) read +0.052. Given the season, recent rainfall and upstream conditions, +0.034 would have been expected \u2014 the reading is 0.9 standard deviations above that. Rainfall over the preceding 7 days totalled 31 mm, which is drier than normal for this time of year. The index here is 0.029 lower than the nearest upstream station (P04). This is the first observation showing the change. Observation quality is LOW_QUALITY; overall confidence is low. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
+      "headline": "Possible change river-condition anomaly at Pra Lower Reach",
+      "explanation": "On 2026-11-01 the satellite sediment indicator at Pra Lower Reach (P06) read +0.045. Given the season, recent rainfall and upstream conditions, +0.012 would have been expected \u2014 the reading is 1.4 standard deviations above that. Rainfall over the preceding 7 days totalled 32 mm, which is drier than normal for this time of year. The index here is 0.017 higher than the nearest upstream station (P05). This is the first observation showing the change. Observation quality is LOW_QUALITY; overall confidence is low. This indicates unusual surface-water conditions that may warrant investigation. It does not identify a cause, and it does not demonstrate mining activity or the presence of any specific contaminant.",
       "recommended_action": "No immediate action. Confirm on the next pass before treating this as a genuine change."
     }
   ]
